@@ -1,0 +1,81 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12 user-info">
+      <p><strong>Welcome</strong>: <%= user.userName %></p>
+      
+      <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+    </div>
+    <!--first column-->
+      <div class="col-6 all-pt-ct">
+          
+          <div>
+            <a href="">New Wound? + </a>
+            <p>All Patients</p>
+            <div class=" col-8 add-patient">
+              <a href="/addpatient">Add Patient</a>
+            </div>
+            <div class="col-8 scrollbox">
+              <ul class="row list-unstyled">
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <p>Baker, Gjarred</p>
+                <!--All patients collection-->
+                <% for(var i=0; i<posts.length; i++) {%>
+                  <li class="col-6 justify-content-between mt-5">
+                    <p>Baker, Gjarred</p>
+                    <a href="/post/<%= posts[i]._id%>">
+                      <img class="img-fluid" src="<%= posts[i].image%>">
+                      
+                    </a>
+                  </li>
+                <% } %>
+              </ul>
+            </div>  
+
+          </div>
+      </div>
+
+      <!--second column-->
+      <div class="col-6 existing-pt-ct">
+        
+        <div class="">
+          <p>Existing Wounds</p>
+          <div class="col-8 scrollbox">
+            <!--Existing wounds collection-->
+            <ul class="row list-unstyled">
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <p>Baker, Gjarred</p>
+              <% for(var i=0; i<posts.length; i++) {%>
+                <li class="col-6 justify-content-between mt-5">
+                  <a href="/post/<%= posts[i]._id%>">
+                    <img class="img-fluid" src="<%= posts[i].image%>">
+                  </a>
+                </li>
+              <% } %>
+              </ul>
+          </div>
+        </div>  
+      </div>  
+
+
+    </div>
+  </div>
+
+<%- include('partials/footer') -%>

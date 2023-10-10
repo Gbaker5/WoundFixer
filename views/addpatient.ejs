@@ -1,0 +1,48 @@
+<%- include('partials/header') -%>
+
+  <div>
+    <form action="">
+        <div>
+          <label for="firstName"></label>
+          <input type="text" class="" id="" name="firstName" placeholder="First Name">
+        </div>
+        <div>
+          <label for="lastName"></label>
+          <input type="text" class="" id="" name="lastName" placeholder="Last Name">
+        </div>
+        <div>
+          <button type="submit" class="" value>Add Patient</button>
+          <span>+</span>
+        </div>
+    </form>
+    <div class="scrollbox">
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+      <p>Baker, Gjarred</p>
+    <ul>
+      <% for(var i=0; i<posts.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <p>Baker, Gjarred</p>
+          <a href="/post/<%= posts[i]._id%>">
+            <img class="img-fluid" src="<%= posts[i].image%>">
+            
+          </a>
+        </li>
+      <% } %>
+    </ul>
+    </div>
+  </div>
+
+<%- include('partials/footer') -%>

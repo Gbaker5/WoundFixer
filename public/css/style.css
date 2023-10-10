@@ -1,0 +1,44 @@
+*{
+    margin:0;
+}
+
+header{
+    height:200px;
+    background-image: url("../imgs/medicalhand.jpg");
+    background-size: 70%, 300px;
+    background-repeat:no-repeat;
+    
+    
+}
+
+header>div{
+    background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.1));
+    width:70%;
+    height: 200px;
+}
+
+body{
+    
+}
+
+.user-info{
+    border:1px solid black;
+}
+
+.scrollbox{
+    border: 1px solid black;
+    height:300px;
+    overflow: auto;
+}
+
+.all-pt-ct{
+    border: 1px solid black;
+}
+
+.existing-pt-ct{
+    border: 1px solid black;
+}
+
+.add-patient{
+    border:1px solid black;
+}

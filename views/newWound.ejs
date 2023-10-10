@@ -1,0 +1,132 @@
+<%- include('partials/header') -%>
+
+   <div class="row mt-5">
+    <!--Left Column-->
+    <div class="col-6">
+        <form action="">
+        <div>
+            <h2>Where is the Wound Located?</h2>
+            <label for=""></label>
+            <select name="" id="">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
+        </div>
+        
+        <div>
+            <h2>What type of Injury?</h2>
+            <label for=""></label>
+            <select name="" id="">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
+        </div>
+
+        <div>
+            <h2>What size?</h2>
+            <div>
+                <label for="Length"></label>
+                <input type="text" placeholder="Length">
+            </div>
+           <div>
+                <label for="Length"></label>
+                <input type="text" placeholder="Width">
+           </div>
+           <div>
+                <label for="Depth"></label>
+                <input type="text" placeholder="Depth">
+            </div>
+        </div>
+
+        <div>
+            <h2>Odor?</h2>
+            <label for="Odor"></label>
+            <select name="" id="">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <div>
+            <h2>Description of Wound</h2>
+            <textarea name="Description" id="WoundDescription" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    
+    <!--Right Column-->
+    <div class="col-6">
+        <div>
+            <p>Anatomical Position Diagram</p>
+            <img src="" alt="">
+        </div>
+        
+        <div>
+            <h2>Intervention</h2>
+            <h3>Previous Interventions</h3>
+            <div>
+                <ul>
+                    <% for(var i=0; i<posts.length; i++) {%>
+                    <li class="col-6 justify-content-between mt-5">
+                      
+                      <a href="/post/<%= posts[i]._id%>">
+                        <img class="img-fluid" src="<%= posts[i].image%>">
+                        <p>Apply wound cleanser, pat dry, apply medihoney, apply bordered gauze</p>
+                      </a>
+                    </li>
+                  <% } %>
+                </ul>
+            </div>
+            <h3>Current Intervention</h3>
+            <div>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Bottom Section-->
+
+    <div>
+        <p>Wound will be added to patients record, notify Wound Nurse and:</p>
+        <input type="checkbox" id="DON" name="DON">
+        <label for="DON">DON</label>
+        <input type="checkbox" id="PCP" name="PCP">
+        <label for="PCP">PCP</label>
+    </div>
+
+
+    <div>
+        <button type="submit">Add Wound</button>
+    </div>
+    </form>
+   </div>
+
+<%- include('partials/footer') -%>
