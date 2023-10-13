@@ -65,4 +65,4 @@ const WoundInfoSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("WoundInfo", WoundInfoSchema);
+module.exports = mongoose.model("woundInfo", WoundInfoSchema);

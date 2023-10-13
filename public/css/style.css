@@ -42,3 +42,8 @@ body{
 .add-patient{
     border:1px solid black;
 }
+
+.diagram{
+    height: 500px;
+    width:500px;
+}
