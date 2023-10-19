@@ -2,51 +2,45 @@
 
    <div class="row mt-5">
     <!--Left Column-->
-    <div class="col-6">
-        <form action="">
+    <div class="col-5 ms-5">
+        <form action="/postWoundForm" method="POST">
         <div>
             <h2>Where is the Wound Located?</h2>
             <label for=""></label>
-            <select name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+            <select name="location" id="location">
+                <option value="Cranium">Cranium</option>
+                <option value="Face">Face</option>
+                <option value="Neck">Neck</option>
+                <option value="Chest">Chest</option>
+                <option value="Mouth">Mouth</option>
+                <option value="Upper Back">Upper Back</option>
+                <option value="Lower Back">Lower Back</option>
+                <option value="Buttock">Buttock</option>
+                <option value="Groin">Groin</option>
+                <option value="left Arm">left Arm</option>
+                <option value="Left Leg">Left Leg</option>
+                <option value="Right Arm">Right Arm</option>
+                <option value="Right Leg">Right Leg</option>
+                <option value="Left Foot">Left Foot</option>
+                <option value="Right Foot">Right Foot</option>
+                <option value="Left Hand">Left Hand</option>
+                <option value="Right Hand">Right Hand</option>
+                <option value="Left Forearm">Left Forearm</option>
+                <option value="Right Forearm">Right Forearm</option>
+                <option value="Other">Other</option>
             </select>
         </div>
         
         <div>
             <h2>What type of Injury?</h2>
             <label for=""></label>
-            <select name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+            <select name="type" id="type">
+                <option value="Skin Tear">Skin Tear</option>
+                <option value="Laceration">Laceration</option>
+                <option value="Pressure Ulcer">Pressure Ulcer</option>
+                <option value="Bruise">Bruise</option>
+                <option value="Other">Other</option>
+               
             </select>
         </div>
 
@@ -54,22 +48,22 @@
             <h2>What size?</h2>
             <div>
                 <label for="Length"></label>
-                <input type="text" placeholder="Length">
+                <input type="text" placeholder="Length" id="length" name="length">
             </div>
            <div>
-                <label for="Length"></label>
-                <input type="text" placeholder="Width">
+                <label for="Width"></label>
+                <input type="text" placeholder="Width" id="width" name="width">
            </div>
            <div>
                 <label for="Depth"></label>
-                <input type="text" placeholder="Depth">
+                <input type="text" placeholder="Depth" id="depth" name="depth">
             </div>
         </div>
 
         <div>
             <h2>Odor?</h2>
             <label for="Odor"></label>
-            <select name="" id="">
+            <select name="odor" id="odor">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
@@ -77,8 +71,24 @@
 
         <div>
             <h2>Description of Wound</h2>
-            <textarea name="Description" id="WoundDescription" cols="30" rows="10"></textarea>
+            <textarea name="description" id="description" cols="30" rows="10" Placeholder="Color, Shape, etc"></textarea>
         </div>
+
+        <% if (locals.messages.errors) { %>
+            <% messages.errors.forEach( el => { %>
+                <div class="alert alert-danger"><%= el.msg %></div>
+            <% }) %>    
+        <% } %>
+        <% if (locals.messages.info) { %>
+            <% messages.info.forEach( el => { %>
+                <div class="alert alert-info"><%= el.msg %></div>
+            <% }) %>    
+        <% } %>
+       
+        
+
+
+
     </div>
     
     <!--Right Column-->
@@ -91,7 +101,7 @@
         <div>
             <h2>Intervention</h2>
             <h3>Previous Interventions</h3>
-            <div>
+            <div class="scrollbox">
                 <ul>
                     <% for(var i=0; i<wound.length; i++) {%>
                     <li class="col-6 justify-content-between mt-5">
@@ -106,7 +116,7 @@
             </div>
             <h3>Current Intervention</h3>
             <div>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea name="intervention" id="intervention" cols="30" rows="10"></textarea>
             </div>
         </div>
 
@@ -116,9 +126,9 @@
 
     <div>
         <p>Wound will be added to patients record, notify Wound Nurse and:</p>
-        <input type="checkbox" id="DON" name="DON">
+        <input type="checkbox" id="don" name="DON" value="Yes">
         <label for="DON">DON</label>
-        <input type="checkbox" id="PCP" name="PCP">
+        <input type="checkbox" id="pcp" name="PCP">
         <label for="PCP">PCP</label>
     </div>
 

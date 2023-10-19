@@ -15,4 +15,14 @@ router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
+//patient
+router.get("/newPatient", ensureAuth, woundController.getAddPatient)
+router.post("/newPatient", ensureAuth, woundController.postAddPatient)
+//wound;
+
+router.get("/newWoundForm", ensureAuth, woundController.getWoundForm);
+
+router.post("/postWoundForm", ensureAuth, woundController.postWoundForm);
+
+
 module.exports = router;

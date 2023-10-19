@@ -21,10 +21,6 @@ const WoundInfoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  Type: {
-    type: String,
-    required: true,
-  },
   Odor: {
     type: String,
     required: true,
@@ -39,25 +35,17 @@ const WoundInfoSchema = new mongoose.Schema({
   },
   NotifyDon: {
     type: String,
-    required: true,
+    
     default: 'no',
   },
   NotifyPCP: {
     type: String,
-    required: true,
+    
     default:'no',
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-  },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
   },
   createdAt: {
     type: Date,
