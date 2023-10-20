@@ -43,7 +43,7 @@ const WoundInfoSchema = new mongoose.Schema({
     
     default:'no',
   },
-  user: {
+  creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },

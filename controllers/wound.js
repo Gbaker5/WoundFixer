@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const WoundInfo = require("../models/Wound");
+const newPatient = require("../models/Patient");
 const validator = require("validator");
 const passport = require("passport");
 
@@ -13,11 +14,20 @@ module.exports = {
     }
   },
   getAddPatient: async (req,res) => {
-    res.render("addpatient.ejs");
+    res.render("newPatient.ejs");
 
   },
   postAddPatient: async (req,res) => {
-
+    try{
+    await newPatient.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    });
+    console.log("Wound Info Created")
+      res.redirect("/profile")
+    }catch (err) {
+      console.log(err);
+    }
   },
   getWoundForm: async (req, res) => {
     try {
