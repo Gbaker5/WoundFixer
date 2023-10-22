@@ -16,7 +16,7 @@ router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
 //patient
-router.get("/newPatient", ensureAuth, woundController.getAddPatient)
+//router.get("/newPatient", ensureAuth, woundController.getAddPatient)
 router.post("/newPatient", ensureAuth, woundController.postAddPatient)
 //wound;
 

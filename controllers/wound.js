@@ -8,23 +8,41 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const wound = await WoundInfo.find();
-      res.render("profile.ejs", { user: req.user, wound: wound });
+      const patients = await newPatient.find().sort({lastName: "asc"});
+      console.log(patients._id)
+      res.render("profile.ejs", { user: req.user, wound: wound, patients: patients});
     } catch (err) {
       console.log(err);
     }
   },
   getAddPatient: async (req,res) => {
-    res.render("newPatient.ejs");
-
+    try{
+      const patients = await newPatient.find().sort({lastName: "asc"});
+      res.render("newPatient.ejs", {patients: patients});
+  
+    }catch (err) {
+      console.log(err);
+    }
+    
   },
   postAddPatient: async (req,res) => {
     try{
+
+      const validationErrors = [];
+      if(validator.isEmpty(req.body.firstName))validationErrors.push({ msg: "First Name Requires Input"});
+      if(validator.isEmpty(req.body.lastName))validationErrors.push({ msg: "Last Name Requires Input"});
+      if (validationErrors.length) {
+        console.log(validationErrors)
+        req.flash("errors", validationErrors);
+        return res.redirect("/newPatient");
+      }
+
     await newPatient.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
     });
-    console.log("Wound Info Created")
-      res.redirect("/profile")
+    console.log("!!!!Wound Info Created!!!!")
+      res.redirect("/newPatient")
     }catch (err) {
       console.log(err);
     }
@@ -41,6 +59,8 @@ module.exports = {
     try{
       console.log(req.body)
       console.log(req.user.id)
+
+      //const patient = await newPatient.find();
 
       const validationErrors = [];
       if(validator.isEmpty(req.body.length))validationErrors.push({ msg: "Length Requires Input"});
@@ -65,7 +85,8 @@ module.exports = {
         Intervention: req.body.intervention,
         NotifyDon: req.body.don,
         NotifyPCP: req.body.pcp,
-        user: req.user.id
+        user: req.user.id,
+        
       });
       console.log("Wound Info Created")
       res.redirect("/profile")

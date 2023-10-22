@@ -14,29 +14,15 @@
             <a href="/newPatient">Add New Patient</a>
             <p>All Patients</p>
             <div class=" col-8 add-patient">
-              <a href="/addPatient">Add Patient</a>
+              <a href="/newPatient">Add Patient</a>
             </div>
             <div class="col-8 scrollbox">
               <ul class="row list-unstyled">
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <p>Baker, Gjarred</p>
-                <!--All patients collection-->
-                <% for(var i=0; i < wound.length; i++) {%>
-                  <li class="col-6 justify-content-between mt-5">
-                    <p>Baker, Gjarred</p>
-                    <a href="/post/<%= wound[i]._id%>">
-                      <img class="img-fluid" src="<%= wound[i].image%>">
-                      
-                    </a>
+                <% for(var i=0; i < patients.length; i++) {%>
+                  <li class="col-12 justify-content-between mt-2 name-ct">
+                    
+                    <a href="/wound/newWoundForm/<%=patients[i]._id%>"><p><%=patients[i].lastName%>, <%=patients[i].firstName%></p></a> 
+                
                   </li>
                 <% } %>
               </ul>
@@ -52,6 +38,7 @@
           <p>Existing Wounds</p>
           <div class="col-8 scrollbox">
             <!--Existing wounds collection-->
+            <!--Maybe get list of wounds and then extract the names and check for duplicates-->
             <ul class="row list-unstyled">
               <p>Baker, Gjarred</p>
               <p>Baker, Gjarred</p>
