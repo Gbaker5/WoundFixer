@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { any } = require("../middleware/multer");
 
 const WoundInfoSchema = new mongoose.Schema({
   Location: {
@@ -49,7 +50,6 @@ const WoundInfoSchema = new mongoose.Schema({
   },
   patient: {
     type: String,
-
   },
   createdAt: {
     type: Date,

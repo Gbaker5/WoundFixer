@@ -1,9 +1,21 @@
 <%- include('partials/header') -%>
 
+
    <div class="row mt-5">
+    <div class="col-12 ">
+        <ul class="row list-unstyled">
+          <% for(var i=0; i < patient.length; i++) {%>
+            <li class="col-12 justify-content-between mt-2">
+              
+              <p class="">New Wound for <br> <strong><%=patient[i].lastName%></strong>, <strong><%=patient[i].firstName%></strong></p> 
+          
+            </li>
+          <% } %>
+        </ul>
+      </div>  
     <!--Left Column-->
     <div class="col-5 ms-5">
-        <form action="/postWoundForm" method="POST">
+        <form action="/wound/postWoundForm/<%=patient._id%>" method="POST">
         <div>
             <h2>Where is the Wound Located?</h2>
             <label for=""></label>

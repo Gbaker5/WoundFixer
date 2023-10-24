@@ -9,7 +9,7 @@ module.exports = {
     try {
       const wound = await WoundInfo.find();
       const patients = await newPatient.find().sort({lastName: "asc"});
-      console.log(patients._id)
+      //console.log(patients._id)
       res.render("profile.ejs", { user: req.user, wound: wound, patients: patients});
     } catch (err) {
       console.log(err);
@@ -49,8 +49,14 @@ module.exports = {
   },
   getWoundForm: async (req, res) => {
     try {
+      console.log(req.params)
+      //console.log(req.user)
+      const patient = await newPatient.find({ _id: req.params.id })
+      console.log(patient)
+      //const patientUrl = await newPatient.findById(req.params.id)
+      //console.log(patientUrl)
       const wound = await WoundInfo.find();
-      res.render("newWound.ejs", { user: req.user, wound: wound });
+      res.render("newWound.ejs", { user: req.user, wound: wound, patient: patient });
     } catch (err) {
       console.log(err);
     }
@@ -58,7 +64,9 @@ module.exports = {
   postWoundForm: async (req, res) => {
     try{
       console.log(req.body)
-      console.log(req.user.id)
+      console.log(req.params)
+      //const patient = await newPatient.find({ _id: req.params.id })
+      //console.log(patient)
 
       //const patient = await newPatient.find();
 
@@ -85,6 +93,7 @@ module.exports = {
         Intervention: req.body.intervention,
         NotifyDon: req.body.don,
         NotifyPCP: req.body.pcp,
+        patient: req.params.id,
         user: req.user.id,
         
       });
