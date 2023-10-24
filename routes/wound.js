@@ -7,7 +7,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 //Wound Routes
 router.get("/newWoundForm/:id", ensureAuth, woundController.getWoundForm);
 
-router.post("/postWoundForm/:id", ensureAuth, woundController.postWoundForm);
+router.post("/postWoundForm/:id?", ensureAuth, woundController.postWoundForm);
 
 
 
