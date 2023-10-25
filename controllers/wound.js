@@ -51,7 +51,7 @@ module.exports = {
     try {
       console.log(req.params)
       //console.log(req.user)
-      const patient = await newPatient.find({ _id: req.params.id })
+      const patient = await newPatient.findOne({ _id: req.params.id })
       console.log(patient)
       //const patientUrl = await newPatient.findById(req.params.id)
       //console.log(patientUrl)
@@ -65,7 +65,7 @@ module.exports = {
     try{
       console.log(req.body)
       console.log(req.params)
-      //const patient = await newPatient.find({ _id: req.params.id })
+      //const patient = await newPatient.findOne({ _id: req.params.id })
       //console.log(patient)
 
       //const patient = await newPatient.find();
@@ -103,7 +103,13 @@ module.exports = {
       console.log(err);
     }
   },
+  getAllWounds: async (req,res) => {
+    try{
 
+    }catch (err) {
+      console.log(err);
+    }
+  },
 
 
 
