@@ -56,3 +56,11 @@ body{
     
     
 }
+
+.woundbox{
+    border: 1px solid black;
+}
+
+.blue{
+    color: blue
+}

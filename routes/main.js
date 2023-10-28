@@ -20,9 +20,9 @@ router.get("/newPatient", ensureAuth, woundController.getAddPatient)
 router.post("/newPatient", ensureAuth, woundController.postAddPatient)
 //wound;
 
-router.get("/newWoundForm", ensureAuth, woundController.getWoundForm);
+//router.get("/newWoundForm", ensureAuth, woundController.getWoundForm);
 
-router.post("/postWoundForm", ensureAuth, woundController.postWoundForm);
+//router.post("/postWoundForm", ensureAuth, woundController.postWoundForm);
 
 
 module.exports = router;

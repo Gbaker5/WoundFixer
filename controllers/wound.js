@@ -103,13 +103,65 @@ module.exports = {
       console.log(err);
     }
   },
-  getAllWounds: async (req,res) => {
+  getAllWounds: async (req,res) => { //createdAt newest to oldest 
     try{
+      const wounds = await WoundInfo.find().sort({createdAt: "desc"})
+      const patient = await newPatient.find()
+      let patientsidArr = []
 
+      for(let i=0;i<wounds.length;i++){
+        patientsidArr.push(wounds[i].patient) //extracts objectid from wound which is the patient id into array
+      }
+      //console.log(patientsidArr)
+      
+
+      //NAMES
+      let firstNamesArr = [];
+      let lastNamesArr = [];
+      for(let j=0;j<wounds.length;j++){
+       const patientName = await newPatient.find({_id: patientsidArr[j]}) //search through patient collection by object ids from first array
+       //console.log(patientName)
+       const fName = patientName[0].firstName //cycle through and capture first names 
+       console.log(fName)
+       const lName = patientName[0].lastName //cycle through and capture last names
+       console.log(lName)
+       firstNamesArr.push(fName) //put names into new array
+       lastNamesArr.push(lName) 
+       
+      }
+      console.log(firstNamesArr)
+      console.log(lastNamesArr)
+      //console.log(wounds)
+      res.render("allwounds.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
     }catch (err) {
       console.log(err);
     }
   },
+  getWoundsZtoA: async (req,res) => { //createdAt oldest to newest
+    try{
+      const wounds = await WoundInfo.find().sort({createdAt: "asc"})
+      res.render("allwoundscreatedztoa.ejs", {wounds: wounds})
+    }catch (err) {
+      console.log(err);
+    }
+  },
+  getWoundsByPatient: async (req,res) => { //patient A to Z
+    try{
+      const wounds = await WoundInfo.find().sort({patient: "desc"})
+      res.render("allwoundspatient.ejs", {wounds: wounds})
+    }catch (err) {
+      console.log(err);
+    }
+  },
+  getWoundsByPatientZtoA: async (req,res) => { //patients Z to A
+    try{
+      const wounds = await WoundInfo.find().sort({createdAt: "desc"})
+      res.render("allwoundspatientztoa.ejs", {wounds: wounds})
+    }catch (err) {
+      console.log(err);
+    }
+  },
+  
 
 
 
