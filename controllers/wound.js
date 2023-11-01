@@ -63,8 +63,6 @@ module.exports = {
       console.log(err);
     }
   },
-  
-
 
   postWoundForm: async (req, res) => {
     try{
@@ -94,8 +92,8 @@ module.exports = {
       const Pname = patient[0].firstName
       //console.log(Pname)
       const user = await User.findOne(req.user)
-      console.log(user)
-      console.log(user.userName)
+      //console.log(user)
+      //console.log(user.userName)
 
 
       
@@ -151,8 +149,8 @@ module.exports = {
         //implement your spam protection or checks.
         sendEmail(Pname,email,subject,message);
       }
-      console.log(JSON.stringify(req.body))
-      console.log(spaces)
+      //console.log(JSON.stringify(req.body))
+      //console.log(spaces)
 
 
       /////Model to send to database
