@@ -1,7 +1,17 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-  <div class="row justify-content-center">
+<main class="">
+  
+  <div class=" justify-content-center">
+    <div class="leftshadow">
+      <div class=" leftcolorpillar">
+        <div class="loginbox">
+          <p>Login</p>
+
+        </div>
+
+      </div>
+    </div>
     <section class="col-6 mt-5">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
@@ -31,7 +41,7 @@
             name="password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btncolor btn btn-primary">Submit</button>
       </form>
     </section>
   </div>

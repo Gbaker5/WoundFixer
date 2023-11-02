@@ -1,6 +1,15 @@
 <%- include('partials/header') -%>
-    <main class="container">
-        <div class="row justify-content-center">
+    <main class="">
+        <div class="justify-content-center">
+          <div class="leftshadow">
+            <div class=" leftcolorpillar">
+              <div class="loginbox">
+                <p>Login</p>
+      
+              </div>
+      
+            </div>
+          </div>
             <section class="col-6 mt-5">
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
@@ -30,7 +39,7 @@
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                       </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btncolor btn btn-primary">Submit</button>
                   </form>
             </section>
         </div>

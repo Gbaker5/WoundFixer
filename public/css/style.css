@@ -4,25 +4,51 @@
 
 *{
     margin:0;
+    padding:0;
 }
+
+
+
+/*HEADER*/
 
 header{
     height:200px;
-    background-image: url("../imgs/medicalhand.jpg");
-    background-size: 70%, 300px;
+    background-image: url("../imgs/marcelo-leal-k7ll1hpdhFA-unsplash.jpg");
+    background-position: center;
+    background-size: 100vw, 300px;
     background-repeat:no-repeat;
+    width:100vw;
     
-    
+
 }
 
-header>div{
+.headerh1{
+    color:white;
+    text-decoration: none;
+}
+
+.headerh1:hover{
+    color:black;
+}
+
+.headshadow{
     background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.1));
-    width:70%;
+    width:100vw;
     height: 200px;
 }
 
-body{
+
+/*.leftcolorshadow{
+    background: linear-gradient(to left, rgba(0,103,103,0.5),rgba(0,103,103,0.1));
+    height:200px;
+    width:100vw;
+}*/
+
+.rightcolorshadow{
     
+    background: linear-gradient(to right, rgba(0,103,103,0.9),rgba(0,103,103,0.1));
+    height:200px;
+    width:100vw;
 }
 
 /*Index Page*/
@@ -50,7 +76,7 @@ body{
 
 h1{
     color: white;
-    font-size: 100px;
+    font-size: 90px;
 }
 
 .fa-bandage{
@@ -71,7 +97,7 @@ h1{
 
 .buttons li{
     width:250px;
-    height:6=70px;
+    height:70px;
     background-color: white;
     border-radius: 5px;
     color:rgba(0,103,103,0.8);
@@ -87,7 +113,7 @@ h1{
 
 .button{
     text-decoration: none;
-    margin-bottom: px;
+    margin-bottom: 0px;
     color: rgba(0,103,103,0.8);
     width: 100%;
 }
@@ -133,6 +159,7 @@ section{
 
 .h1list p{
     font-size:30px;
+
 }
 
 
@@ -142,7 +169,7 @@ section{
 }
 
 .buttons li{
-    margin: 5% 0 5% 0;
+    margin: 5% 0 1% 0;
     list-style-type: none;
     box-shadow: -2px 7px rgba(0,0,0);
 }
@@ -153,6 +180,51 @@ section{
     
     padding: 10px;
 }*/
+
+/*LOGIN*/
+
+.leftcolorpillar{
+    float:left;
+    width:30vw;
+    height:73.2vh;
+    background-color: rgba(0,103,103, 0.9);
+    position:relative;
+    
+}
+
+.leftshadow{
+    float:left;
+    width:30vw;
+    height:73vh;
+    background-color: rgba(0,0,0, 0.9); 
+}
+
+.loginbox{
+    position:absolute;
+    height:100px;
+    width:350px;
+    background-color: white;
+    border:5px solid rgb(0,103,103);
+    left: 180px;
+    top: 200px;
+}
+
+.loginbox p{
+    color:rgba(0,103,103, 0.9);
+    text-align: center;
+    
+    font-size: 60px;
+}
+
+.btncolor{
+    background-color: rgb(0,103,103);
+}
+
+.btncolor:hover{
+    background-color: white;
+    border-color: rgb(0,103,103);
+    color:rgb(0,103,103);
+}
 
 /**/
 
