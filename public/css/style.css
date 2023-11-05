@@ -264,10 +264,72 @@ section{
     
 }
 
-.woundbox{
-    border: 1px solid black;
-}
+
 
 .blue{
-    color: blue
+    color: blue;
+}
+
+/*Wounds*/
+
+.blueback{
+    background-color: white;
+}
+
+.woundbox{
+    border: 1px solid black;
+    background-color: rgb(0,103,103);
+    background-image: url(../imgs/bandage.jpg) ;
+    background-position: center;
+    background-size: contain;
+    overflow:auto;
+    height:400px;
+}
+
+.boxcolor{
+    background-color: rgba(0,103,103, 0.9);
+    height:100vh;
+    
+    
+}
+
+.boxshadow{
+    background-color: rgba(0,0,0,0.3);
+    height:100%;
+    
+}
+
+.woundbox p{
+    color: white;
+    word-wrap: break-word;
+}
+
+
+.sortedby{
+    border-bottom: 1px solid black;
+    background-color: black;
+}
+
+#woundname{
+    background-color: white;
+    color:black;
+}
+
+#woundnameold{
+    background-color: white;
+    color:black;
+}
+
+#woundnameaz{
+    background-color: black;
+    color:white;
+}
+
+#woundnameza{
+    background-color: black;
+    color:white;
+}
+
+.black{
+    color:black;
 }

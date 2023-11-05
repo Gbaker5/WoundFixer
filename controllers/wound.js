@@ -194,15 +194,15 @@ module.exports = {
        const patientName = await newPatient.find({_id: patientsidArr[j]}) //search through patient collection by object ids from first array
        //console.log(patientName)
        const fName = patientName[0].firstName //cycle through and capture first names 
-       console.log(fName)
+       //console.log(fName)
        const lName = patientName[0].lastName //cycle through and capture last names
-       console.log(lName)
+       //console.log(lName)
        firstNamesArr.push(fName) //put names into new array
        lastNamesArr.push(lName) 
        
       }
-      console.log(firstNamesArr)
-      console.log(lastNamesArr)
+      //console.log(firstNamesArr)
+      //console.log(lastNamesArr)
       //console.log(wounds)
       res.render("allwounds.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
     }catch (err) {
