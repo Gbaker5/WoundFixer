@@ -107,7 +107,7 @@ h1{
 }
 
 .buttons li:hover{
-    background-color: rgba(0,103,103,0.8);
+    background-color: rgb(0,103,103);
     color: white;
 }
 
@@ -171,7 +171,7 @@ section{
 .buttons li{
     margin: 5% 0 1% 0;
     list-style-type: none;
-    box-shadow: -2px 7px rgba(0,0,0);
+    box-shadow: -2px 7px rgba(108, 108, 108, 0.2);
 }
 
 /*.button:hover{
@@ -226,11 +226,19 @@ section{
     color:rgb(0,103,103);
 }
 
+.h1list li{
+    
+}
+
+
 /**/
 
-.user-info{
-    border:1px solid black;
+
+.diagram{
+    height: 500px;
+    width:500px;
 }
+
 
 .scrollbox{
     border: 1px solid black;
@@ -238,26 +246,6 @@ section{
     overflow: auto;
 }
 
-.all-pt-ct{
-    border: 1px solid black;
-}
-
-.existing-pt-ct{
-    border: 1px solid black;
-}
-
-.add-patient{
-    border:1px solid black;
-}
-
-.diagram{
-    height: 500px;
-    width:500px;
-}
-
-.name-ct:hover{
-    border: 1px solid blue;
-}
 
 .names:hover{
     
@@ -277,7 +265,9 @@ section{
 }
 
 .woundbox{
-    border: 1px solid black;
+    border: 5px solid black;
+    border-radius: 5px;
+    
     background-color: rgb(0,103,103);
     background-image: url(../imgs/bandage.jpg) ;
     background-position: center;
@@ -288,7 +278,7 @@ section{
 
 .boxcolor{
     background-color: rgba(0,103,103, 0.9);
-    height:100vh;
+    height:80vh;
     
     
 }
@@ -309,6 +299,27 @@ section{
     border-bottom: 1px solid black;
     background-color: black;
 }
+
+.woundbox::-webkit-scrollbar{
+    width: 10px;
+}
+
+.woundbox::-webkit-scrollbar-track{
+    /*background: repeating-linear-gradient(
+        45deg,
+        rgb(0,103,103),
+        rgb(0,103,103) 10px,
+        rgb(0,0,0) 10px,
+        rgb(0,0,0) 20px
+      );*/
+      background-color: black;
+}
+
+.woundbox::-webkit-scrollbar-thumb{
+    background: white;
+    border-radius: 50px;
+}
+
 
 #woundname{
     background-color: white;
@@ -332,4 +343,213 @@ section{
 
 .black{
     color:black;
+}
+
+/*PROFILE*/
+
+.user-info >p {
+    color:white;
+}
+
+.newcontainer{
+    background-image: url(../imgs/steth.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    height:100%;
+    width: 100vw;
+}
+
+.shadow2{
+    width:100vw;
+    height: 100vh;
+    background-color: rgba(0,103,103,0.6);
+}
+
+.whiteback{
+    background-color: white;
+}
+
+.blackback{
+    background-color: black;
+    
+}
+
+.bluebutton{
+    background-color: rgb(0,103,103);
+    color:white;
+    
+}
+
+.titles{
+    background-color: black;
+    color:white;
+    padding: 5px;
+    border: 2px solid rgb(0,103,103);
+    border-radius: 5px;
+}
+.allnames{
+    color:black;
+}
+
+.name-ct{
+    background-color: rgba(255,255,255,0.9);
+    border: 1px solid rgb(0,103,103);
+    border-radius: 5px;
+}
+
+.name-ct > a{
+    text-decoration-color: rgb(0,103,103);
+}
+
+.name-ct:hover{
+    border: 1px solid black;
+
+}
+
+.name-ct:hover .allnames{
+    color: rgb(0,103,103);
+}
+
+.user-info{
+    border-bottom:5px solid white;
+    box-shadow: 0px 5px rgba(0,0,0, 0.9);
+    width:101vw;
+}
+
+.scrollbox2{
+    
+    height:300px;
+    overflow: auto;
+    
+}
+
+.scrollbox2::-webkit-scrollbar{
+    width: 10px;
+}
+
+.scrollbox2::-webkit-scrollbar-track{
+    /*background: repeating-linear-gradient(
+        45deg,
+        rgb(0,103,103),
+        rgb(0,103,103) 10px,
+        rgb(0,0,0) 10px,
+        rgb(0,0,0) 20px
+      );*/
+      background-color: black;
+}
+
+.scrollbox2::-webkit-scrollbar-thumb{
+    background: white;
+    border-radius: 50px;
+}
+
+.all-pt-ct{
+
+}
+
+.existing-pt-ct{
+    
+}
+
+.add-patient a{
+   text-decoration: none;
+}
+
+.add-patient a:hover{
+    color: rgb(0,103,103)
+}
+
+.allw a{
+    color:white;
+    text-decoration: none;
+}
+
+.allw a:hover{
+    color: rgb(0,103,103)
+}
+
+
+/*NewPatient*/
+
+.woundbox2{
+    border: 5px solid black;
+    border-radius: 5px;
+    margin:0;
+    padding:0;
+    
+    background-image: url(../imgs/bandage.jpg) ;
+    background-position: center;
+    background-size: contain;
+    
+    height:400px;
+}
+
+
+
+.woundbox2::-webkit-scrollbar{
+    width: 10px;
+}
+
+.woundbox2::-webkit-scrollbar-track{
+    /*background: repeating-linear-gradient(
+        45deg,
+        rgb(0,103,103),
+        rgb(0,103,103) 10px,
+        rgb(0,0,0) 10px,
+        rgb(0,0,0) 20px
+      );*/
+      background-color: black;
+}
+
+.woundbox2::-webkit-scrollbar-thumb{
+    background: white;
+    border-radius: 50px;
+}
+
+.anotherbox{
+    overflow:auto;
+    height:380px;
+}
+
+.boxcolor2{
+    background-color: rgba(0,103,103, 0.9);
+    height:100%;
+    width:100%;
+    margin-top: 0;
+    
+}
+
+.boxshadow2{
+    background-color: rgba(0,0,0,0.3);
+    height:100%;
+    width:100%;
+}
+
+.submit:hover{
+    background-color: white;
+    color:rgb(0,103,103);
+    border: 2px solid rgb(0,103,103);
+}
+
+.fa-trash-can{
+    color:white;
+    
+}
+
+.fa-trash-can:hover{
+    color: red;
+}
+
+.whitegradient{
+    background: linear-gradient(to left, rgba(225,225,225,0.9),rgba(225,225,225,0.1));
+    height:2%;
+
+}
+
+.button5{
+    background-color: black;
+    border:1px solid rgb(0,103,103);
+    padding:1px;
+    margin-bottom: 1px;
 }

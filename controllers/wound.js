@@ -12,6 +12,8 @@ module.exports = {
       const wound = await WoundInfo.find();
       const patients = await newPatient.find().sort({lastName: "asc"});
       //console.log(patients._id)
+
+      //LIVE CLOCK
       res.render("profile.ejs", { user: req.user, wound: wound, patients: patients});
     } catch (err) {
       console.log(err);
@@ -48,6 +50,34 @@ module.exports = {
     }catch (err) {
       console.log(err);
     }
+  },
+  deletePatient: async (req,res) => {
+    
+
+  try{
+    /////CONFIRM
+    
+    /////
+    const thispatient = await newPatient.findOne({_id:req.params.id})
+    console.log(thispatient)
+
+    const thisPatientWoundsArr = await WoundInfo.find({patient: req.params.id})
+    console.log(thisPatientWoundsArr)
+
+    await WoundInfo.deleteMany({patient: req.params.id})
+    await newPatient.deleteOne({_id: req.params.id})
+
+    //for(i=0;i<WoundInfo.length;i++){
+      //const thisPatientWounds = await WoundInfo[i].findbyId()
+    //}
+
+   
+
+    console.log("!!!!Patient/Wound Info Deleted!!!!")
+    res.redirect("/newPatient")
+  }catch (err) {
+    console.log(err);
+  }
   },
   getWoundForm: async (req, res) => {
     try {

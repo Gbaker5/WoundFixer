@@ -1,13 +1,9 @@
 <%- include('partials/header') -%>
 
-<main class="container">
+<main class="">
   <div class="row justify-content-center">
-    <section>
-        <div>
-            <a href="/profile">Back to Profile</a>
-        </div>
-    </section>
-    <section class="col-6 mt-5">
+   
+    <section class="col-4 mt-5">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
@@ -33,23 +29,50 @@
             name="lastName"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary titles submit">Submit</button>
       </form>
     </section>
-    <div class="scrollbox col-6">
-        <ul class="row list-unstyled">
+
+    <section class="col-5">
+    <h2>Name List</h2>
+    <div class="woundbox2 col">
+      <div class="boxcolor2">
+        <div class="boxshadow2">
+          
+              <div class="anotherbox">
+              <ul class=" ms-1  col-11 row list-unstyled">
                
                 <!--All patients collection-->
                 <% for(var i=0; i < patients.length; i++) {%>
-                  <li class="col-12 justify-content-between mt-2 name-ct">
+                  <li class="col-10 justify-content-between mt-2 name-ct">
                     
-                    <p class="names"><%=patients[i].lastName%>, <%=patients[i].firstName%></p>
-                
+                    <p class=" ms-3 names"><%=patients[i].lastName%>, <%=patients[i].firstName%></p>
+                    
+                    
                   </li>
+                  <div class="whitegradient mt-2 col-2">
+                  <form class="mt-3 " action="/deletePatient/<%=patients[i]._id%>?_method=DELETE"
+                          method="POST">
+                          <span><button class="button5" type="submit"><i class="fa-regular fa-trash-can"></i></button></span>
+                    </form>
+                  </div>
                 <% } %>
               </ul>
+              </div>
+
+          </div>
+        </div>   
     </div>
+    <section>
+        <div>
+            <a href="/profile" class="titles">Back to Profile</a>
+           
+        </div>
+    </section>
   </div>
+</section>
 </main>
 
+
+<script src='js/alt.js'></script>
 <%- include('partials/footer') -%>

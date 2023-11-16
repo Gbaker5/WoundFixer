@@ -19,8 +19,15 @@
         <% for(var i=0; i<wounds.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <div class="woundbox">
-              <strong><p>Time Created: <%= wounds[i].createdAt%></p></strong>
-              <p class="blue">Patient:<%=lastNames[i]%>, <%=firstNames[i]%></p>
+              <div class="boxcolor">
+              <div class="boxshadow">
+
+              
+              <div class="sortedby">
+                <strong><p>Time Created: <%= wounds[i].createdAt%></p></strong>
+              </div>
+              
+              <p id="woundname">Patient:<%=lastNames[i]%>,<%=firstNames[i]%></p>
               <p>Type:<%=wounds[i].Type%></p>
               <p>Location:<%=wounds[i].Location%></p>
               <p>Length:<%=wounds[i].Length%></p>
@@ -30,7 +37,8 @@
               <p>Description:<%=wounds[i].Description%></p>
               <p>Intervention:<%=wounds[i].Intervention%></p>
               
-
+            </div>
+            </div>
             </div>
             <!--<a href="/post/<%= wounds[i]._id%>">
               <img class="img-fluid" src="<%= wounds[i].image%>">

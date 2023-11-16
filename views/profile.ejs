@@ -1,64 +1,68 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-12 user-info">
-      <p><strong>Welcome</strong>: <%= user.userName %></p>
+<div class="newcontainer">
+<div class="shadow2">
+  
+  <div class="row ">
+    <div class="blackback co user-info">
+      <p class="ms-3 "><strong>Welcome</strong>: <%= user.userName %></p>
       
-      <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+      <a href="/logout" class="ms-3 col-3 btn mb-2 bluebutton">Logout</a>
     </div>
     <!--first column-->
-      <div class="col-6 all-pt-ct">
+      <div class="  col-6 all-pt-ct">
           
           <div>
             <!--<a href="/newWoundForm">New Wound? + </a>
             <a href="/newPatient">Add New Patient</a>-->
-            <p>All Patients</p>
-            <div class=" col-8 add-patient">
-              <a href="/newPatient">Add Patient</a>
-            </div>
-            <div class="col-8 scrollbox">
-              <ul class="row list-unstyled">
+           <h2 class="ms-5 mt-4 white">Create Wound</h2>
+           
+            <p class="titles col-8 ms-5 mt-5">All Patients</p>
+            <div class=" ms-5 col-8 scrollbox2">
+              <ul class="list-unstyled">
+                
                 <% for(var i=0; i < patients.length; i++) {%>
-                  <li class="col-12 justify-content-between mt-2 name-ct">
+                  <li class="col-10 justify-content-between mt-2 name-ct">
                     
-                    <a href="/wound/newWoundForm/<%=patients[i]._id%>"><p><%=patients[i].lastName%>, <%=patients[i].firstName%></p></a> 
+                    <a href="/wound/newWoundForm/<%=patients[i]._id%>"><p class="allnames ms-2"><%=patients[i].lastName%>, <%=patients[i].firstName%></p></a> 
                 
                   </li>
                 <% } %>
               </ul>
             </div>  
-
+            <div class="titles ms-5 mt-5 col-3 add-patient">
+              <a href="/newPatient" class="white">Add Patient <span><i class="fa-solid fa-user-plus"></i></span></a>
+              
+            </div>
           </div>
       </div>
 
       <!--second column-->
-      <div class="col-6 existing-pt-ct">
+      <div class=" col-6 existing-pt-ct">
         
         <div class="">
-          <p>Existing Wounds</p>
-          <a href="/wound/allWounds">All Wounds</a>
-          <div class="col-8 scrollbox">
+          
+          
+          
+          <p class="titles ms-5 mt-5 col-8">Existing Wounds</p>
+          <div class="ms-5 col-8 scrollbox2">
             <!--Existing wounds collection-->
             <!--Maybe get list of wounds and then extract the names and check for duplicates-->
-            <ul class="row list-unstyled">
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
-              <p>Baker, Gjarred</p>
+            <ul class=" list-unstyled">
+              
+              
               <p>Baker, Gjarred</p>
               <% for(var i=0; i<wound.length; i++) {%>
-                <li class="col-6 justify-content-between mt-5">
-                  <a href="/post/<%= wound[i]._id%>">
-                    <img class="img-fluid" src="<%= wound[i].image%>">
+                <li class="col-10 justify-content-between mt-2 name-ct">
+                  <a href="">
+                    <p class="allnames ms-2"><%= wound[i].patient%></p>
                   </a>
                 </li>
               <% } %>
               </ul>
+          </div>
+
+          <div class="ms-5 mt-5 col-2 titles allw">
+            <a href="/wound/allWounds">All Wounds</a>
           </div>
         </div>  
       </div>  
@@ -66,5 +70,5 @@
 
     </div>
   </div>
-
+</div>
 <%- include('partials/footer') -%>
