@@ -425,7 +425,17 @@ module.exports = {
       console.log(err);
     }
     
+  },
+  getPatientPage: async (req,res) => {
+    try{
+      const patientWounds = await WoundInfo.find({patient: req.params.id}).sort({createdAt: "asc"})
+      console.log(patientWounds)
+
+    res.render("patientpage.ejs", { wounds: patientWounds, });
+  } catch (err) {
+    console.log(err);
   }
+  },
   
 
 

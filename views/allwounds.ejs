@@ -28,7 +28,7 @@
                 <strong><p>Time Created: <%= wounds[i].createdAt%></p></strong>
               </div>
               
-              <p id="woundname">Patient: <%=lastNames[i]%>,<%=firstNames[i]%></p>
+              <a href="/patientpage/<%=wounds[i].patient%>"><p id="woundname">Patient: <%=lastNames[i]%>,<%=firstNames[i]%></p></a>
               <p class="pushingp">Injury Type: <%=wounds[i].Type%></p>
               <p class="pushingp">Location: <%=wounds[i].Location%></p>
               <p class="pushingp">Length: <%=wounds[i].Length%></p>
