@@ -9,9 +9,76 @@ const axios = require("axios")
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const wound = await WoundInfo.find();
+
+      //how to sort uniquePatArr by lastName property from each object in array
       const patients = await newPatient.find().sort({lastName: "asc"});
-      //console.log(patients._id)
+      //console.log(patients)
+
+      const wound = await WoundInfo.find(); //All wounds
+      //console.log(wound)
+
+      ///////////// Array of all patients from wounds
+
+      let WpatientArr = []
+      for(let i=0;i<wound.length;i++){
+        WpatientArr.push(wound[i].patient)
+      }
+      console.log(WpatientArr) 
+
+      /////////////Array of patients with no duplicates
+      let unique = [];
+      function removeDuplicates(arrwound) { 
+         
+        arrwound.forEach(element => { 
+            if (!unique.includes(element)) { 
+                unique.push(element); 
+            } 
+        }); 
+        return unique
+        
+    } 
+    removeDuplicates(WpatientArr)
+    console.log(unique)
+
+    ////////////Trying to sort wounds by name
+    let newArr = []
+    let sortedUniquePatArr = [];
+    for(let j=0;j<unique.length;j++){
+      let uniquePatArr = await newPatient.find({_id:unique[j]});
+      //console.log(uniquePatArr)
+      newArr.push(uniquePatArr[0])
+      
+      //console.log(newArr)
+  
+
+      let sortedUniquePatArr = newArr.sort((a, b) => {
+        const lastNameA = a.lastName.toUpperCase(); // Ignore case
+        const lastNameB = b.lastName.toUpperCase(); // Ignore case
+        
+        if (lastNameA < lastNameB) {
+          return -1;
+        }
+        if (lastNameA > lastNameB) {
+          return 1;
+        }
+        return 0;
+      });
+    
+      
+      console.log(sortedUniquePatArr)
+
+    }
+
+    console.log('outside' + sortedUniquePatArr)
+
+    for(let k=0;k<sortedUniquePatArr.length;k++){
+      //console.log(sortedUniquePatArr[k])
+    }
+
+    
+    
+
+       
 
       //LIVE CLOCK
       res.render("profile.ejs", { user: req.user, wound: wound, patients: patients});
@@ -41,15 +108,35 @@ module.exports = {
         return res.redirect("/newPatient");
       }
 
+      const firstCapArr = req.body.firstName.split('')
+      const firstCap = firstCapArr[0].toUpperCase()+firstCapArr.join('').substring(1)
+
+      const lastCapArr = req.body.lastName.split('')
+      const lastCap = lastCapArr[0].toUpperCase()+lastCapArr.join('').substring(1)
+      
+
+
     await newPatient.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      firstName: firstCap,
+      lastName: lastCap,
     });
-    console.log("!!!!Wound Info Created!!!!")
+    console.log()
+    console.log(`Patient: ${firstCap} ${lastCap} Created!!!!`)
       res.redirect("/newPatient")
     }catch (err) {
       console.log(err);
     }
+  },
+  getConfirmDeletePatient: async (req,res) => {
+    try{
+      const patient = await newPatient.findById(req.params.id)
+      console.log(patient)
+
+
+      res.render("confirmation.ejs",{patient:patient})
+    }catch (err) {
+    console.log(err);
+  }
   },
   deletePatient: async (req,res) => {
     

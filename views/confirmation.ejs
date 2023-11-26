@@ -1,9 +1,30 @@
 <%- include('partials/header') -%>
 
-<div>
-    <h1>Confirmation</h1>
-  <p><%= confirmationMessage %></p>
-  <button onclick="deletePatient()">Confirm</button>
-  <button onclick="cancelAction()">Cancel</button>
+<div class="confirmcont">
+  
+  <div class="tan">
+  <div class="confirmshadow">
+  <div class="confirmbox">
+    <h2>Confirmation</h2>
+    <p>This will delete <strong>Name</strong> and all associated <strong>Wounds</strong> for <strong><%=patient.firstName%> <%=patient.lastName%></strong>  from database. Are you sure?
+    </p>
+
+    <div class="flexbox">
+      <form class="" action="/deletePatient/<%=patient._id%>?_method=DELETE"
+        method="POST">
+        <button class="confbtn titles" type="submit">Confirm</button>
+      </form>
+        <a class="" href="/newPatient"><button class="confbtn titles">Cancel</button></a>
+    </div>
+    
+    
+  </div>
+    
+  </div>
+  </div>
+  
+  
+
+  
 
 </div>

@@ -272,13 +272,13 @@ section{
     background-image: url(../imgs/bandage.jpg) ;
     background-position: center;
     background-size: contain;
-    overflow:auto;
+    
     height:400px;
 }
 
 .boxcolor{
     background-color: rgba(0,103,103, 0.9);
-    height:80vh;
+    height:100%;
     
     
 }
@@ -387,6 +387,7 @@ section{
     padding: 5px;
     border: 2px solid rgb(0,103,103);
     border-radius: 5px;
+    text-decoration: none;
 }
 .allnames{
     color:black;
@@ -509,7 +510,15 @@ section{
 
 .anotherbox{
     overflow:auto;
-    height:380px;
+    height:385px;
+}
+
+.pushingp{
+    margin-left: 5px;
+}
+
+.wrap{
+    word-wrap: break-word;
 }
 
 .boxcolor2{
@@ -550,6 +559,65 @@ section{
 .button5{
     background-color: black;
     border:1px solid rgb(0,103,103);
+    border-radius: 5px;
     padding:1px;
     margin-bottom: 1px;
+}
+
+.anchor:hover{
+    background-color: white;
+    color:rgb(0,103,103);  
+}
+
+/*ConfirmPage*/
+
+.confirmcont{
+    height:100vh;
+    width:100%;
+    background-image: url(../imgs/tools.jpg) ;
+    background-repeat: repeat;
+    background-size: 100px, 100px ;
+}
+
+.tan{
+    height:100vh;
+    width: 100vw;
+    background-color: rgba(210,180,140, 0.9);
+}
+
+.confirmshadow{
+    height:100vh;
+    width:100vw;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+.confirmbox{
+    float:left;
+    margin-left: 25%;
+    margin-top: 10%;
+    height:200px;
+    padding:10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.6);
+    box-shadow: -6px 7px rgba(0,0,0, 0.9);
+}
+
+.confirmbox h2{
+    color:white;
+}
+
+.confirmbox p{
+    color: white;
+}
+
+.flexbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.confbtn:hover{
+    background-color: white;
+    color:rgb(0,103,103)
 }

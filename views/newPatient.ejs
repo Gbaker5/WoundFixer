@@ -46,13 +46,13 @@
                 <% for(var i=0; i < patients.length; i++) {%>
                   <li class="col-10 justify-content-between mt-2 name-ct">
                     
-                    <p class=" ms-3 names"><%=patients[i].lastName%>, <%=patients[i].firstName%></p>
+                    <p class="wrap ms-3 names"><%=patients[i].lastName%>, <%=patients[i].firstName%></p>
                     
                     
                   </li>
                   <div class="whitegradient mt-2 col-2">
-                  <form class="mt-3 " action="/deletePatient/<%=patients[i]._id%>?_method=DELETE"
-                          method="POST">
+                  <form class="mt-3 " action="/confirmDelete/<%=patients[i]._id%>">
+                          
                           <span><button class="button5" type="submit"><i class="fa-regular fa-trash-can"></i></button></span>
                     </form>
                   </div>
@@ -65,7 +65,7 @@
     </div>
     <section>
         <div>
-            <a href="/profile" class="titles">Back to Profile</a>
+            <a href="/profile" class="anchor titles">Back to Profile</a>
            
         </div>
     </section>

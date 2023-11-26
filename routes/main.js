@@ -19,6 +19,7 @@ router.post("/signup", authController.postSignup);
 //patient
 router.get("/newPatient", ensureAuth, woundController.getAddPatient)
 router.post("/newPatient", ensureAuth, woundController.postAddPatient)
+router.get("/confirmDelete/:id", ensureAuth, woundController.getConfirmDeletePatient)
 router.delete("/deletePatient/:id", ensureAuth, woundController.deletePatient)
 //wound;
 
