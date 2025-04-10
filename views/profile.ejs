@@ -41,7 +41,7 @@
         
         <div class="">
           
-          
+          <h2 class="ms-5 mt-4 white">Existing Wounds</h2>
           
           <p class="titles ms-5 mt-5 col-8">Existing Wounds</p>
           <div class="ms-5 col-8 scrollbox2">
@@ -50,11 +50,11 @@
             <ul class=" list-unstyled">
               
               
-              <p>Baker, Gjarred</p>
+              
               <% for(var i=0; i<wound.length; i++) {%>
                 <li class="col-10 justify-content-between mt-2 name-ct">
-                  <a href="">
-                    <p class="allnames ms-2"><%= wound[i].patient%></p>
+                  <a href="/patientpage/<%=wound[i]._id%>">
+                    <p class="allnames ms-2"><%= wound[i].lastName%>, <%= wound[i].firstName%></p>
                   </a>
                 </li>
               <% } %>

@@ -1,6 +1,30 @@
 <%- include('partials/header') -%>
+<div class="">
+    <div class="patientpbox col-6">
+        <div class="patientcolor">
+        
+            <div class="patientpshadow">
+                <h2 class="patientheader ms-5 mt-2"><strong> Wounds for <%=lastName%>, <%=firstName%> (<%=count%>)</strong></h2>
+            </div>
+    </div>
+    </div>
+   <section class="row ">
+    <div class="flexbox">
+    <div class=" mt-5 col-2 titles allw">
+        <a href="/wound/newWoundForm/<%=patient._id%>">Create New Wound</a>
+    </div>
+    
+    <div class=" mt-5 col-2 titles allw">
+        <a href="/wound/allWounds">Back to All Wounds</a>
+    </div>
+    </div>
+   </section>
+    
+    
+</div>
 
-<div class="containers">
+
+<div class="">
     <div class="row justify-content-center mt-5">
         <ul class="row list-unstyled">
           <% for(var i=0; i<wounds.length; i++) {%>
@@ -14,7 +38,7 @@
                   <strong><p>Time Created: <%= wounds[i].createdAt%></p></strong>
                 </div>
                 
-                <a href="/patientpage/<%=wounds[i].patient%>"><p id="woundname">Patient: <%=lastNames[i]%>,<%=firstNames[i]%></p></a>
+                <p id="woundname">Patient: <%=lastName%>,<%=firstName%></p>
                 <p class="pushingp">Injury Type: <%=wounds[i].Type%></p>
                 <p class="pushingp">Location: <%=wounds[i].Location%></p>
                 <p class="pushingp">Length: <%=wounds[i].Length%></p>

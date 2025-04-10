@@ -1,10 +1,11 @@
 <%- include('partials/header') -%>
-  <div class="container">
-    <div class="col-12">
-      <h2>All Wounds</h2>
+  <div class="">
+    <section class="blacktop">
+    <div class="col-12 halfover">
+      <h2 class="white" id="top">All Wounds</h2>
     </div>
     
-    <div>
+    <div class="user-info woundpad halfover">
       <label for=""></label>
       <select name="" id="" onchange="javascript:location.href = this.value;">
         <option selected value="/wound/allWounds"><a href="">Most Recent(Default)</a></option>
@@ -13,18 +14,18 @@
         <option value="/wound/woundsPatientZtoA"><a href="">Patient(Z-A)</a></option>
       </select>
     </div>
-
+  </section>
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
         <% for(var i=0; i<wounds.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+          <li class="col-4 justify-content-between mt-5">
             <div class="woundbox">
               <div class="boxcolor">
               <div class="boxshadow">
               <div class="anotherbox">
               
               <div class="sortedby">
-                <strong><p id="woundname">Patient:<%=lastNames[i]%>,<%=firstNames[i]%></p></strong>
+                <a class="nametag" href="/patientpage/<%=wounds[i].patient%>"><p id="woundname">Patient: <%=lastNames[i]%>, <%=firstNames[i]%></p></a>
               </div>
               
               <p>Time Created: <%= wounds[i].createdAt%></p>
@@ -47,5 +48,15 @@
         <% } %>
         </ul>
     </div>
+
+    <section class="row mb-5 col-12 justify-content-center">
+ 
+      <a href="#top" class="ms-2 mt-5 col-4 titles allw justify-content-center">Back to Top</a>
+  
+  
+    <a href="/profile" class="ms-2 mt-5 col-4 titles allw">Profile</a>
+  
+  </section>
+
   </div>  
 <%- include('partials/footer') -%>

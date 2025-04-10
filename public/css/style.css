@@ -25,6 +25,8 @@ header{
 .headerh1{
     color:white;
     text-decoration: none;
+    height: 50%;
+    width:50%;
 }
 
 .headerh1:hover{
@@ -35,6 +37,11 @@ header{
     background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.1));
     width:100vw;
     height: 200px;
+}
+
+.headshadow span{
+    color:white;
+    
 }
 
 
@@ -181,13 +188,15 @@ section{
     padding: 10px;
 }*/
 
+
+
 /*LOGIN*/
 
 .leftcolorpillar{
     float:left;
     width:30vw;
     height:73.2vh;
-    background-color: rgba(0,103,103, 0.9);
+    background-image: linear-gradient(to right, rgba(0,103,103, 0.9),rgba(0,103,103, 0));
     position:relative;
     
 }
@@ -196,24 +205,32 @@ section{
     float:left;
     width:30vw;
     height:73vh;
-    background-color: rgba(0,0,0, 0.9); 
+    background-color: rgba(0,0,0, 0.1); 
 }
 
-.loginbox{
-    position:absolute;
-    height:100px;
-    width:350px;
-    background-color: white;
-    border:5px solid rgb(0,103,103);
-    left: 180px;
-    top: 200px;
-}
-
-.loginbox p{
-    color:rgba(0,103,103, 0.9);
-    text-align: center;
+.smallLogin{
+    display:block;
+    border: 5px solid white;
+    background-color: rgba(0,103,103, 0.8);
+    margin-bottom: 10px ;
     
-    font-size: 60px;
+} 
+
+.smallLogin p{
+    font-size: 30px;
+    color:white;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+.loginboxcolor{
+    
+    height:100%;
+    
+}
+
+.loginboxshadow{
+    
 }
 
 .btncolor{
@@ -230,6 +247,11 @@ section{
     
 }
 
+@media screen and (max-width: 375px) {
+    h1 {
+      display: none;
+    }
+  }
 
 /**/
 
@@ -260,8 +282,20 @@ section{
 
 /*Wounds*/
 
-.blueback{
-    background-color: white;
+.blacktop{
+    margin:0;
+    padding: 0;
+    height:100px;
+    width:100%;
+    background-color: black;
+}
+
+.woundpad{
+    padding-bottom: 20px;
+}
+
+.halfover{
+    padding-left: 45%;
 }
 
 .woundbox{
@@ -312,11 +346,11 @@ section{
         rgb(0,0,0) 10px,
         rgb(0,0,0) 20px
       );*/
-      background-color: black;
+      background-color: white;
 }
 
 .woundbox::-webkit-scrollbar-thumb{
-    background: white;
+    background: black;
     border-radius: 50px;
 }
 
@@ -344,6 +378,21 @@ section{
 .black{
     color:black;
 }
+
+.nametag{
+    text-decoration: none;
+}
+
+.nametag:hover #woundname{
+    color:black;
+    background-color: rgba(165,104,42,0.9);
+}
+
+.nametag:active #woundname{
+    color:rgb(0,103,103);
+    border: 1px solid white;
+}
+
 
 /*PROFILE*/
 
@@ -466,8 +515,10 @@ section{
     text-decoration: none;
 }
 
-.allw a:hover{
-    color: rgb(0,103,103)
+.allw:hover{
+    background:rgba(165,104,42,0.9) ;
+    color: black;
+    border: 2px solid black;
 }
 
 
@@ -513,8 +564,33 @@ section{
     height:385px;
 }
 
+.anotherbox::-webkit-scrollbar{
+    width: 10px;
+}
+
+.anotherbox::-webkit-scrollbar-track{
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(165,104,42,0.9),
+        rgba(165,104,42,0.9) 10px,
+        rgb(0,0,0) 10px,
+        rgb(0,0,0) 20px
+      );
+      /*background-color: white;*/
+}
+
+.anotherbox::-webkit-scrollbar-thumb{
+    background: black;
+    border-radius: 50px;
+}
+
 .pushingp{
     margin-left: 5px;
+    color:black;
+}
+
+.descriptvalue{
+    color:white;
 }
 
 .wrap{
@@ -621,3 +697,83 @@ section{
     background-color: white;
     color:rgb(0,103,103)
 }
+
+/*PatientPage*/
+
+.patientheader{
+    
+}
+
+.patientcolor{
+    background-color: rgba(165,104,42,0.7);
+    height:100%;
+}
+
+.patientpbox{
+    
+    margin-left: 25%;
+    margin-top: 10%;
+    height:100px;
+    
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: rgba();
+    background-image: url(../imgs/tools.jpg);
+    background-position: center;
+    background-size: 50px;
+    background-repeat: repeat;
+}
+
+.patientpshadow{
+   
+    height:100%;
+    width:100%;
+    padding:10px;
+
+}
+
+.flexbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 50%;
+}
+
+/*Media Q*/
+
+
+@media all and (max-width: 425px) {
+    .h1list p{
+        
+       color:black; 
+    }
+
+    h1 {
+      font-size: 45px;
+    }
+
+    .buttons li{
+        width:100%;
+        height: 10%;
+        font-size: 40px ;
+    }
+
+   
+  
+
+    .smallLogin{
+        display:block;
+        border: 5px solid white;
+        background-color: rgba(0,103,103, 0.8);
+        margin-bottom: 10px ;
+        
+    } 
+
+    .smallLogin p{
+        font-size: 30px;
+        color:white;
+        margin-left: 30%;
+        margin-top: 5%;
+    }
+}
+

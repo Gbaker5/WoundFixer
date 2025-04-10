@@ -48,7 +48,7 @@ module.exports = {
       //console.log(uniquePatArr)
       newArr.push(uniquePatArr[0])
       
-      //console.log(newArr)
+      console.log(newArr)
   
 
       let sortedUniquePatArr = newArr.sort((a, b) => {
@@ -65,11 +65,11 @@ module.exports = {
       });
     
       
-      console.log(sortedUniquePatArr)
+      //console.log(sortedUniquePatArr)
 
     }
 
-    console.log('outside' + sortedUniquePatArr)
+    //console.log('outside' + sortedUniquePatArr)
 
     for(let k=0;k<sortedUniquePatArr.length;k++){
       //console.log(sortedUniquePatArr[k])
@@ -81,7 +81,7 @@ module.exports = {
        
 
       //LIVE CLOCK
-      res.render("profile.ejs", { user: req.user, wound: wound, patients: patients});
+      res.render("profile.ejs", { user: req.user, wound: newArr, patients: patients});
     } catch (err) {
       console.log(err);
     }
@@ -295,6 +295,36 @@ module.exports = {
   getAllWounds: async (req,res) => { //createdAt newest to oldest 
     try{
       const wounds = await WoundInfo.find().sort({createdAt: "desc"})
+
+      const timeArr = []
+
+      for(let j=0;j<wounds.length;j++){
+        timeArr.push(wounds[j].createdAt.toISOString())
+        
+      }
+      //console.log(timeArr)
+
+      // Split each item in timeArr
+      const splitTimeArr = timeArr.map(item => item.split(/[T.]/)); // Assuming createdAt is a string with a comma-separated date/time
+
+      console.log(splitTimeArr);
+      const dateArr = []; //array of first item in each array
+      const timeArrTwo = []; //array of secind item in each array
+      for(let k=0;k<splitTimeArr.length;k++){
+        const date = splitTimeArr[k][0]
+        const time = splitTimeArr[k][1]
+
+        dateArr.push(date)
+        timeArrTwo.push(time)
+      }
+
+      
+
+      console.log(dateArr)
+      console.log(timeArrTwo)
+
+      
+      //////////
       const patient = await newPatient.find()
       let patientsidArr = []
 
@@ -317,11 +347,12 @@ module.exports = {
        firstNamesArr.push(fName) //put names into new array
        lastNamesArr.push(lName) 
        
+
       }
       //console.log(firstNamesArr)
       //console.log(lastNamesArr)
       //console.log(wounds)
-      res.render("allwounds.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
+      res.render("allwounds.ejs", {date: dateArr, time:timeArrTwo, wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
     }catch (err) {
       console.log(err);
     }
@@ -431,7 +462,17 @@ module.exports = {
       const patientWounds = await WoundInfo.find({patient: req.params.id}).sort({createdAt: "asc"})
       console.log(patientWounds)
 
-    res.render("patientpage.ejs", { wounds: patientWounds, });
+      const patient = await newPatient.find({_id: req.params.id})
+      //console.log(patient)
+      const thisPatient = patient[0]
+      console.log(thisPatient)
+      const first = patient[0].firstName
+      const last = patient[0].lastName
+
+      const count = await WoundInfo.find({patient: req.params.id}).countDocuments()
+      console.log(count)
+
+    res.render("patientpage.ejs", { wounds: patientWounds, firstName: first, lastName: last, count:count, patient: thisPatient});
   } catch (err) {
     console.log(err);
   }
