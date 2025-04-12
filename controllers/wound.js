@@ -75,7 +75,8 @@ module.exports = {
       //console.log(sortedUniquePatArr[k])
     }
 
-    
+    console.log(req.user)
+    console.log(req.body)
     
 
        

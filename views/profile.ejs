@@ -7,7 +7,15 @@
       <p class="ms-3 "><strong>Welcome</strong>: <%= user.userName %></p>
       
       <a href="/logout" class="ms-3 col-3 btn mb-2 bluebutton">Logout</a>
+      
+      <% if (user.role== "manager" || user.role == "admin") { %>
+        <div>
+           <p>Admin and Manager Access</p> 
+        </div>
+      <% } %>
     </div>
+  
+    
     <!--first column-->
       <div class="  col-6 all-pt-ct">
           
