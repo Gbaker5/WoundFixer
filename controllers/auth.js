@@ -5,6 +5,7 @@ const validator = require("validator");
 const User = require("../models/User");
 const axios = require("axios")
 
+
 ///LOGIN
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -180,3 +181,4 @@ exports.postSignup = async (req, res, next) => {
     return next(err);
   }
 };
+

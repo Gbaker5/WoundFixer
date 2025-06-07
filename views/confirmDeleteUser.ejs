@@ -1,0 +1,25 @@
+<%- include('partials/header') -%>
+
+<div class="confirmcont">
+  
+  <div class="tan">
+  <div class="confirmshadow">
+  <div class="confirmbox">
+    <h2>Confirmation</h2>
+    <p>This will delete <strong>User</strong> and all <strong>Associated Information</strong> for <br><strong>User:<span class="teal"><%=user.userName%></span> Email:<span class="teal"><%=user.email%></span></strong>  from database. <br>Are you sure?
+    </p>
+
+    <div class="flexbox">
+      <form class="" action="/deleteUser/<%=user._id%>?_method=DELETE"
+        method="POST">
+        <button class="confbtn titles" type="submit">Confirm</button>
+      </form>
+        <a class="" href="/editUsers"><button class="confbtn titles">Cancel</button></a>
+    </div>
+    
+    
+  </div>
+    
+  </div>
+  </div>
+  

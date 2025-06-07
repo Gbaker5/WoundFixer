@@ -1,0 +1,149 @@
+<%- include('partials/header') -%>
+<div class="newcontainer">
+    <div class="shadow2">
+       
+    <div>
+        <div class="row user-info blackback whitetext halfover">
+            <h2>Physician Page</h2>
+        </div>
+      
+        <div class="physicianP-ct">
+            
+
+            <div class="columns column-left ">
+            <div class="woundInfoBoxLeft existing-pt-ct">
+            
+                <div class="">
+                
+                  <h2 class="ms-5 mt-4 white">Existing Wounds</h2>
+                
+                  <p class="titles ms-5 mt-5 col-8">Existing Wounds</p>
+                  <div class="ms-5 col-8 scrollbox2">
+                    <!--Existing wounds collection-->
+                    <!--Maybe get list of wounds and then extract the names and check for duplicates-->
+                    <ul class=" list-unstyled">
+                    
+                    
+                    
+                      <% for(var i=0; i<patients.length; i++) {%>
+                        <li class="col-10 justify-content-between mt-2 name-ct">
+                          <a href=>
+                            <p class="allnames ms-2"><%= patients[i].lastName%>, <%= patients[i].firstName%></p>
+                          </a>
+                        </li>
+                      <% } %>
+                      </ul>
+                  </div>
+              
+              
+                </div>  <!--empty-->
+              </div>  <!--woundinfobox left-->
+              </div> <!--column column-left-->
+    
+        <!--Right Column-->
+        
+        <div class="columns column-right ">
+            
+            <div class="woundInfoBoxRight ">
+                <div class="physicianP-scrollbox">
+                    <div>
+                            <div class="ptProfile-ct">
+                                <div class="pt-profile ptImg-ct">
+                                    <p>Patient Image</p>
+                                    <img src="" alt="" class="">
+                                </div>
+                                <ul class="pt-profile">
+                                    <li><h3>Patient Profile</h3></li>
+                                    <li><p>Name: <%=patient.lastName%>, <%=patient.firstName%></p></li>
+                                </ul>
+                            
+                            </div>
+                        
+                            <div>
+                                <p>Wounds for: <%=patient.lastName%>, <%=patient.firstName%></p>
+                                <ul class="woundList-ct">
+                                    <% for(var i=0; i<wounds.length; i++) {%>
+                                        <li class="col-10 justify-content-between mt-2 ppname-ct">
+                                        
+                                            <p class="allnames ms-2">Type: <%= wounds[i].Type%></p>
+                                            <p class="allnames ms-2">Location: <%= wounds[i].Location%></p>
+                                            <p class="allnames ms-2">Time Created: <%= wounds[i].createdAt%></p>
+                                            <p class="allnames ms-2">Last Updated <%= wounds[i].updatedAt%></p>
+                                        
+                                        </li>
+                                        <li class="hidden">
+                                            <div>
+                                                <h3>Orginal Wound Details:</h3>
+                                                <p>Location:</p>
+                                                <p>Type:</p>
+                                                <p>Length:</p>
+                                                <p>Width:</p>
+                                                <p>Depth:</p>
+                                                <p>Odor:</p>
+                                                <p>Description:</p>
+                                                <p>Created By:</p>
+                                            </div>
+                                            <button class="">Add new Wound Info</button> <!--button will be tan-->
+                                            <div class="updateInputBox hidden">
+                                            <form class="woundupdate-ct" action="">
+                                                <label for="Length">Length</label>
+                                                <input class="col-2" type="text" name="Length">
+                                                <label for="Width">Width</label>
+                                                <input class="col-2" type="text" name="Width">
+                                                <label for="Depth">Depth</label>
+                                                <input class="col-2" type="text" name="Depth">
+                                                <label for="Odor">Odor</label>
+                                                <input class="col-2" type="text" name="Odor">
+                                                <label for="Description">Description</label>
+                                                <textarea class="col-5" name="Description"></textarea>
+                                                <label for="Intervention">Intervention</label>
+                                                <textarea class="col-5" name="Intervention"></textarea>
+                                                <span>Upload Wound Image</span>
+                                                <input type="file" name="woundImg">
+                                                <input type="submit">
+                                            </form> 
+                                            </div>
+                                        </li>
+                                        
+                                      <% } %>
+                                      
+                                </ul>
+                            </div>
+                        
+                        
+                    </div> <!--Empty Div-->
+
+                        <div class="scrollbox">
+                            <h3>Patient Wound(s)</</h3>
+                            <!--Patient Image-->
+                            <div>
+                            <p>Patient Image</p>
+                            <img src="" alt="" class="">
+                            </div>
+                            <!--images of most recent Wound-->
+                            <div>
+                            <p>Wound Image</p>
+                            <img src="" alt="" class="">
+                            <p>Date Created</p>
+                            <p>DateUpdated</p>
+                            </div>
+                            <div>
+                                <p>Wound Description</p>
+                                <p>Location:</p>
+                                <p>Type:</p>
+                                <p></p>
+                            </div>
+                            <div>
+                                <p>Update</p>
+                            </div>
+                        </div>
+                    </div> <!--scrollbox-->
+            </div> <!--WoundinfoBoxRight-->
+        
+        </div> <!--column column-right-->
+    
+    </div> <!--PhysicianP-ct-->
+</div> <!--empty-->
+</div> <!--shadow2-->
+</div> <!--newcontainer-->
+<%- include('partials/footer') -%>

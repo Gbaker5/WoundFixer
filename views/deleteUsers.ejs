@@ -1,0 +1,26 @@
+<%- include('partials/header') -%>
+<main>
+    <div>
+      <div>
+        <p><a href="/profile">Back to profile</a></p>
+      </div>
+       <div class="editHeader">
+            <h2>Edit Roles</h2>
+            <p>(One User at a time)</p>
+        </div>
+        
+        <ul>
+            <ul class="row list-unstyled">
+                <% for(var i=0; i < user.length; i++) {%>
+                  <li class="col-12 justify-content-between mt-2 blackborder">
+                    <p>Username: <span class="teal"><%=user[i].userName%></span></p>
+                    <p>Email: <span class="teal"><%=user[i].email%></span></p>
+                    <p>Current Role: <span class="teal"><%=user[i].role%></span></p>
+                  <a href="/confirmDeleteUser/<%=user[i]._id%>">Delete</a>
+                  </li>
+                <% } %>
+              </ul>
+        </ul>
+    </div>
+</main>
+<%- include('partials/footer') -%>

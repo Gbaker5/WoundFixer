@@ -3,16 +3,24 @@
 <div class="shadow2">
   
   <div class="row ">
-    <div class="blackback co user-info">
-      <p class="ms-3 "><strong>Welcome</strong>: <%= user.userName %></p>
-      
-      <a href="/logout" class="ms-3 col-3 btn mb-2 bluebutton">Logout</a>
-      
-      <% if (user.role== "manager" || user.role == "admin") { %>
-        <div>
-           <p>Admin and Manager Access</p> 
-        </div>
-      <% } %>
+    <div class="blackback co user-info userinfosection whitetext">
+      <section class="topsecs">
+        <p class="ms-3 "><strong>Welcome</strong>: <%= user.userName %></p>
+        
+        <a href="/logout" class="ms-3 col-3 btn mb-2 bluebutton">Logout</a>
+      </section>
+      <section class="topsecs roleSec whitetext">
+          <p>Role: <%= user.role %></p>
+        <% if (user.role== "manager" || user.role == "admin") { %>
+          <p class="underline"><strong>Admin and Manager Access:</strong></p> 
+          <div class="adminBox">
+             <p><a class="bluebutton btn" href="/physicianP">Physician Profile</a></p>
+             <p><a class="bluebutton btn" href="/editRoles">Role Edit</a></p>
+             <p><a class="bluebutton btn" href="/editUsers">Delete Users</a></p>
+             
+          </div>
+        <% } %>
+      </section>
     </div>
   
     
@@ -22,7 +30,7 @@
           <div>
             <!--<a href="/newWoundForm">New Wound? + </a>
             <a href="/newPatient">Add New Patient</a>-->
-           <h2 class="ms-5 mt-4 white">Create Wound</h2>
+           <h2 class="ms-5 mt-4 white">Create Wound For:</h2>
            
             <p class="titles col-8 ms-5 mt-5">All Patients</p>
             <div class=" ms-5 col-8 scrollbox2">
@@ -38,7 +46,7 @@
               </ul>
             </div>  
             <div class="titles ms-5 mt-5 col-3 add-patient">
-              <a href="/newPatient" class="white">Add Patient <span><i class="fa-solid fa-user-plus"></i></span></a>
+              <a href="/newPatient" class="white">Add/Delete Patient <span><i class="fa-solid fa-user-plus"></i></span></a>
               
             </div>
           </div>

@@ -24,3 +24,5 @@ const deleteButton = document.querySelectorAll('.tester')
     }
 }
    
+
+/////////////Toggle for each Hidden classs

@@ -7,6 +7,15 @@
     padding:0;
 }
 
+html, body{
+    height:100%;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow-x: hidden;
+}
 
 
 /*HEADER*/
@@ -282,6 +291,18 @@ section{
 
 /*Wounds*/
 
+.newcontainer2{
+    background-image: url(../imgs/steth.jpg);
+    background-repeat: repeat-y;
+    background-position: center center;
+    background-size:contain;
+    min-height:100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
 .blacktop{
     margin:0;
     padding: 0;
@@ -396,7 +417,14 @@ section{
 
 /*PROFILE*/
 
+.user-info, .user-info *{
+    margin-top: 0;
+    padding-top: 0;
+    
+}
+
 .user-info >p {
+   
     color:white;
 }
 
@@ -405,13 +433,13 @@ section{
     background-repeat: no-repeat;
     background-position: center;
     background-size:cover;
-    height:100%;
+    min-height:100vh;
     width: 100vw;
 }
 
 .shadow2{
     width:100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgba(0,103,103,0.6);
 }
 
@@ -437,6 +465,7 @@ section{
     border: 2px solid rgb(0,103,103);
     border-radius: 5px;
     text-decoration: none;
+    margin-bottom: 10px;
 }
 .allnames{
     color:black;
@@ -465,12 +494,14 @@ section{
     border-bottom:5px solid white;
     box-shadow: 0px 5px rgba(0,0,0, 0.9);
     width:101vw;
+
 }
 
 .scrollbox2{
     
-    height:300px;
-    overflow: auto;
+    height: 400px; /* or more */
+    overflow-y: auto;
+    padding-right: 5px;
     
 }
 
@@ -486,21 +517,20 @@ section{
         rgb(0,0,0) 10px,
         rgb(0,0,0) 20px
       );*/
-      background-color: black;
+      background-color: #f0f0f0;
 }
 
 .scrollbox2::-webkit-scrollbar-thumb{
-    background: white;
+    background: rgba(0,103,103, 0.8);
     border-radius: 50px;
 }
 
-.all-pt-ct{
-
+.all-pt-ct, .existing-pt-ct{
+    flex:1;
+    padding: 1rem;
 }
 
-.existing-pt-ct{
-    
-}
+
 
 .add-patient a{
    text-decoration: none;
@@ -521,6 +551,37 @@ section{
     border: 2px solid black;
 }
 
+.whitetext{
+    color:white;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+.userinfosection{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.roleSec{
+
+}
+
+.blackborder{
+    border: 1px solid black;
+}
+
+section{
+    border: 1px solid white;
+    border-radius: 10px
+}
+
+.adminBox{
+    display:flex;
+    justify-content: space-evenly;
+}
 
 /*NewPatient*/
 
@@ -645,6 +706,42 @@ section{
     color:rgb(0,103,103);  
 }
 
+/*New Wound*/
+
+.newWoundcontainer{
+    background-image: url(../imgs/steth.jpg);
+    background-repeat: repeat-y;
+    background-position: center center;
+    background-size:contain;
+    min-height:100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.newWndPtBox{
+    position: relative;
+}
+.newWndPt{
+    position: absolute;
+    top: 0;
+    font-size: 2rem;
+    margin-top: 2%;
+}
+
+.smallBlackBack{
+    border: 1px solid rgb(0,103,103);
+    background-color: black;
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+    
+}
+
+.woundrow{
+    border:1px solid black;
+}
 /*ConfirmPage*/
 
 .confirmcont{
@@ -738,6 +835,126 @@ section{
     justify-content: space-evenly;
     margin-left: 50%;
 }
+
+/*Edit Roles*/
+.editHeader{
+    text-align: center;
+    border: 1px solid black;
+}
+
+.teal{
+    color:rgb(0,103,103)
+}
+
+/*Physician P*/
+.physicianP-ct{
+    display: flex;
+    margin-top: 10px;
+}
+
+.columns{
+    flex-direction: column;
+    
+    
+}
+
+.column-left{
+    margin-right: 0;
+    margin-left: 10%;
+    width:30%;
+}
+
+.column-right{
+    margin-right: 0;
+    margin-left: 0;
+    width:50%;
+}
+
+.woundInfoBoxRight{
+    background-color: rgba(255,255,255, 0.6);
+    border:1px solid white;
+    height: 900px;
+}
+
+.woundInfoBoxLeft{
+    background-color: rgba(0,0,0, 0.6);
+    border:1px solid white;
+    height:700px;
+
+}
+
+.ptProfile-ct{
+    display:flex;
+
+}
+
+.pt-profile{
+    flex-direction: column;
+}
+
+.pt-profile >li{
+    list-style-type: none;
+}
+
+.ptImg-ct{
+    border: 1px solid black;
+}
+
+.woundList-ct>li{
+    list-style-type: none;
+}
+
+.physicianP-scrollbox{
+    
+        border: 1px solid black;
+        height:900px;
+        overflow-y: auto;
+    
+}
+
+.ppname-ct{
+    
+        background-color: rgba(0,0,0,0.7);
+        border: 1px solid rgb(0,103,103);
+        border-radius: 5px;
+    
+}
+
+.ppname-ct>p{
+    color:white
+}
+
+.woundupdate-ct{
+    display:flex;
+    flex-direction: column;
+}
+
+.updateInputBox{
+    border: 1px solid black;
+   
+}
+
+.pptr:nth-child(even) {
+    background-color: rgb(0,103,103)
+}
+
+.pptr:nth-child(odd) {
+    background-color: rgb(165,104,42)
+}
+
+#physician-container{
+    background-color: black;
+    height: 100vh;
+    width:100vw;
+    
+}
+
+#physicianTable{
+    color:white;
+}
+
+
+
 
 /*Media Q*/
 

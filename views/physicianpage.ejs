@@ -1,0 +1,69 @@
+<%- include('partials/header') -%>
+<div class="newcontainer">
+    <div class="shadow2">
+       
+    <div>
+        <div class="row user-info blackback whitetext halfover">
+            <h2>Physician Page</h2>
+        </div>
+      
+        <div class="physicianP-ct">
+
+        <div class="columns column-left ">
+        <div class="woundInfoBoxLeft existing-pt-ct">
+        
+            <div class="">
+              
+              <h2 class="ms-5 mt-4 white">Existing Wounds</h2>
+              
+              <p class="titles ms-5 mt-5 col-8">Existing Wounds</p>
+              <div class="ms-5 col-8 scrollbox2">
+                <!--Existing wounds collection-->
+                <!--Maybe get list of wounds and then extract the names and check for duplicates-->
+                <ul class=" list-unstyled">
+                  
+                  
+                  
+                  <% for(var i=0; i<patients.length; i++) {%>
+                    <li class="col-10 justify-content-between mt-2 name-ct">
+                      <a href="/physicianP/<%=patients[i]._id%>">
+                        <p class="allnames ms-2"><%= patients[i].lastName%>, <%= patients[i].firstName%></p>
+                      </a>
+                    </li>
+                  <% } %>
+                  </ul>
+              </div>
+    
+            
+            </div>  
+          </div>  
+          </div>
+    
+        <!--Right Column-->
+          <div class="columns column-right ">
+            <div class="woundInfoBoxRight ">
+            <div>
+                <div class="ptProfile-ct">
+                    <div class="pt-profile ptImg-ct">
+                        <p>Patient Image</p>
+                        <img src="" alt="" class="">
+                    </div>
+                    <ul class="pt-profile">
+                        <li><h3>Patient Profile</h3></li>
+                        <li><p>Name:</p></li>
+                    </ul>
+                
+                </div>
+
+               
+                <!--Patient Image-->
+                
+            </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<%- include('partials/footer') -%>

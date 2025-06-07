@@ -1,22 +1,24 @@
 <%- include('partials/header') -%>
-  <div class="">
-    <div class="blueback">
-
-    <section class="blacktop">
-    <div class="col-12 halfover">
-      <h2 class="white" id="top">All Wounds</h2>
-    </div>
+  <div class="newcontainer2">
+    <div class="shadow2">
+      
     
-    <div class="user-info woundpad halfover">
-      <label for=""></label>
-      <select name="" id="" onchange="javascript:location.href = this.value;">
-        <option selected value="/wound/allWounds"><a href="">Most Recent(Default)</a></option>
-        <option value="/wound/woundsZtoA">Oldest</option>
-        <option value="/wound/woundsPatient"><a href="">Patient(A-Z)</a></option>
-        <option value="/wound/woundsPatientZtoA"><a href="">Patient(Z-A)</a></option>
-      </select>
-    </div>
-  </section>
+
+      <section class="blacktop">
+          <div class="col-12 halfover">
+            <h2 class="white" id="top">All Wounds</h2>
+          </div>
+        
+          <div class="user-info woundpad halfover">
+            <label for=""></label>
+            <select name="" id="" onchange="javascript:location.href = this.value;">
+              <option selected value="/wound/allWounds"><a href="">Most Recent(Default)</a></option>
+              <option value="/wound/woundsZtoA">Oldest</option>
+              <option value="/wound/woundsPatient"><a href="">Patient(A-Z)</a></option>
+              <option value="/wound/woundsPatientZtoA"><a href="">Patient(Z-A)</a></option>
+            </select>
+          </div>
+      </section>
 
 
     <div class="row justify-content-center mt-5">
@@ -24,25 +26,24 @@
         <% for(var i=0; i<wounds.length; i++) {%>
           <li class="col-4 justify-content-between mt-5">
             <div class="woundbox">
-              <div class="boxcolor">
-              <div class="boxshadow">
+            <div class="boxcolor">
+            <div class="boxshadow">
 
-              <div class="anotherbox">
-              <div class="sortedby">
-                <strong><p>Time Created: <%= date[i]%> (<%=time[i]%>)</p></strong>
-                
-              </div>
-              
-              <a class="nametag" href="/patientpage/<%=wounds[i].patient%>"><p id="woundname">Patient: <%=lastNames[i]%>, <%=firstNames[i]%></p></a>
-              <p class="pushingp"><strong>Injury Type:</strong> <span class="descriptvalue"><%=wounds[i].Type%></span></p>
-              <p class="pushingp">Location: <%=wounds[i].Location%></p>
-              <p class="pushingp">Length: <%=wounds[i].Length%></p>
-              <p class="pushingp">Width: <%=wounds[i].Width%></p>
-              <p class="pushingp">Depth: <%=wounds[i].Depth%></p>
-              <p class="pushingp">Odor: <%=wounds[i].Odor%></p>
-              <p class="pushingp">Description: <%=wounds[i].Description%></p>
-              <p class="pushingp">Intervention: <%=wounds[i].Intervention%></p>
-            </div>
+                  <div class="anotherbox">
+                    <div class="sortedby">
+                    <strong><p>Time Created: <%= date[i]%> (<%=time[i]%>)</p></strong>
+                    </div>
+                  
+                    <a class="nametag" href="/patientpage/<%=wounds[i].patient%>"><p id="woundname">Patient: <%=lastNames[i]%>, <%=firstNames[i]%></p></a>
+                    <p class="pushingp"><strong>Injury Type:</strong> <span class="descriptvalue"><%=wounds[i].Type%></span></p>
+                    <p class="pushingp">Location: <%=wounds[i].Location%></p>
+                    <p class="pushingp">Length: <%=wounds[i].Length%></p>
+                    <p class="pushingp">Width: <%=wounds[i].Width%></p>
+                    <p class="pushingp">Depth: <%=wounds[i].Depth%></p>
+                    <p class="pushingp">Odor: <%=wounds[i].Odor%></p>
+                    <p class="pushingp">Description: <%=wounds[i].Description%></p>
+                    <p class="pushingp">Intervention: <%=wounds[i].Intervention%></p>
+                  </div>
             </div>
             </div>
             </div>
@@ -53,16 +54,15 @@
         <% } %>
         </ul>
     </div>
+  
+
+  <div class="row mb-5 col-12 justify-content-center">
+    <a href="#top" class="ms-2 mt-5 col-4 titles allw justify-content-center">Back to Top</a>
+    <a href="/profile" class="ms-2 mt-5 col-4 titles allw">Profile</a>
   </div>
 
-  <section class="row mb-5 col-12 justify-content-center">
- 
-      <a href="#top" class="ms-2 mt-5 col-4 titles allw justify-content-center">Back to Top</a>
-  
-  
-    <a href="/profile" class="ms-2 mt-5 col-4 titles allw">Profile</a>
-  
-  </section>
-
   </div>  
+</div>
+
 <%- include('partials/footer') -%>
+

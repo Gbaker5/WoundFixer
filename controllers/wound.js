@@ -5,6 +5,7 @@ const User = require("../models/User")
 const validator = require("validator");
 const passport = require("passport");
 const axios = require("axios")
+const Mailjet = require('node-mailjet');
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -23,9 +24,9 @@ module.exports = {
       for(let i=0;i<wound.length;i++){
         WpatientArr.push(wound[i].patient)
       }
-      console.log(WpatientArr) 
+      //console.log(WpatientArr) 
 
-      /////////////Array of patients with no duplicates
+      /////////////Array of patients with no duplicates (because there are can be multiple wounds under same name)
       let unique = [];
       function removeDuplicates(arrwound) { 
          
@@ -38,9 +39,9 @@ module.exports = {
         
     } 
     removeDuplicates(WpatientArr)
-    console.log(unique)
+    //console.log(unique)
 
-    ////////////Trying to sort wounds by name
+    ////////////Trying to sort wounds by name (arr of unique names now being sorted by last name?)
     let newArr = []
     let sortedUniquePatArr = [];
     for(let j=0;j<unique.length;j++){
@@ -48,7 +49,7 @@ module.exports = {
       //console.log(uniquePatArr)
       newArr.push(uniquePatArr[0])
       
-      console.log(newArr)
+      //console.log(newArr)
   
 
       let sortedUniquePatArr = newArr.sort((a, b) => {
@@ -81,7 +82,9 @@ module.exports = {
 
        
 
-      //LIVE CLOCK
+    //LIVE CLOCK
+
+    
       res.render("profile.ejs", { user: req.user, wound: newArr, patients: patients});
     } catch (err) {
       console.log(err);
@@ -176,6 +179,7 @@ module.exports = {
       //const patientUrl = await newPatient.findById(req.params.id)
       //console.log(patientUrl)
       const wound = await WoundInfo.find();
+
       res.render("newWound.ejs", { user: req.user, wound: wound, patient: patient });
     } catch (err) {
       console.log(err);
@@ -194,81 +198,144 @@ module.exports = {
 
       /////Validator for missing data in form
       const validationErrors = [];
-      if(validator.isEmpty(req.body.length))validationErrors.push({ msg: "Length Requires Input"});
-      if(validator.isEmpty(req.body.width))validationErrors.push({ msg: "Width Requires Input"});
-      if(validator.isEmpty(req.body.depth))validationErrors.push({ msg: "Depth Requires Input"});
-      if(validator.isEmpty(req.body.description))validationErrors.push({ msg: "Description Requires Input"});
-      if(validator.isEmpty(req.body.intervention))validationErrors.push({ msg: "Intervention Requires Input"});
+
+      if (validator.isEmpty(req.body.length)) {
+        validationErrors.push({ param: "length", msg: "Length requires input" });
+      } else if (!validator.isNumeric(req.body.length)) {
+        validationErrors.push({ param: "length", msg: "Length must be a number" });
+      }
+      
+      if (validator.isEmpty(req.body.width)) {
+        validationErrors.push({ param: "width", msg: "Width requires input" });
+      } else if (!validator.isNumeric(req.body.width)) {
+        validationErrors.push({ param: "width", msg: "Width must be a number" });
+      }
+      
+      if (validator.isEmpty(req.body.depth)) {
+        validationErrors.push({ param: "depth", msg: "Depth requires input" });
+      } else if (!validator.isNumeric(req.body.depth)) {
+        validationErrors.push({ param: "depth", msg: "Depth must be a number" });
+      }
+
+      if(validator.isEmpty(req.body.description))validationErrors.push({ param: "description", msg: "Description Requires Input"});
+      if(validator.isEmpty(req.body.intervention))validationErrors.push({ param: "intervention", msg: "Intervention Requires Input"});
       if (validationErrors.length) {
         console.log(validationErrors)
         req.flash("errors", validationErrors);
-        return res.redirect("/newWoundForm");
+        return res.redirect(`/wound/newWoundForm/${req.params.id}`);
       }
 
       const patient = await newPatient.find({_id: req.params.id})
       //console.log(patient)
       const Pname = patient[0].firstName
       //console.log(Pname)
-      const user = await User.findOne(req.user)
+      const user = await User.findById(req.user.id)
       //console.log(user)
       //console.log(user.userName)
 
-
-      
+      //api key: 6f5a5acc1e1adb46c07c82a644d2e405
+      //secret key: 879c7cbd0da7418cbcb33f127b47d237
 
       /////Send Email
-      function sendEmail (name, email, subject, message) {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.set('Authorization', 'Basic ' + btoa('bb1bfa5362e3033e9d31ed0998b5cb54'+":" +'baa1c5b9dcafbe464660c4f3e5e3a45d'));
       
-        const data = JSON.stringify({
-          "Messages": [{
-            "From": {"Email": "gjarred23@gmail.com", "Name": `"${user.userName}"`},
-            "To": [{"Email": email, "Name": name}],
-            "Subject": subject,
-            "TextPart": message
-          }]
+      function sendEmail (){
+        const Mailjet = require('node-mailjet');
+        
+        const mailjet = new Mailjet({
+          apiKey: process.env.MJ_APIKEY_PUBLIC,
+          apiSecret: process.env.MJ_APIKEY_SECRET,
+         
         });
       
-        const requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: data,
-        };
-      
-        fetch("https://api.mailjet.com/v3.1/send", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
+        const request = mailjet
+        .post('send', { version: 'v3.1' })
+        .request({
+                  Messages: 
+                  [
+                    {
+                      From: {
+                        Email: "gjarred23@gmail.com",
+                        Name: "Mailjet Test"
+                      },
+                      To: [
+                        {
+                          Email: "gjarred23+swe@gmail.com",
+                          Name: "Test1"
+                        }
+                      ],
+                      Subject: "Your email flight plan!",
+                      TextPart: "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
+                      HTMLPart: "<h3>Dear passenger 1, welcome to <a href=\"https://www.mailjet.com/\">Mailjet</a>!</h3><br />May the delivery force be with you!"
+                    }
+                  ]
+                })
+
+request
+    .then((result) => {
+        console.log(result.body)
+    })
+    .catch((err) => {
+        console.log(err.statusCode)
+    })
       }
 
+      sendEmail()
 
-      const string = JSON.stringify(req.body)
-      const spaces = string.split(',').join('\n')
-      
 
-      if(req.body.DON == "Yes"){
-        const name = Pname
-        const email = "gjarred23@gmail.com" 
-        const subject = Pname 
-        const message = spaces;
-        console.log('Email activated')
-        //implement your spam protection or checks.
-        sendEmail(Pname,email,subject,message);
-      }
 
-      if(req.body.PCP == "Yes"){
-        const name = Pname
-        const email = "gjarred23@gmail.com" 
-        const subject = Pname 
-        const message = spaces;
-        console.log('Email activated')
-        //implement your spam protection or checks.
-        sendEmail(Pname,email,subject,message);
-      }
-      //console.log(JSON.stringify(req.body))
-      //console.log(spaces)
+
+      //function sendEmail (name, email, subject, message) {
+      //  const myHeaders = new Headers();
+      //  myHeaders.append("Content-Type", "application/json");
+      //  myHeaders.set('Authorization', 'Basic ' + btoa('bb1bfa5362e3033e9d31ed0998b5cb54'+":" +'baa1c5b9dcafbe464660c4f3e5e3a45d'));
+      //
+      //  const data = JSON.stringify({
+      //    "Messages": [{
+      //      "From": {"Email": "gjarred23@gmail.com", "Name": `"${user.userName}"`},
+      //      "To": [{"Email": email, "Name": name}],
+      //      "Subject": subject,
+      //      "TextPart": message
+      //    }]
+      //  });
+      //
+      //  const requestOptions = {
+      //    method: 'POST',
+      //    headers: myHeaders,
+      //    body: data,
+      //  };
+      //
+      //  fetch("https://api.mailjet.com/v3.1/send", requestOptions)
+      //    .then(response => response.text())
+      //    .then(result => console.log(result))
+      //    .catch(error => console.log('error', error));
+      //}
+//
+//
+      //const string = JSON.stringify(req.body)
+      //const spaces = string.split(',').join('\n')
+      //
+//
+      //if(req.body.DON == "Yes"){
+      //  const name = Pname
+      //  const email = "gjarred23+swe@gmail.com" 
+      //  const subject = Pname 
+      //  const message = spaces;
+      //  console.log('DON Email activated')
+      //  //implement your spam protection or checks.
+      //  sendEmail(Pname,email,subject,message);
+      //}
+//
+      //if(req.body.PCP == "Yes"){
+      //  const name = Pname
+      //  const email = "gjarred23+swe@gmail.com" 
+      //  const subject = Pname 
+      //  const message = spaces;
+      //  console.log('PCP Email activated')
+      //  //implement your spam protection or checks.
+      //  sendEmail(Pname,email,subject,message);
+      //}
+      ////console.log(JSON.stringify(req.body))
+      ////console.log(spaces)
 
 
       /////Model to send to database
@@ -284,7 +351,7 @@ module.exports = {
         NotifyDon: req.body.DON,
         NotifyPCP: req.body.PCP,
         patient: req.params.id,
-        user: req.user.id,
+        creator: req.user.id,
         
       });
       console.log("Wound Info Created")

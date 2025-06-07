@@ -11,8 +11,9 @@ module.exports = {
     const token = req.cookies.token;
 
   if (!token) {
-    //return res.status(401).redirect("/login"); // or show a flash error
-    return res.status(401).json({message:"no token"})
+    console.log("no token")
+    return res.status(401).redirect("/login"); // or show a flash error
+    //return res.status(401).json({message:""})
   }
   
     try {
@@ -20,7 +21,10 @@ module.exports = {
       req.user = decoded.user; // attach the payload
       next();
     } catch (err) {
-      res.status(401).json({ message: "Token is not valid" });
+      
+      console.log("token is not valid")
+      res.redirect("/")
+      //res.status(401).json({ message: "Token is not valid" });
     }
   }, 
 

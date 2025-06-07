@@ -1,21 +1,22 @@
+ 
+
+
 <%- include('partials/header') -%>
+<div class="newWoundcontainer">
+    <div class="shadow2">
 
+        <div class="blacktop">
+            <div class="newWndPtBox halfover col-12 ">
+                <span class="newWndPt smallBlackBack">New Wound for: <strong><%=patient.lastName%></strong>, <strong><%=patient.firstName%></strong></span> 
+            </div>  
+        </div>
 
-   <div class="row mt-5">
-    <div class="col-12 ">
-        <ul class="row list-unstyled">
-          <% for(var i=0; i < patient.length; i++) {%>
-            <li class="col-12 justify-content-between mt-2">
-              
-              <p class="">New Wound for <br> <strong><%=patient[i].lastName%></strong>, <strong><%=patient[i].firstName%></strong></p> 
-          
-            </li>
-          <% } %>
-        </ul>
-      </div>  
-    <!--Left Column-->
-    <div class="col-5 ms-5">
-        <form action="/wound/postWoundForm/<%=patient._id%>" method="POST">
+    <div class="container mt-5 mb-5">
+  <form action="/wound/postWoundForm/<%=patient._id%>" method="POST">
+    <div class="row justify-content-center">
+      <!-- Left Column -->
+      <div class="col-md-5">
+        <!-- form content -->
         <div>
             <h2>Where is the Wound Located?</h2>
             <label for=""></label>
@@ -56,28 +57,48 @@
             </select>
         </div>
 
+        <% const fieldErrors = {}; %>
+        <% if (locals.messages && messages.errors) {
+        messages.errors.forEach(err => {
+       fieldErrors[err.param] = err.msg;
+        });
+        } %>
+
+
         <div>
             <h2>What size?</h2>
             <div>
-                <label for="Length"></label>
-                <input type="text" placeholder="Length" id="length" name="length">
+              <label for="length"></label>
+              <input type="text" placeholder="Length" id="length" name="length">
+              <% if (fieldErrors.length) { %>
+                <div class="text-danger"><%= fieldErrors.length %></div>
+              <% } %>
             </div>
-           <div>
-                <label for="Width"></label>
-                <input type="text" placeholder="Width" id="width" name="width">
-           </div>
-           <div>
-                <label for="Depth"></label>
-                <input type="text" placeholder="Depth" id="depth" name="depth">
+
+            <div>
+              <label for="width"></label>
+              <input type="text" placeholder="Width" id="width" name="width">
+              <% if (fieldErrors.width) { %>
+                <div class="text-danger"><%= fieldErrors.width %></div>
+              <% } %>
             </div>
+
+            <div>
+              <label for="depth"></label>
+              <input type="text" placeholder="Depth" id="depth" name="depth">
+              <% if (fieldErrors.depth) { %>
+                <div class="text-danger"><%= fieldErrors.depth %></div>
+              <% } %>
+            </div>
+
         </div>
 
         <div>
             <h2>Odor?</h2>
             <label for="Odor"></label>
             <select name="odor" id="odor">
-                <option value="yes">Yes</option>
                 <option value="no">No</option>
+                <option value="yes">Yes</option>
             </select>
         </div>
 
@@ -86,69 +107,46 @@
             <textarea name="description" id="description" cols="30" rows="10" Placeholder="Color, Shape, etc"></textarea>
         </div>
 
-        <% if (locals.messages.errors) { %>
-            <% messages.errors.forEach( el => { %>
-                <div class="alert alert-danger"><%= el.msg %></div>
-            <% }) %>    
-        <% } %>
-        <% if (locals.messages.info) { %>
-            <% messages.info.forEach( el => { %>
-                <div class="alert alert-info"><%= el.msg %></div>
-            <% }) %>    
-        <% } %>
-       
-        
+      </div>
 
-
-
-    </div>
-    
-    <!--Right Column-->
-    <div class="col-6">
+      <!-- Right Column -->
+      <div class="col-md-5 offset-md-1">
+        <!-- image + intervention -->
         <div>
-            <p>Anatomical Position Diagram</p>
+            <h2>Anatomical Position Diagram</h2>
             <img class="diagram" src="http://localhost:2026/imgs/AnatomicalPosition.webp" alt="Anatomical">
         </div>
         
         <div>
             <h2>Intervention</h2>
-            <h3>Previous Interventions</h3>
-            <div class="scrollbox">
-                <ul>
-                    <% for(var i=0; i<wound.length; i++) {%>
-                    <li class="col-6 justify-content-between mt-5">
-                      
-                      <a href="/post/<%= wound[i]._id%>">
-                        <img class="img-fluid" src="<%= wound[i].image%>">
-                        <p>Apply wound cleanser, pat dry, apply medihoney, apply bordered gauze</p>
-                      </a>
-                    </li>
-                  <% } %>
-                </ul>
-            </div>
-            <h3>Current Intervention</h3>
+            <h3>Initial Intervention</h3>
+        
             <div>
                 <textarea name="intervention" id="intervention" cols="30" rows="10"></textarea>
             </div>
         </div>
-
+      </div>
     </div>
 
-    <!--Bottom Section-->
-
-    <div>
-        <p>Wound will be added to patients record, notify Wound Nurse and:</p>
+    <!-- Bottom Section -->
+    <div class="row mt-5 text-center">
+      <div class="col-12">
+        <p>Wound will be added to patient's record, notify Wound Nurse and:</p>
         <input type="checkbox" id="don" name="DON" value="Yes">
-        <label for="DON">DON</label>
+        <label for="don">DON</label>
         <input type="checkbox" id="pcp" name="PCP" value="Yes">
-        <label for="PCP">PCP</label>
-    </div>
+        <label for="pcp">PCP</label>
+      </div>
 
-
-    <div>
-        <button type="submit">Add Wound</button>
+      <div class="col-12 mt-3">
+        <button type="submit" class="btn bluebutton">Add Wound</button>
+      </div>
     </div>
-    </form>
-   </div>
+  </form>
+</div>
+
+    
+    </div> 
+</div>
 
 <%- include('partials/footer') -%>
