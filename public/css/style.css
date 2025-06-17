@@ -17,7 +17,13 @@ body{
     overflow-x: hidden;
 }
 
+.hidden{
+    display:none;
+}
 
+.noborder{
+    border:none;
+}
 /*HEADER*/
 
 header{
@@ -416,6 +422,14 @@ section{
 
 
 /*PROFILE*/
+
+.halfover2{
+    margin-left:35%;
+}
+
+.topsecs{
+    background-color: rgba(255,255,255,0.6);
+}
 
 .user-info, .user-info *{
     margin-top: 0;
@@ -836,6 +850,17 @@ section{
     margin-left: 50%;
 }
 
+.recentWinfo{
+    padding:2px;
+    background-color: rgb(165,104,42);
+    border: 1px solid black
+}
+
+.recentWoundinfoBox{
+    background-color: rgba(0,0,0,0.7);
+    
+}
+
 /*Edit Roles*/
 .editHeader{
     text-align: center;
@@ -898,6 +923,21 @@ section{
 
 .ptImg-ct{
     border: 1px solid black;
+    width:200px;
+    height:200px;
+    background-color: black;
+}
+
+.ptImg{
+    height:200px;
+    width:200px
+}
+
+.woundList-ct{
+    margin-right: 4%;
+    margin-left: 4%;
+    padding: 2px ;
+    
 }
 
 .woundList-ct>li{
@@ -931,8 +971,14 @@ section{
 
 .updateInputBox{
     border: 1px solid black;
-   
+    
+    overflow: hidden;
+    transition: max-height 0.4s ease;
 }
+
+.updateInputBox.open {
+    max-height: 1000px; /* large enough to show full form */
+  }
 
 .pptr:nth-child(even) {
     background-color: rgb(0,103,103)
@@ -953,7 +999,90 @@ section{
     color:white;
 }
 
+/*Physician P Pt*/
+.woundDocImg{
+    width:100px;
+    height:100px;
+    border-radius: 10px;
+}
+.woundDocs-scrollBox{
+    border: 1px solid black;
+    height:300px;
+    overflow: auto;
+    background-color: rgba(0,0,0, 0.6)
+}
 
+.woundDocsBox{
+    border: 1px solid black;
+}
+
+.woundDoc-ct{
+    background-color: rgba(255,255,255, 0.9);
+    margin-left: 2%;
+    border-radius: 10px;
+}
+
+.woundDoc-ct > li{
+    list-style-type: none;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+.arrow-icon.rotate {
+  transform: rotate(180deg); /* arrow points down */
+}
+  
+/*Pt Image Update*/
+.imgUpName{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.imgUpdate-ct{
+    border: 1px solid black;
+    background-color: rgba(0,0,0, 0.3);
+    
+    height: 500px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+    margin:0;
+    padding:0
+
+}
+
+.upd-ct{
+   
+
+}
+
+.ptImg-ct2{
+    border: 1px solid black;
+    width:200px;
+    height:200px;
+    background-color: black;
+    position:relative;
+    margin-right: 50px;
+}
+
+.ptImg-ct2>p{
+    position:absolute;
+    bottom:-50px;
+    left:50px
+}
+
+.ptImg2{
+    height:200px;
+    width:200px
+}
 
 
 /*Media Q*/

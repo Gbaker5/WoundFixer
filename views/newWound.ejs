@@ -105,6 +105,9 @@
         <div>
             <h2>Description of Wound</h2>
             <textarea name="description" id="description" cols="30" rows="10" Placeholder="Color, Shape, etc"></textarea>
+            <% if (fieldErrors.description) { %>
+                <div class="text-danger"><%= fieldErrors.description %></div>
+              <% } %>
         </div>
 
       </div>
@@ -124,6 +127,9 @@
             <div>
                 <textarea name="intervention" id="intervention" cols="30" rows="10"></textarea>
             </div>
+            <% if (fieldErrors.intervention) { %>
+                <div class="text-danger"><%= fieldErrors.intervention %></div>
+              <% } %>
         </div>
       </div>
     </div>

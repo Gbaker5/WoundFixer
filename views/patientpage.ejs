@@ -1,5 +1,12 @@
 <%- include('partials/header') -%>
-<div class="">
+<div class="newcontainer">
+<div class="shadow2">
+
+  <div>
+        <div class="row user-info blackback whitetext ">
+            <h2 class="halfover2">Patient Wound Tracking Page</h2>
+        </div>
+  
     <div class="patientpbox col-6">
         <div class="patientcolor">
         
@@ -8,7 +15,7 @@
             </div>
     </div>
     </div>
-   <section class="row ">
+   <section class="row noborder ">
     <div class="flexbox">
     <div class=" mt-5 col-2 titles allw">
         <a href="/wound/newWoundForm/<%=patient._id%>">Create New Wound</a>
@@ -27,29 +34,51 @@
 <div class="">
     <div class="row justify-content-center mt-5">
         <ul class="row list-unstyled">
-          <% for(var i=0; i<wounds.length; i++) {%>
-            <li class="col-6 justify-content-between mt-5">
+          <% for(var i=0; i<wounds.length; i++){
+            var woundIdStr = wounds[i]._id.toString(); 
+            var recentDoc = woundDocsByWound[woundIdStr] ? woundDocsByWound[woundIdStr][0] : null;
+          %>
+            <li class="col-5 justify-content-between ms-5 mt-5">
+
+             
+
+             
+
               <div class="woundbox">
-                <div class="boxcolor">
-                <div class="boxshadow">
-  
-                <div class="anotherbox">
-                <div class="sortedby">
-                  <strong><p>Time Created: <%= wounds[i].createdAt%></p></strong>
-                </div>
-                
-                <p id="woundname">Patient: <%=lastName%>,<%=firstName%></p>
-                <p class="pushingp">Injury Type: <%=wounds[i].Type%></p>
-                <p class="pushingp">Location: <%=wounds[i].Location%></p>
-                <p class="pushingp">Length: <%=wounds[i].Length%></p>
-                <p class="pushingp">Width: <%=wounds[i].Width%></p>
-                <p class="pushingp">Depth: <%=wounds[i].Depth%></p>
-                <p class="pushingp">Odor: <%=wounds[i].Odor%></p>
-                <p class="pushingp">Description: <%=wounds[i].Description%></p>
-                <p class="pushingp">Intervention: <%=wounds[i].Intervention%></p>
-              </div>
-              </div>
-              </div>
+                  <div class="boxcolor">
+                  <div class="boxshadow">
+                  
+                    <div class="anotherbox">
+                    <div class="sortedby">
+                      <strong><p>Time Created: <%= wounds[i].createdAt%></p></strong>
+                    </div>
+
+                    <p id="woundname">Patient: <%=lastName%>,<%=firstName%></p>
+                    <p class="pushingp">Injury Type: <%=wounds[i].Type%></p>
+                    <p class="pushingp">Location: <%=wounds[i].Location%></p>
+                    <p class="pushingp">Length: <%=wounds[i].Length%></p>
+                    <p class="pushingp">Width: <%=wounds[i].Width%></p>
+                    <p class="pushingp">Depth: <%=wounds[i].Depth%></p>
+                    <p class="pushingp">Odor: <%=wounds[i].Odor%></p>
+                    <p class="pushingp">Description: <%=wounds[i].Description%></p>
+                    <p class="pushingp">Intervention: <%=wounds[i].Intervention%></p>
+                      <% if (recentDoc) { %>
+                        <!--If woundDoc exists then display button and div-->
+                        <p class="recentWinfo">Most recent wound orders/Info:</p>
+                        <div class="recentWoundinfoBox blackborder col-12 ">
+                          <p>Updated: <%= recentDoc.createdAt %></p>
+                          <p>The wound Length is now: <%= recentDoc.Length %>cm</p>
+                          <p>The wound Width is now: <%= recentDoc.Width %> cm</p>
+                          <p>The wound Depth is now: <%= recentDoc.Depth %> cm</p>
+                          <p>Does the wound currently have an odor?: <%= recentDoc.Odor %></p>
+                          <p>Current Description of wound: <%= recentDoc.Description %></p>
+                          <p>Current Intervention for wound: <%= recentDoc.Intervention %></p>
+                        </div>
+                        <!--If woundDoc exists then display button and div-->
+                      <% } %>
+                    </div>
+                  </div>
+                  </div>
               </div>
                               <!--<a href="/post/<%= wounds[i]._id%>">
                                 <img class="img-fluid" src="<%= wounds[i].image%>">
@@ -58,7 +87,8 @@
           <% } %>
           </ul>
       </div>
-
+    </div>
+</div>
 </div>
 
 

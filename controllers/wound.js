@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const WoundInfo = require("../models/Wound");
+const WoundDoc = require("../models/WoundImg")
 const newPatient = require("../models/Patient");
 const User = require("../models/User")
 const validator = require("validator");
@@ -270,14 +271,15 @@ module.exports = {
                   ]
                 })
 
-request
-    .then((result) => {
-        console.log(result.body)
-    })
-    .catch((err) => {
-        console.log(err.statusCode)
-    })
-      }
+              request
+                 .then((result) => {
+                     console.log(result.body)
+                     console.log("Email Sent")
+                 })
+                 .catch((err) => {
+                     console.log(err.statusCode)
+                 })
+                   }
 
       sendEmail()
 
@@ -336,6 +338,7 @@ request
       //}
       ////console.log(JSON.stringify(req.body))
       ////console.log(spaces)
+    
 
 
       /////Model to send to database
@@ -528,19 +531,44 @@ request
   getPatientPage: async (req,res) => {
     try{
       const patientWounds = await WoundInfo.find({patient: req.params.id}).sort({createdAt: "asc"})
-      console.log(patientWounds)
 
       const patient = await newPatient.find({_id: req.params.id})
-      //console.log(patient)
       const thisPatient = patient[0]
-      console.log(thisPatient)
       const first = patient[0].firstName
       const last = patient[0].lastName
-
       const count = await WoundInfo.find({patient: req.params.id}).countDocuments()
-      console.log(count)
+      //console.log(patientWounds)
+      //console.log(patient)
+      //console.log(thisPatient)
+      //console.log(count)
 
-    res.render("patientpage.ejs", { wounds: patientWounds, firstName: first, lastName: last, count:count, patient: thisPatient});
+     
+
+      ////Recent woundDoc Info
+      const allWoundDocs = await WoundDoc.find({ Patient: req.params.id })
+      .populate('user') // assuming each doc has a user who updated it
+      .sort({ createdAt: -1 }); // newest first
+      console.log(allWoundDocs)
+    
+    // Group only the first (most recent) doc per wound
+    const woundDocsByWound = {};
+    for (let doc of allWoundDocs) {
+      const woundId = doc.originalWoundId.toString();
+      if (!woundDocsByWound[woundId]) {
+        woundDocsByWound[woundId] = [doc]; // only save the first one (newest)
+      }
+    }
+    
+
+
+    res.render("patientpage.ejs", { 
+      wounds: patientWounds, 
+      firstName: first, 
+      lastName: last, 
+      count:count, 
+      patient: thisPatient,
+      woundDocsByWound,
+    });
   } catch (err) {
     console.log(err);
   }

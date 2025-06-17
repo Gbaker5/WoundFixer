@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/multer");
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const woundController = require("../controllers/wound");
@@ -26,6 +27,9 @@ router.get("/confirmDeleteUser/:id", ensureAuth, authorizeRoles("admin"),manager
 router.delete("/deleteUser/:id", ensureAuth, authorizeRoles("admin", "manager"), managerialController.deleteUser )
 router.get("/physicianP", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getPhysicianP )
 router.get("/physicianP/:id", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getPhysicianPtPage )
+router.post("/physicianP/:id/updateWound", ensureAuth, authorizeRoles("admin", "manager"), upload.single("woundImg"), managerialController.updateWounds )
+router.get("/physicianP/:id/updatePtProfileImg", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getUpdatePtProfileImg)
+router.put("/physicianP/:id/updatePtProfileImg", ensureAuth, authorizeRoles("admin", "manager"), upload.single("ptImg"), managerialController.putUpdatePtProfileImg)
 
 //patient
 router.get("/newPatient", ensureAuth, woundController.getAddPatient)

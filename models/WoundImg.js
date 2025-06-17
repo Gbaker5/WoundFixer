@@ -45,11 +45,17 @@ const WoundImgSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    originalWoundId: {
+        type: String,
+        required: true,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User", //user id created from user.js 
     },
     
-});
+},{
+    timestamps: true,
+  });
 
 module.exports = mongoose.model("WoundImg", WoundImgSchema)

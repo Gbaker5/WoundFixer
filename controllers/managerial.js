@@ -3,10 +3,12 @@ const WoundInfo = require("../models/Wound");
 const newPatient = require("../models/Patient");
 const User = require("../models/User")
 const WoundDoc = require("../models/WoundImg")
+const PatientImg = require("../models/PatientImg")
 const validator = require("validator");
 const passport = require("passport");
 const axios = require("axios")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const WoundImg = require("../models/WoundImg");
 
 
 exports.getroleEdit = async (req,res) => {
@@ -145,6 +147,9 @@ exports.getPhysicianP = async(req,res) => {
 exports.getPhysicianPtPage = async(req,res) => {
     try{
 
+        /////////loading Pt Image
+        const ptImage = await PatientImg.find({ Patient: req.params.id });
+
         /////////Getting List of patients with wounds (Left side list)
 
         // 1. Get all wounds
@@ -163,7 +168,9 @@ exports.getPhysicianPtPage = async(req,res) => {
           return lastA.localeCompare(lastB);
         });
 
-        console.log(sortedPatients);
+        //console.log(sortedPatients);
+
+
 
         //Im going to create a snapshot with each edit. The info will be stored within the image document
 
@@ -172,40 +179,171 @@ exports.getPhysicianPtPage = async(req,res) => {
         const currentPatient = await newPatient.findById(req.params.id)
         ////////////List of Wounds for patient
 
-        const patientWounds = await WoundInfo.find({patient: req.params.id}).sort({createdAt: "asc"})
-        console.log(patientWounds)
+        const patientWounds = await WoundInfo.find({patient: req.params.id}).populate('creator').sort({createdAt: "asc"})
+        //console.log(patientWounds)
 
+        ///Wound Docs related to Patient (arr)
+        const woundImgs = await WoundDoc.find({Patient: req.params.id}).populate('user').sort({createdAt: "desc"})
+        console.log(woundImgs)
+
+        //Wound Docs associated with each wound of patient
+        // Group woundDocs by originalWoundId
+        const woundDocsByWound = {};
+        woundImgs.forEach(doc => {
+          const id = doc.originalWoundId?.toString();
+          if (!woundDocsByWound[id]) {
+            woundDocsByWound[id] = [];
+          }
+          woundDocsByWound[id].push(doc);
+        });
+
+       
     
-        res.render("physicianpagePatientProfile.ejs", {patients: sortedPatients, wounds:patientWounds, patient: currentPatient})
+        res.render("physicianpagePatientProfile.ejs", {
+            patients: sortedPatients, 
+            wounds:patientWounds, 
+            patient: currentPatient, 
+            woundDocsByWound,
+            messages: req.flash(),
+            ptImg: ptImage.length ? ptImage[0] : null
+        })
     }catch(err){
         console.log(err)
     }
 }
 
 
-exports.getEditWounds = async(req,res) => {
-    try{
 
-
-
-
-    
-        res.redirect("/physicianP")
-    }catch(err){
-        console.log(err)
-    }
-}
 
 exports.updateWounds = async(req,res) => {
     try{
+
+         /////Validator for missing data in form
+         const validationErrors = [];
+        
+         if (validator.isEmpty(req.body.Length)) {
+           validationErrors.push({ param: "Length", msg: "Length requires input" });
+         } else if (!validator.isNumeric(req.body.Length)) {
+           validationErrors.push({ param: "Length", msg: "Length must be a number" });
+         }
+         
+         if (validator.isEmpty(req.body.Width)) {
+           validationErrors.push({ param: "Width", msg: "Width requires input" });
+         } else if (!validator.isNumeric(req.body.Width)) {
+           validationErrors.push({ param: "Width", msg: "Width must be a number" });
+         }
+         
+         if (validator.isEmpty(req.body.Depth)) {
+           validationErrors.push({ param: "Depth", msg: "Depth requires input" });
+         } else if (!validator.isNumeric(req.body.Depth)) {
+           validationErrors.push({ param: "Depth", msg: "Depth must be a number" });
+         }
+   
+         if(validator.isEmpty(req.body.Description))validationErrors.push({ param: "Description", msg: "Description Requires Input"});
+         if(validator.isEmpty(req.body.Intervention))validationErrors.push({ param: "Intervention", msg: "Intervention Requires Input"});
+         if (!req.file) {
+            validationErrors.push({ param: "woundImg", msg: "Wound Image Requires File" });
+          }
+          
+         if (validationErrors.length) {
+           //console.log(validationErrors)
+           req.flash("errors", JSON.stringify({
+            woundId: req.body.woundId,
+            errors: validationErrors
+          }));
+          req.flash("showFormWoundId", req.body.woundId);
+
+           return res.redirect(`/physicianP/${req.params.id}`);
+         }
+
+
+
+        console.log("Cloudinary loaded:", cloudinary.config);
+        console.log("req.file:", req.file);
+        console.log("req.body:", req.body);
+        
+       
+        const result = await cloudinary.uploader.upload(req.file.path);
+
         await WoundDoc.create({
-            
+
+            Type: req.body.Type ,
+            Location: req.body.Location,
+            Length: req.body.Length,
+            Width: req.body.Width,
+            Depth: req.body.Depth,
+            Odor: req.body.Odor,
+            Description: req.body.Description,
+            Intervention: req.body.Intervention,
+            Image: result.secure_url,
+            CloudinaryId: result.public_id,
+            Patient: req.body.Patient,
+            originalWoundId:req.body.woundId,
+            user: req.user.id,
+
+
         })
 
 
 
     
-        res.redirect("/physicianP")
+        res.redirect(`/physicianP/${req.params.id}`)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+exports.getUpdatePtProfileImg = async(req,res) => {
+    try{
+
+        const currentPatient = await newPatient.findById(req.params.id)
+
+        const ptImage = await PatientImg.find({ Patient: req.params.id });
+
+        res.render("editPtProfileImg.ejs", {
+          patient: currentPatient,
+          ptImg: ptImage.length ? ptImage[0] : null
+        });
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+
+exports.putUpdatePtProfileImg = async(req,res) => {
+    try{
+
+        //////Validation Error for image upload
+        const validationErrors = [];
+
+        if (!req.file) {
+            validationErrors.push({ param: "ptImg", msg: "Wound Image Requires File" });
+        }
+        
+        if (validationErrors.length) {
+            req.flash("errors", validationErrors);
+            return res.redirect(`/physicianP/${req.params.id}/updatePtProfileImg`);
+        }
+        
+        // If no validation errors, continue with Cloudinary upload and DB logic
+        
+        const result = await cloudinary.uploader.upload(req.file.path);
+
+        /////////Database Update for Pt Image
+        await PatientImg.findOneAndUpdate(
+            { Patient: req.params.id },
+            { $set: {
+                Image:result.secure_url,
+                CloudinaryId:result.public_id,
+                Patient:req.params.id,
+                user:req.user.id,
+            } },
+            { upsert: true }
+        )
+        console.log("Image updated!")
+
+    
+        res.redirect(`/physicianP/${req.params.id}`)
     }catch(err){
         console.log(err)
     }

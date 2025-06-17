@@ -1,0 +1,41 @@
+<%- include('partials/header') -%>
+<div class="newcontainer">
+    <div class="shadow2">
+
+        <div>
+
+            <div class="row user-info blackback whitetext halfover">
+                <h2>Update Patient Image</h2>
+            </div>
+            <div class="imgUpName">
+                <h3><%=patient.lastName%>, <%=patient.firstName%></h3>
+            </div>
+            <div class="imgUpdate-ct col-12 mt-5">
+                <!--If current image exists then display-->
+                <% if (ptImg) { %>
+                    <div class="ptImg-ct2 upd-ct">
+                      <img src="<%= ptImg.Image %>" alt="Pt Img" class="ptImg2">
+                      <p>Current Image</p>
+                    </div>
+                  <% } else { %>
+                    <p>No image uploaded yet.</p>
+                  <% } %>
+                <!--Else display "no current image"-->
+                
+                <!--Field Error logic-->
+                <div class="upd-ct">
+                    <form class="" action="/physicianP/<%=patient._id%>/updatePtProfileImg?_method=PUT" method="POST" enctype="multipart/form-data">
+                        <span>Upload Wound Image</span>
+                        <input type="file" name="ptImg">
+                        <input type="submit">
+                    </form>
+                    <!--Field Error -->
+                </div>
+                
+
+            </div>
+
+        </div>
+    </div> <!--shadow2-->
+</div> <!--newcontainer-->
+<%- include('partials/footer') -%>
