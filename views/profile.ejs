@@ -3,18 +3,25 @@
 <div class="shadow2">
   
   <div class="row ">
-    <div class="blackback co user-info userinfosection whitetext">
-      <section class="topsecs">
+    <div class="profileHeader blackback whitetext">
+      <h2>Home</h2>
+    </div>
+    <div class="blackback  user-info userinfosection whitetext">
+      
+      <section class="topsecs col-5">
         <p class="ms-3 "><strong>Welcome</strong>: <%= user.userName %></p>
         
         <a href="/logout" class="ms-3 col-3 btn mb-2 bluebutton">Logout</a>
       </section>
-      <section class="topsecs roleSec whitetext">
-          <p>Role: <%= user.role %></p>
+      <section class="topsecs topsec2 roleSec whitetext col-5">
+          <p>Access Level: <%= user.role %></p>
+
         <% if (user.role== "manager" || user.role == "admin") { %>
+          <p><a class="bluebutton btn" href="/physicianP">Physician Page</a></p>
           <p class="underline"><strong>Admin and Manager Access:</strong></p> 
+          
           <div class="adminBox">
-             <p><a class="bluebutton btn" href="/physicianP">Physician Profile</a></p>
+            
              <p><a class="bluebutton btn" href="/editRoles">Role Edit</a></p>
              <p><a class="bluebutton btn" href="/editUsers">Delete Users</a></p>
              
@@ -27,7 +34,7 @@
     <!--first column-->
       <div class="  col-6 all-pt-ct">
           
-          <div>
+          <div class="all-pt col-10">
             <!--<a href="/newWoundForm">New Wound? + </a>
             <a href="/newPatient">Add New Patient</a>-->
            <h2 class="ms-5 mt-4 white">Create Wound For:</h2>
@@ -45,8 +52,8 @@
                 <% } %>
               </ul>
             </div>  
-            <div class="titles ms-5 mt-5 col-3 add-patient">
-              <a href="/newPatient" class="white">Add/Delete Patient <span><i class="fa-solid fa-user-plus"></i></span></a>
+            <div class="row col-12 align-content-center links">
+              <a href="/newPatient" class="white titles allw ms-5 mt-5 col-6">Add/Delete Patient <span><i class="fa-solid fa-user-plus"></i></span></a>
               
             </div>
           </div>
@@ -55,7 +62,7 @@
       <!--second column-->
       <div class=" col-6 existing-pt-ct">
         
-        <div class="">
+        <div class="existing-pt col-10">
           
           <h2 class="ms-5 mt-4 white">Existing Wounds</h2>
           
@@ -77,8 +84,8 @@
               </ul>
           </div>
 
-          <div class="ms-5 mt-5 col-2 titles allw">
-            <a href="/wound/allWounds">All Wounds</a>
+          <div class="row col-12 align-content-center links">
+            <a href="/wound/allWounds" class="ms-5 mt-5 col-6 titles allw">All Wounds</a>
           </div>
         </div>  
       </div>  

@@ -67,12 +67,12 @@
                         <p class="recentWinfo">Most recent wound orders/Info:</p>
                         <div class="recentWoundinfoBox blackborder col-12 ">
                           <p>Updated: <%= recentDoc.createdAt %></p>
-                          <p>The wound Length is now: <%= recentDoc.Length %>cm</p>
-                          <p>The wound Width is now: <%= recentDoc.Width %> cm</p>
-                          <p>The wound Depth is now: <%= recentDoc.Depth %> cm</p>
-                          <p>Does the wound currently have an odor?: <%= recentDoc.Odor %></p>
-                          <p>Current Description of wound: <%= recentDoc.Description %></p>
-                          <p>Current Intervention for wound: <%= recentDoc.Intervention %></p>
+                          <p><strong><span class="tealglow">The wound Length is now:</span></strong> <%= recentDoc.Length %>cm</p>
+                          <p><strong><span class="tealglow">The wound Width is now:</span></strong> <%= recentDoc.Width %> cm</p>
+                          <p><strong><span class="tealglow">The wound Depth is now:</span></strong> <%= recentDoc.Depth %> cm</p>
+                          <p><strong><span class="tealglow">Does the wound currently have an odor?:</span></strong> <%= recentDoc.Odor %></p>
+                          <p><strong><span class="tealglow">Current Description of wound:</span></strong> <%= recentDoc.Description %></p>
+                          <p><strong><span class="tealglow">Current Intervention for wound:</span></strong> <%= recentDoc.Intervention %></p>
                         </div>
                         <!--If woundDoc exists then display button and div-->
                       <% } %>

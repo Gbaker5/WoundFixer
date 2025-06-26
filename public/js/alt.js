@@ -79,3 +79,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+//////////Active/Inactive Slider
+document.querySelectorAll('.toggle-track').forEach(toggle => {
+  toggle.addEventListener('click', async () => {
+    const woundId = toggle.dataset.woundId;// Get the wound ID from the data attribute (data-wound-id) on the clicked toggle
+    const isActive = toggle.classList.contains('active'); // Check if the current toggle has the 'active' class
+    const newActive = !isActive; // Determine the new active state by inverting the current one
+
+    toggle.classList.toggle('active', newActive);// Toggle the 'active' class based on the new state
+    toggle.classList.toggle('inactive', !newActive);// Toggle the 'inactive' class in the opposite way
+
+     // Send a PUT request to the server to update the 'active' state in the database
+    await fetch(`/physicianP/${woundId}/toggleActive`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ active: newActive }) // Send new active status in the body
+    });
+  });
+});
+
+
+
+/////////Toggle Show/Hide inactive Wounds
+const button = document.querySelector('.showButton');
+const targetDiv = document.querySelector('.inactiveWounds-ct');
+const arrow = document.querySelector('.inactiveArrow')
+
+button.addEventListener('click', () => {
+   // Rotate arrow
+   arrow.classList.toggle('inactiveRotate');
+  targetDiv.classList.toggle('hidden');
+  button.textContent = targetDiv.classList.contains('hidden') ? 'Show' : 'Hide';
+});
+
+////////////Update roles

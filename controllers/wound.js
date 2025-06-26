@@ -114,17 +114,19 @@ module.exports = {
       }
 
       const firstCapArr = req.body.firstName.split('')
-      const firstCap = firstCapArr[0].toUpperCase()+firstCapArr.join('').substring(1)
+      const firstNameCap = firstCapArr[0].toUpperCase()+firstCapArr.join('').substring(1)
 
       const lastCapArr = req.body.lastName.split('')
-      const lastCap = lastCapArr[0].toUpperCase()+lastCapArr.join('').substring(1)
+      const lastNameCap = lastCapArr[0].toUpperCase()+lastCapArr.join('').substring(1)
       
 
 
     await newPatient.create({
-      firstName: firstCap,
-      lastName: lastCap,
+      firstName: firstNameCap,
+      lastName: lastNameCap,
     });
+
+    
     console.log()
     console.log(`Patient: ${firstCap} ${lastCap} Created!!!!`)
       res.redirect("/newPatient")
@@ -239,7 +241,7 @@ module.exports = {
 
       /////Send Email
       
-      function sendEmail (){
+      function sendEmail (SendTo){
         const Mailjet = require('node-mailjet');
         
         const mailjet = new Mailjet({
@@ -250,26 +252,28 @@ module.exports = {
       
         const request = mailjet
         .post('send', { version: 'v3.1' })
-        .request({
-                  Messages: 
-                  [
-                    {
-                      From: {
-                        Email: "gjarred23@gmail.com",
-                        Name: "Mailjet Test"
-                      },
-                      To: [
-                        {
-                          Email: "gjarred23+swe@gmail.com",
-                          Name: "Test1"
-                        }
-                      ],
-                      Subject: "Your email flight plan!",
-                      TextPart: "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
-                      HTMLPart: "<h3>Dear passenger 1, welcome to <a href=\"https://www.mailjet.com/\">Mailjet</a>!</h3><br />May the delivery force be with you!"
-                    }
-                  ]
-                })
+        .request(//{
+                 //Messages: 
+                 //[
+                 //  {
+                 //    From: {
+                 //      Email: "gjarred23@gmail.com",
+                 //      Name: "Mailjet Test"
+                 //    },
+                 //    To: [
+                 //      {
+                 //        Email: "gjarred23+swe@gmail.com",
+                 //        Name: "Test1"
+                 //      }
+                 //    ],
+                 //    Subject: "Your email flight plan!",
+                 //    TextPart: "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
+                 //    HTMLPart: "<h3>Dear passenger 1, welcome to <a href=\"https://www.mailjet.com/\">Mailjet</a>!</h3><br />May the delivery force be with you!"
+                 //  }
+                 //]
+                 //}
+                 SendTo //New object with info from form and message template 
+                 )
 
               request
                  .then((result) => {
@@ -281,63 +285,64 @@ module.exports = {
                  })
                    }
 
-      sendEmail()
+      //sendEmail()
+
+      const emailPt = await newPatient.findById(req.params.id)
+
+      if(req.body.DON === "Yes"){
+       const DONEmail = {
+          Messages: 
+          [
+            {
+              From: {
+                Email: "gjarred23@gmail.com",
+                Name: "DON EMAIL"
+              },
+              To: [
+                {
+                  Email: "gjarred23+swe@gmail.com",
+                  Name: "DON EMAIL"
+                }
+              ],
+              Subject: `New Wound for Pt: ${emailPt.firstName} ${emailPt.lastName}`,
+              TextPart: `Hello, This patient ${emailPt.firstName} ${emailPt.lastName} has a new ${req.body.type} located ${req.body.location}, check details in App: WoundFixer`,
+              HTMLPart: `Hello, This patient <strong>${emailPt.firstName} ${emailPt.lastName}</strong> has a new <strong>${req.body.type}</strong> located on <strong>${req.body.location}</strong>, check details in App: <a href="http://localhost:2026/physicianP/${req.params.id}">Wound Fixer</a>`,
+
+            }
+          ]
+        }
+        
+        sendEmail(DONEmail)
+      }
+
+      if(req.body.PCP === "Yes"){
+        const PCPEmail = {
+           Messages: 
+           [
+            {
+              From: {
+                Email: "gjarred23@gmail.com",
+                Name: "PCP EMAIL"
+              },
+              To: [
+                {
+                  Email: "gjarred23+swe@gmail.com",
+                  Name: "PCP EMAIL"
+                }
+              ],
+              Subject: `New Wound for Pt: ${emailPt.firstName} ${emailPt.lastName}`,
+              TextPart: `Hello, This patient ${emailPt.firstName} ${emailPt.lastName} has a new ${req.body.type} located, ${req.body.location}, check details in App: WoundFixer`,
+              HTMLPart: `Hello, This patient <strong>${emailPt.firstName} ${emailPt.lastName}</strong> has a new <strong>${req.body.type}</strong> located on <strong>${req.body.location}</strong>, check details in App: <a href="http://localhost:2026/physicianP/${req.params.id}">Wound Fixer</a>`,
+
+            }
+           ]
+         }
+
+         sendEmail(PCPEmail)
+       }
 
 
-
-
-      //function sendEmail (name, email, subject, message) {
-      //  const myHeaders = new Headers();
-      //  myHeaders.append("Content-Type", "application/json");
-      //  myHeaders.set('Authorization', 'Basic ' + btoa('bb1bfa5362e3033e9d31ed0998b5cb54'+":" +'baa1c5b9dcafbe464660c4f3e5e3a45d'));
-      //
-      //  const data = JSON.stringify({
-      //    "Messages": [{
-      //      "From": {"Email": "gjarred23@gmail.com", "Name": `"${user.userName}"`},
-      //      "To": [{"Email": email, "Name": name}],
-      //      "Subject": subject,
-      //      "TextPart": message
-      //    }]
-      //  });
-      //
-      //  const requestOptions = {
-      //    method: 'POST',
-      //    headers: myHeaders,
-      //    body: data,
-      //  };
-      //
-      //  fetch("https://api.mailjet.com/v3.1/send", requestOptions)
-      //    .then(response => response.text())
-      //    .then(result => console.log(result))
-      //    .catch(error => console.log('error', error));
-      //}
-//
-//
-      //const string = JSON.stringify(req.body)
-      //const spaces = string.split(',').join('\n')
-      //
-//
-      //if(req.body.DON == "Yes"){
-      //  const name = Pname
-      //  const email = "gjarred23+swe@gmail.com" 
-      //  const subject = Pname 
-      //  const message = spaces;
-      //  console.log('DON Email activated')
-      //  //implement your spam protection or checks.
-      //  sendEmail(Pname,email,subject,message);
-      //}
-//
-      //if(req.body.PCP == "Yes"){
-      //  const name = Pname
-      //  const email = "gjarred23+swe@gmail.com" 
-      //  const subject = Pname 
-      //  const message = spaces;
-      //  console.log('PCP Email activated')
-      //  //implement your spam protection or checks.
-      //  sendEmail(Pname,email,subject,message);
-      //}
-      ////console.log(JSON.stringify(req.body))
-      ////console.log(spaces)
+      
     
 
 
@@ -365,6 +370,9 @@ module.exports = {
   },
   getAllWounds: async (req,res) => { //createdAt newest to oldest 
     try{
+
+      const pageUser = await User.findById(req.user.id)
+
       const wounds = await WoundInfo.find().sort({createdAt: "desc"})
 
       const timeArr = []
@@ -378,7 +386,7 @@ module.exports = {
       // Split each item in timeArr
       const splitTimeArr = timeArr.map(item => item.split(/[T.]/)); // Assuming createdAt is a string with a comma-separated date/time
 
-      console.log(splitTimeArr);
+      //console.log(splitTimeArr);
       const dateArr = []; //array of first item in each array
       const timeArrTwo = []; //array of secind item in each array
       for(let k=0;k<splitTimeArr.length;k++){
@@ -391,8 +399,8 @@ module.exports = {
 
       
 
-      console.log(dateArr)
-      console.log(timeArrTwo)
+      //console.log(dateArr)
+      //console.log(timeArrTwo)
 
       
       //////////
@@ -423,13 +431,16 @@ module.exports = {
       //console.log(firstNamesArr)
       //console.log(lastNamesArr)
       //console.log(wounds)
-      res.render("allwounds.ejs", {date: dateArr, time:timeArrTwo, wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
+      res.render("allwounds.ejs", {date: dateArr, time:timeArrTwo, wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr, user: pageUser,})
     }catch (err) {
       console.log(err);
     }
   },
   getWoundsZtoA: async (req,res) => { //createdAt oldest to newest
     try{
+
+      const pageUser = await User.findById(req.user.id)
+
       const wounds = await WoundInfo.find().sort({createdAt: "asc"})
       const patient = await newPatient.find()
       let patientsidArr = []
@@ -447,24 +458,27 @@ module.exports = {
        const patientName = await newPatient.find({_id: patientsidArr[j]}) //search through patient collection by object ids from first array
        //console.log(patientName)
        const fName = patientName[0].firstName //cycle through and capture first names 
-       console.log(fName)
+       //console.log(fName)
        const lName = patientName[0].lastName //cycle through and capture last names
-       console.log(lName)
+       //console.log(lName)
        firstNamesArr.push(fName) //put names into new array
        lastNamesArr.push(lName) 
        
       }
-      console.log(firstNamesArr)
-      console.log(lastNamesArr)
+      //console.log(firstNamesArr)
+      //console.log(lastNamesArr)
       //console.log(wounds)
 
-      res.render("allwoundscreatedztoa.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
+      res.render("allwoundscreatedztoa.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr, user: pageUser,})
     }catch (err) {
       console.log(err);
     }
   },
   getWoundsByPatient: async (req,res) => { //patient A to Z
     try {
+
+      const pageUser = await User.findById(req.user.id)
+
       const wounds = await WoundInfo.find();
     
       // Retrieve patient data and sort by last name in descending order
@@ -480,23 +494,26 @@ module.exports = {
         const lastNameB = patientsMap.get(b.patient.toString()).lastName;
         return lastNameA.localeCompare(lastNameB);
       });
-      console.log(wounds)
+      //console.log(wounds)
     
       // Extract patient names
       const firstNamesArr = wounds.map(wound => patientsMap.get(wound.patient.toString()).firstName);
       const lastNamesArr = wounds.map(wound => patientsMap.get(wound.patient.toString()).lastName);
     
-      console.log(firstNamesArr);
-      console.log(lastNamesArr);
+      //console.log(firstNamesArr);
+      //console.log(lastNamesArr);
 
 
-      res.render("allwoundspatient.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr})
+      res.render("allwoundspatient.ejs", {wounds: wounds, firstNames: firstNamesArr, lastNames:lastNamesArr, user: pageUser,})
     }catch (err) {
       console.log(err);
     }
   },
   getWoundsByPatientZtoA: async (req, res) =>{
     try {
+
+      const pageUser = await User.findById(req.user.id)
+
       const wounds = await WoundInfo.find();
     
       // Retrieve patient data and sort by last name in descending order
@@ -512,17 +529,17 @@ module.exports = {
         const lastNameB = patientsMap.get(b.patient.toString()).lastName;
         return lastNameB.localeCompare(lastNameA);
       });
-      console.log(wounds)
+      //console.log(wounds)
     
       // Extract patient names
       const firstNamesArr = wounds.map(wound => patientsMap.get(wound.patient.toString()).firstName);
       const lastNamesArr = wounds.map(wound => patientsMap.get(wound.patient.toString()).lastName);
     
-      console.log(firstNamesArr);
-      console.log(lastNamesArr);
+      //console.log(firstNamesArr);
+      //console.log(lastNamesArr);
     
       // Render the view with sorted data
-      res.render("allwoundspatientztoa.ejs", { wounds, firstNames: firstNamesArr, lastNames: lastNamesArr });
+      res.render("allwoundspatientztoa.ejs", { wounds, firstNames: firstNamesArr, lastNames: lastNamesArr , user: pageUser,});
     } catch (err) {
       console.log(err);
     }

@@ -30,6 +30,9 @@ router.get("/physicianP/:id", ensureAuth, authorizeRoles("admin", "manager"), ma
 router.post("/physicianP/:id/updateWound", ensureAuth, authorizeRoles("admin", "manager"), upload.single("woundImg"), managerialController.updateWounds )
 router.get("/physicianP/:id/updatePtProfileImg", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getUpdatePtProfileImg)
 router.put("/physicianP/:id/updatePtProfileImg", ensureAuth, authorizeRoles("admin", "manager"), upload.single("ptImg"), managerialController.putUpdatePtProfileImg)
+router.put("/physicianP/:id/toggleActive", ensureAuth, authorizeRoles("admin", "manager"), managerialController.toggleActive)
+router.get("/physicianP/:id/updatePtProfile", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getEditPtProfile)
+router.put("/physicianP/:id/updatePtProfile", ensureAuth, authorizeRoles("admin", "manager"), managerialController.putEditPtProfile)
 
 //patient
 router.get("/newPatient", ensureAuth, woundController.getAddPatient)

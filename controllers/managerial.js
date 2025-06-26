@@ -4,6 +4,7 @@ const newPatient = require("../models/Patient");
 const User = require("../models/User")
 const WoundDoc = require("../models/WoundImg")
 const PatientImg = require("../models/PatientImg")
+const PatientProfile = require("../models/PatientProfile")
 const validator = require("validator");
 const passport = require("passport");
 const axios = require("axios")
@@ -179,12 +180,12 @@ exports.getPhysicianPtPage = async(req,res) => {
         const currentPatient = await newPatient.findById(req.params.id)
         ////////////List of Wounds for patient
 
-        const patientWounds = await WoundInfo.find({patient: req.params.id}).populate('creator').sort({createdAt: "asc"})
+        const patientWounds = await WoundInfo.find({patient: req.params.id, active: true}).populate('creator').sort({createdAt: "asc"})
         //console.log(patientWounds)
 
         ///Wound Docs related to Patient (arr)
         const woundImgs = await WoundDoc.find({Patient: req.params.id}).populate('user').sort({createdAt: "desc"})
-        console.log(woundImgs)
+        //console.log(woundImgs)
 
         //Wound Docs associated with each wound of patient
         // Group woundDocs by originalWoundId
@@ -197,15 +198,23 @@ exports.getPhysicianPtPage = async(req,res) => {
           woundDocsByWound[id].push(doc);
         });
 
+        //////////////Inactive wounds
+
+        const inactiveWounds = await WoundInfo.find({ patient: req.params.id, active: false });
        
-    
+        /////Patient Profile
+        const PtProfile = await PatientProfile.find({patient: req.params.id})
+        console.log(PtProfile)
+
         res.render("physicianpagePatientProfile.ejs", {
             patients: sortedPatients, 
             wounds:patientWounds, 
+            inactive: inactiveWounds,
             patient: currentPatient, 
             woundDocsByWound,
             messages: req.flash(),
-            ptImg: ptImage.length ? ptImage[0] : null
+            ptImg: ptImage.length ? ptImage[0] : null,
+            profileInfo: PtProfile.length ? PtProfile[0] : null,
         })
     }catch(err){
         console.log(err)
@@ -347,4 +356,66 @@ exports.putUpdatePtProfileImg = async(req,res) => {
     }catch(err){
         console.log(err)
     }
+}
+
+exports.getEditPtProfile = async(req,res) => {
+  try{
+
+    const currentPatient = await newPatient.findById(req.params.id)
+    const ptImage = await PatientImg.find({ Patient: req.params.id });
+
+    res.render("editPtProfile.ejs", {
+      patient: currentPatient, 
+      ptImg: ptImage.length ? ptImage[0] : null})
+  }catch(err){
+        console.log(err)
+    }
+}
+
+exports.putEditPtProfile = async (req, res) => {
+  try {
+    const updateFields = {};
+
+    // Check each field before adding it
+    if (req.body.age) updateFields.age = req.body.age;
+    if (req.body.gender) updateFields.gender = req.body.gender;
+    if (req.body.race) updateFields.race = req.body.race;
+    if (req.body.height) updateFields.height = req.body.height;
+    if (req.body.weight) updateFields.weight = req.body.weight;
+    if (req.body.allergies) updateFields.allergies = req.body.allergies;
+    if (req.body.mobility) updateFields.mobility = req.body.mobility;
+    if (req.body.smoker) updateFields.smoker = req.body.smoker;
+
+    // Always set these
+    updateFields.patient = req.params.id;
+    updateFields.user = req.user.id;
+
+    await PatientProfile.findOneAndUpdate(
+      { patient: req.params.id },
+      { $set: updateFields },
+      { upsert: true, new: true }
+    );
+
+    console.log("Pt Profile updated!");
+
+    res.redirect(`/physicianP/${req.params.id}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+exports.toggleActive = async(req,res) => {
+  try{
+
+    await WoundInfo.findByIdAndUpdate(
+      req.params.id, {
+      active: req.body.active
+    });
+
+    res.status(200).json({ message: "Active status updated successfully." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error." });
+  }
 }

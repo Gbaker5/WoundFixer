@@ -5,6 +5,13 @@
     <div>
         <div class="row user-info blackback whitetext halfover">
             <h2>Physician Page</h2>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Create Wound</a></li>
+                    <li><a href="">All wounds</a></li>
+                </ul>
+            </nav>
         </div>
       
         <div class="physicianP-ct">
@@ -50,37 +57,102 @@
                             <div class="ptProfile-ct">
                                 <%if(ptImg){%>
                                     <div class="pt-profile ptImg-ct">
-                                        <img src="<%=ptImg.Image%>" alt="Pt Image" class="ptImg">
+                                        <img src="<%=ptImg.Image%>" alt="Pt Image" class="ptImg enlargeable">
+
+                                        <div class="imgEdit-ct ">
+                                            <p class="titles allw ">
+                                                <a href="/physicianP/<%=patient._id%>/updatePtProfileImg">Edit Profile Image</a>
+                                            </p>
+                                            <p class="titles allw ">
+                                                <a href="/physicianP/<%=patient._id%>/updatePtProfile">Edit Patient Profile</a>
+                                            </p>
+                                        </div>
+                                           
                                     </div>
+                                   
 
                                 <%} else {%>
                                     <div class="pt-profile ptImg-ct">
                                         <img src="" alt="Pt Image" class="ptImg">
+                                        <div class="imgEdit-ct ">
+                                            <p class="titles allw ">
+                                                <a href="/physicianP/<%=patient._id%>/updatePtProfileImg">Edit Profile Image</a>
+                                            </p>
+                                            <p class="titles allw ">
+                                                <a href="/physicianP/<%=patient._id%>/updatePtProfile">Edit Patient Profile</a>
+                                            </p>
+                                        </div>
                                     </div>
+                                   
                                 <%}%>
                                
                                
-                                <ul class="pt-profile">
-                                    <li><h3>Patient Profile</h3></li>
-                                    <li><p>Name: <%=patient.lastName%>, <%=patient.firstName%></p></li>
-                                    <li><p>Age: 86</p></li>
-                                    <li><p>Gender: Male</p></li>
-                                    <li><p>Race: African-American</p></li>
+                                <ul class="pt-profile demographics">
+                                   <% if(profileInfo){%>
+
+                                    
+                                    <div class="demlists">
+                                        <h3><strong>Patient Profile</strong></h3>
+                                        <p><strong>Name:</strong> <%=patient.lastName%>, <%=patient.firstName%></p>
+                                        <p><strong>Age:</strong> <%=profileInfo.age%> </p>
+                                        <p><strong>Gender:</strong> <%=profileInfo.gender%></p>
+                                        <p><strong>Race:</strong> <%=profileInfo.race%></p>
+                                    </div>
+                                    <div class="demlists">
+                                        <p><strong>Height:</strong> <%=profileInfo.height%></p>
+                                        <p><strong>Weight: </strong><%=profileInfo.weight%></p>
+                                        <p><strong>Allergies: </strong><%=profileInfo.allergies%></p>
+                                        <p><strong>Mobility Status: </strong><%=profileInfo.mobility%></p>
+                                        <p><strong>Smoker: </strong><%=profileInfo.smoker%></p>
+                                    </div>
+                                <%} else {%>
+                                    <div class="demlists">
+                                        <h3><strong>Patient Profile</strong></h3>
+                                        <p><strong>Name:</strong> <%=patient.lastName%>, <%=patient.firstName%></p>
+                                        <p><strong>Age:</strong>  </p>
+                                        <p><strong>Gender:</strong> </p>
+                                        <p><strong>Race:</strong> </p>
+                                    </div>
+                                    <div class="demlists">
+                                        <p><strong>Height:</strong></p>
+                                        <p><strong>Weight: </strong></p>
+                                        <p><strong>Allergies: </strong></p>
+                                        <p><strong>Mobility Status: </strong></p>
+                                        <p><strong>Smoker: </strong></p>
+                                    </div>
+                               <% }%>
+                                   
                                     <!--<li><p>Need to either create another model or update an existing one to add this info.Last thing then css!</p></li>-->
                                 </ul>
                             
                             </div>
                         
-                            <div>
+                            <div class="bigWoundBox">
                                 <input type="hidden" id="showFormWoundId" value="<%= messages?.showFormWoundId?.[0] || '' %>">
-                                <div>
-                                    <span>Patient Image</span>
-                                    <p><a href="/physicianP/<%=patient._id%>/updatePtProfileImg">Edit Profile Image</a></p>
-                                </div>
                                
-                                <p>Wounds for: <%=patient.lastName%>, <%=patient.firstName%></p>
+                               
+                                <h4 class="woundHeader">Active Wounds for: <%=patient.lastName%>, <%=patient.firstName%></h4>
                                 <ul class="woundList-ct">
                                     <% for(var i=0; i<wounds.length; i++) {%>
+                                        <div class="active-btn">
+                                        <p><strong>Active:</strong> </p>
+                                        <div class="toggle-wrapper">
+                                          <div class="toggle-track <%= wounds[i].active ? 'active' : 'inactive' %>" data-wound-id="<%= wounds[i]._id %>">
+
+                                            <div class="toggle-label-left">No</div>
+                                            <div class="toggle-label-right">Yes</div>
+                                        
+                                            <div class="toggle-knob"></div>
+                                        
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                        
+                                        
+                                        
+                                          
+
                                         <li class="col-10 justify-content-between mt-2 ppname-ct">
                                         
                                             <p class="allnames ms-2">Type: <%= wounds[i].Type%></p>
@@ -90,19 +162,30 @@
                                         
                                         </li>
                                         <li class="">
-                                            <div>
-                                                <h3>Orginal Wound Details:</h3>
-                                                <p>Location: <%=wounds[i].Location%></p>
-                                                <p>Type: <%=wounds[i].Type%></p>
-                                                <p>Length: <%=wounds[i].Length%> cm</p>
-                                                <p>Width: <%=wounds[i].Width%> cm</p>
-                                                <p>Depth: <%=wounds[i].Depth%> cm</p>
-                                                <p>Odor: <%=wounds[i].Odor%></p>
+                                            <div class="originalDetail-ct col-10">
+                                                <h3>Original Wound Details:</h3>
+                                                <div class="originalDetailTop">
+                                                    <div>
+                                                        <p>Location: <%=wounds[i].Location%></p>
+                                                        <p>Type: <%=wounds[i].Type%></p>
+                                                    </div>
+                                                    <div>
+                                                        <p>Length: <%=wounds[i].Length%> cm</p>
+                                                        <p>Width: <%=wounds[i].Width%> cm</p>
+                                                        <p>Depth: <%=wounds[i].Depth%> cm</p>
+                                                        
+                                                    </div>
+                                                    <div>
+                                                        <p>Odor: <%=wounds[i].Odor%></p>
+                                                    </div>
+                                                </div>
+                                               
                                                 <p>Description: <%=wounds[i].Description%></p>
+                                                <p>Intervention: <%=wounds[i].Intervention%></p>
                                                 <p>Created By: <%=wounds[i].creator.userName%></p>
                                                 
                                             </div>
-                                            <button class="toggleFormBtn" data-wound-id="<%= wounds[i]._id %>">
+                                            <button class="toggleFormBtn titles allw" data-wound-id="<%= wounds[i]._id %>">
                                                 Add new Wound Info <span class="arrow-icon">▲</span> 
                                             </button> <!--button will be tan-->
                                             <div class="updateInputBox hidden">
@@ -124,86 +207,135 @@
                                                 }
                                               %>
 
-                                                <label for="Length">Length</label>
-                                                <input class="col-2" type="text" name="Length">
+                                                <label  class="woundInputs" or="Length">Length</label>
+                                                <input class="col-2 woundInputs" type="text" name="Length">
                                                 <% if (fieldErrors.Length) { %>
                                                     <div class="text-danger"><%= fieldErrors.Length %></div>
                                                 <% } %>
                                                 
-                                                <label for="Width">Width</label>
-                                                <input class="col-2" type="text" name="Width">
+                                                <label  class="woundInputs" for="Width">Width</label>
+                                                <input class="col-2 woundInputs" type="text" name="Width">
                                                 <% if (fieldErrors.Width) { %>
                                                     <div class="text-danger"><%= fieldErrors.Width %></div>
                                                 <% } %>
 
-                                                <label for="Depth">Depth</label>
-                                                <input class="col-2" type="text" name="Depth">
+                                                <label  class="woundInputs" for="Depth">Depth</label>
+                                                <input class="col-2 woundInputs" type="text" name="Depth">
                                                 <% if (fieldErrors.Depth) { %>
                                                     <div class="text-danger"><%= fieldErrors.Depth %></div>
                                                 <% } %>
 
-                                                <label for="Odor">Odor</label>
-                                                <select name="Odor" class="col-2">
+                                                <label  class="woundInputs" for="Odor">Odor</label>
+                                                <select name="Odor" class="col-2 woundInputs">
                                                     <option value="No">No</option>
                                                     <option value="Yes">Yes</option>
                                                 </select>
 
-                                                <label for="Description">Description</label>
-                                                <textarea class="col-5" name="Description"></textarea>
+                                                <label  class="woundInputs" for="Description">Description</label>
+                                                <textarea class="col-5 woundInputs" name="Description"></textarea>
                                                 <% if (fieldErrors.Description) { %>
                                                     <div class="text-danger"><%= fieldErrors.Description %></div>
                                                 <% } %>
 
-                                                <label for="Intervention">Intervention</label>
-                                                <textarea class="col-5" name="Intervention"></textarea>
+                                                <label  class="woundInputs" for="Intervention">Intervention</label>
+                                                <textarea class="col-5 woundInputs" name="Intervention"></textarea>
                                                 <% if (fieldErrors.Intervention) { %>
                                                     <div class="text-danger"><%= fieldErrors.Intervention %></div>
                                                 <% } %>
 
-                                                <span>Upload Wound Image</span>
-                                                <input type="file" name="woundImg">
+                                                <span class="woundInputs" >Upload Wound Image</span>
+                                                <input class="woundInputs titles allw col-10" type="file" name="woundImg">
                                                
                                                 <% if (fieldErrors.woundImg) { %>
                                                     <div class="text-danger"><%= fieldErrors.woundImg %></div>
                                                 <% } %>
 
-                                                <input type="submit">
+                                                <input class="woundInputs titles allw col-10" type="submit">
                                             </form> 
                                             </div>
 
                                         </li>
 
-                                        <div class="woundDocs-scrollBox">
+                                        <div class="woundDocs-scrollBox col-10">
                                             <% 
                                             var woundIdStr = wounds[i]._id.toString(); 
                                             var relatedDocs = woundDocsByWound[woundIdStr] || [];
                                             for (var j = 0; j < relatedDocs.length; j++) {
                                             %>
                                             
-                                            <ul class="woundDoc-ct col-9 blackborder">
-                                              <li><img src="<%= relatedDocs[j].Image %>" alt="Wound Image" class="woundDocImg enlargeable"></li>
-                                              <p>Length: <%= relatedDocs[j].Length %> cm</p>
-                                              <p>Width: <%= relatedDocs[j].Width %> cm</p>
-                                              <p>Depth: <%= relatedDocs[j].Depth %> cm</p>
-                                              <p>Odor: <%= relatedDocs[j].Odor %> cm</p>
-                                              <p>Description: <%= relatedDocs[j].Description %></p>
-                                              <p>Updated By: <%= relatedDocs[j].user.userName%></p>
-                                            </ul>
+                                            <div class="woundDoc-ct col-11 blackborder">
+                                                <div class="woundDocTop">
+                                                
+                                                    <div class="woundDocImg">
+                                                        <img src="<%= relatedDocs[j].Image %>" alt="Wound Image" class="woundDocImg enlargeable">
+                                                    </div>
+                                                    <div class="woundDocMeasure">
+                                                        <ul>
+                                                            <li> <span><strong>Length:</strong> <%= relatedDocs[j].Length %> cm</span></li>
+                                                            <li><span><strong>Width:</strong> <%= relatedDocs[j].Width %> cm</span></li>
+                                                            <li><span><strong>Depth:</strong> <%= relatedDocs[j].Depth %> cm</span></li>
+                                                            <li><span><strong>Odor:</strong> <%= relatedDocs[j].Odor %></p></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                   
+                                                <div class="woundDocDescript">
+                                                    <p><strong>Description:</strong> <%= relatedDocs[j].Description %></p>
+                                                    <p><strong>Intervention:</strong> <%= relatedDocs[j].Intervention%></p>
+                                                    <p><strong>Updated By:</strong> <%= relatedDocs[j].user.userName%></p>
+                                                </div>
+                                              
+                                              
+                                            
+                                            </div>
                                             <% } %> <!--This closes the relatedDocs[j] loop-->
                                             
                                                 <% if (relatedDocs.length === 0) { %>
                                                 <p>No wound documentation for this wound yet.</p>
                                                 <% } %>
                                         </div>
+                                        <div class="divider col-12">
+                                            <p class="dividerp"><strong>End of Wound <%=[i + 1]%></strong></p>
+                                        </div>                          
                                             <% } %> <!--This closes the wounds[i] loop-->
                                        
                                       
                                 </ul>
+                                
                             </div>
                         
                         
                     </div> <!--Empty Div-->
+                                        <div class="inactiveHeader">
+                                            <h3>Inactive Wounds</h3>
+                                            <button class="showButton">Show</button>
+                                            <span class="inactiveArrow">▲</span>
+                                        </div>
+                                        <div class="inactiveWounds-ct hidden">
+                                            <% for(var k=0; k<inactive.length; k++) {%>
+                                                <div class="woundNButton">
+                                                    <div class="col-8 justify-content-between mt-2 ppname-ct">
+                                                        <p class="allnames ms-2">Type: <%= inactive[k].Type%></p>
+                                                        <p class="allnames ms-2">Location: <%= inactive[k].Location%></p>
+                                                        <p class="allnames ms-2">Time Created: <%= inactive[k].createdAt%></p>
+                                                    </div>
+                                                    <div class="inactive-btn">
+                                                        <p><strong>Active:</strong> </p>
+                                                        <div class="toggle-wrapper">
+                                                        <div class="toggle-track <%= inactive[k].active ? 'active' : 'inactive' %>" data-wound-id="<%= inactive[k]._id %>"> 
+                                                            <div class="toggle-label-left">No</div>
+                                                            <div class="toggle-label-right">Yes</div>   
+                                                            <div class="toggle-knob"></div> 
+                                                        </div><!--toggle-track-->
+                                                        </div> <!--toggle-rapper-->
+                                                    </div> <!--active-btn-->
 
+                                                    
+
+                                                    
+                                                </div><!--woundNButton-->
+                                                <%}%>
+                                        </div><!--inactiveWounds-ct-->
                         
                     </div> <!--scrollbox-->
             </div> <!--WoundinfoBoxRight-->
@@ -218,3 +350,4 @@
     <div id="fullscreenModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999;">
     <img id="modalImage" src="" style="margin:auto; display:block; max-width:90%; max-height:90%; position:absolute; top:0; bottom:0; left:0; right:0;">
     </div>
+

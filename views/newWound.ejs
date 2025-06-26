@@ -3,51 +3,85 @@
 
 <%- include('partials/header') -%>
 <div class="newWoundcontainer">
-    <div class="shadow2">
+<div class="shadow2">
 
         <div class="blacktop">
-            <div class="newWndPtBox halfover col-12 ">
+            <div class="newWndPtBox col-12 ">
                 <span class="newWndPt smallBlackBack">New Wound for: <strong><%=patient.lastName%></strong>, <strong><%=patient.firstName%></strong></span> 
             </div>  
         </div>
 
     <div class="container mt-5 mb-5">
-  <form action="/wound/postWoundForm/<%=patient._id%>" method="POST">
-    <div class="row justify-content-center">
+    <form action="/wound/postWoundForm/<%=patient._id%>" method="POST">
+    <div class="row justify-content-center ">
       <!-- Left Column -->
-      <div class="col-md-5">
+      <div class="col-5 formBoxes whitetext">
         <!-- form content -->
         <div>
             <h2>Where is the Wound Located?</h2>
             <label for=""></label>
             <select name="location" id="location">
-                <option value="Cranium">Cranium</option>
-                <option value="Face">Face</option>
-                <option value="Neck">Neck</option>
-                <option value="Chest">Chest</option>
-                <option value="Mouth">Mouth</option>
-                <option value="Upper Back">Upper Back</option>
-                <option value="Lower Back">Lower Back</option>
-                <option value="Buttock">Buttock</option>
-                <option value="Groin">Groin</option>
-                <option value="left Arm">left Arm</option>
-                <option value="Left Leg">Left Leg</option>
-                <option value="Right Arm">Right Arm</option>
-                <option value="Right Leg">Right Leg</option>
-                <option value="Left Foot">Left Foot</option>
-                <option value="Right Foot">Right Foot</option>
-                <option value="Left Hand">Left Hand</option>
-                <option value="Right Hand">Right Hand</option>
-                <option value="Left Forearm">Left Forearm</option>
-                <option value="Right Forearm">Right Forearm</option>
-                <option value="Other">Other</option>
+              <option value="" disabled selected>-- Select Location --</option>
+              <option value="Abdomen">Abdomen</option>
+              <option value="Antecubitis">Antecubitis</option>
+              <option value="Antebrachium (Forearm)">Antebrachium (Forearm)</option>
+              <option value="Axilla">Axilla</option>
+              <option value="Brachium">Brachium</option>
+              <option value="Chin">Chin</option>
+              <option value="Cranium">Cranium</option>
+              <option value="Dorsum (Upper Back)">Dorsum (Upper Back)</option>
+              <option value="Face">Face</option>
+              <option value="Forehead">Forehead</option>
+              <option value="Groin">Groin</option>
+              <option value="Left Ankle">Left Ankle</option>
+              <option value="Left Breast">Left Breast</option>
+              <option value="Left Carpus (Wrist)">Left Carpus (Wrist)</option>
+              <option value="Left Cheek">Left Cheek</option>
+              <option value="Left Foot">Left Foot</option>
+              <option value="Left Gluteus">Left Gluteus</option>
+              <option value="Left Heel">Left Heel</option>
+              <option value="Left Hip">Left Hip</option>
+              <option value="Left Leg">Left Leg</option>
+              <option value="Left Palm">Left Palm</option>
+              <option value="Left Patella">Left Patella</option>
+              <option value="Left Popliteus">Left Popliteus</option>
+              <option value="Left Shoulder">Left Shoulder</option>
+              <option value="Left Sole">Left Sole</option>
+              <option value="Left Sura(Calf)">Left Sura(Calf)</option>
+              <option value="Lumbus (Lower Back)">Lumbus (Lower Back)</option>
+              <option value="Mouth">Mouth</option>
+              <option value="Neck">Neck</option>
+              <option value="Nose">Nose</option>
+              <option value="Olecranon (Back Elbow)">Olecranon (Back Elbow)</option>
+              <option value="Pelvis">Pelvis</option>
+              <option value="Pubis">Pubis</option>
+              <option value="Right Ankle">Right Ankle</option>
+              <option value="Right Breast">Right Breast</option>
+              <option value="Right Carpus (Wrist)">Right Carpus (Wrist)</option>
+              <option value="Right Cheek">Right cheek</option>
+              <option value="Right Eye">Right Eye</option>
+              <option value="Right Femur">Right Femur</option>
+              <option value="Right Foot">Right Foot</option>
+              <option value="Right Gluteus">Right Gluteus</option>
+              <option value="Right Heel">Right Heel</option>
+              <option value="Right Hip">Right Hip</option>
+              <option value="Right Leg">Right Leg</option>
+              <option value="Right Palm">Right Palm</option>
+              <option value="Right Patella">Right Patella</option>
+              <option value="Right Polpiteus">Right Polpiteus</option>
+              <option value="Right Shoulder">Right Shoulder</option>
+              <option value="Sacrum">Sacrum</option>
+              <option value="Thorax (chest)">Thorax (chest)</option>
+              <option value="Umbilicus (Navel)">Umbilicus (Navel)</option>
             </select>
+            
         </div>
         
         <div>
             <h2>What type of Injury?</h2>
             <label for=""></label>
             <select name="type" id="type">
+              <option value="" disabled selected>-- Select Type --</option>
                 <option value="Skin Tear">Skin Tear</option>
                 <option value="Laceration">Laceration</option>
                 <option value="Pressure Ulcer">Pressure Ulcer</option>
@@ -113,7 +147,7 @@
       </div>
 
       <!-- Right Column -->
-      <div class="col-md-5 offset-md-1">
+      <div class="col-md-5 offset-md-1 formBoxes whitetext">
         <!-- image + intervention -->
         <div>
             <h2>Anatomical Position Diagram</h2>
@@ -125,7 +159,7 @@
             <h3>Initial Intervention</h3>
         
             <div>
-                <textarea name="intervention" id="intervention" cols="30" rows="10"></textarea>
+                <textarea name="intervention" id="intervention" cols="30" rows="10" placeholder="Clean with NS, Pat Dry, Apply Dry Dressing"></textarea>
             </div>
             <% if (fieldErrors.intervention) { %>
                 <div class="text-danger"><%= fieldErrors.intervention %></div>
@@ -135,13 +169,25 @@
     </div>
 
     <!-- Bottom Section -->
-    <div class="row mt-5 text-center">
-      <div class="col-12">
-        <p>Wound will be added to patient's record, notify Wound Nurse and:</p>
-        <input type="checkbox" id="don" name="DON" value="Yes">
-        <label for="don">DON</label>
-        <input type="checkbox" id="pcp" name="PCP" value="Yes">
-        <label for="pcp">PCP</label>
+    <div class="row mt-5 text-center formBoxes whitetext">
+      <p>Wound will be added to patient's record, notify Wound Nurse and:</p>
+      <div class="col-12 radiobox-ct">
+        
+        <div class="radioboxes">
+        <p>Don</p>
+        <input type="radio" id="don-no" name="DON" value="No" checked>
+        <label for="don-no">No</label>
+        <input type="radio" id="don-yes" name="DON" value="Yes">
+        <label for="don-yes">Yes</label>
+        </div>
+        <div class="radioboxes">
+        <p>PCP</p>
+        <input type="radio" id="pcp-no" name="PCP" value="No" checked>
+        <label for="pcp-no">No</label>
+        <input type="radio" id="pcp-yes" name="PCP" value="Yes" >
+        <label for="pcp-yes">Yes</label>
+        </div>
+       
       </div>
 
       <div class="col-12 mt-3">

@@ -1,9 +1,16 @@
 <%- include('partials/header') -%>
 
+<div class="newcontainer">
+  <div class="shadow2">
+
+    <div class="row user-info blackback whitetext halfover">
+    <h2>Edit Patients</h2>
+    </div>
+
 <main class="">
   <div class="row justify-content-center">
    
-    <section class="col-4 mt-5">
+    <section class="col-4 mt-5 editP-ct whitetext">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
@@ -20,7 +27,7 @@
             name="firstName"
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 ">
           <label for="patientLName" class="form-label">Last Name</label>
           <input
             placeholder="Smith"
@@ -33,8 +40,8 @@
       </form>
     </section>
 
-    <section class="col-5">
-    <h2>Name List</h2>
+    <section class="col-5 editP-ct">
+    <h2 class="whitetext">Name List</h2>
     <div class="woundbox2 col">
       <div class="boxcolor2">
         <div class="boxshadow2">
@@ -63,7 +70,7 @@
           </div>
         </div>   
     </div>
-    <section>
+    <section class="noborder">
         <div>
             <a href="/profile" class="anchor titles">Back to Profile</a>
            
@@ -73,6 +80,8 @@
 </section>
 </main>
 
+</div>
+</div>
 
 <script src='js/alt.js'></script>
 <%- include('partials/footer') -%>

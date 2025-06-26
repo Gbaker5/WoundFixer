@@ -24,6 +24,19 @@ body{
 .noborder{
     border:none;
 }
+
+.teal{
+    color:teal;
+}
+
+.tealglow{
+    color:white;
+    box-shadow: 0 0 50px 5px teal;
+}
+
+.noborder{
+    border: none;
+}
 /*HEADER*/
 
 header{
@@ -157,9 +170,11 @@ h1{
 
 section{
     float:left;
-    width:50vw;
-    margin-left: 10%;
+    width:40%;
+    margin-left: 5%;
     margin-top: 10%;
+    margin-bottom: 10px;
+    
 }
 
 .frontpage{
@@ -273,7 +288,7 @@ section{
 
 .diagram{
     height: 500px;
-    width:500px;
+    width:100%;
 }
 
 
@@ -423,12 +438,31 @@ section{
 
 /*PROFILE*/
 
+.profileHeader{
+    float:left;
+    width:100%;
+    height:70px;
+    text-align: center;
+    border: 1px solid white;
+    border-bottom: 1px solid black;
+}
+
+.profileHeader > h2{
+    margin-top: 10px;
+}
+
 .halfover2{
     margin-left:35%;
 }
 
 .topsecs{
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+}
+
+.topsec2{
+    width:30%;
+    margin-left:2%; 
 }
 
 .user-info, .user-info *{
@@ -481,6 +515,11 @@ section{
     text-decoration: none;
     margin-bottom: 10px;
 }
+
+.links{
+    text-align: center;
+}
+
 .allnames{
     color:black;
 }
@@ -542,9 +581,18 @@ section{
 .all-pt-ct, .existing-pt-ct{
     flex:1;
     padding: 1rem;
+    
 }
 
-
+.all-pt, .existing-pt{
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.4);
+    box-shadow: 10px 7px black;
+    margin-bottom: 50px;
+    margin:0px;
+    margin-left: 50px;
+}
 
 .add-patient a{
    text-decoration: none;
@@ -594,10 +642,22 @@ section{
 
 .adminBox{
     display:flex;
-    justify-content: space-evenly;
+ 
+   
 }
 
 /*NewPatient*/
+
+.editP-ct{
+    border:1px solid black;
+    background-color: rgba(0,0,0, 0.5);
+    box-shadow: 10px 7px black;
+    margin-bottom: 50px;
+}
+
+.editP-ct + .editP-ct{
+    margin-top: 48px;
+}
 
 .woundbox2{
     border: 5px solid black;
@@ -734,14 +794,22 @@ section{
     overflow-x: hidden;
 }
 
+.formBoxes{
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.4);
+    box-shadow: 10px 7px black;
+}
+
 .newWndPtBox{
-    position: relative;
+    display:flex;
+    justify-content: center;
+    
 }
 .newWndPt{
-    position: absolute;
-    top: 0;
+    box-shadow: 0 0 50px 5px teal;
     font-size: 2rem;
-    margin-top: 2%;
+    margin-top: 2%
 }
 
 .smallBlackBack{
@@ -755,6 +823,25 @@ section{
 
 .woundrow{
     border:1px solid black;
+}
+
+
+.diagram{
+    height: 500px;
+    width:100%;
+}
+
+.radiobox-ct{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:1rem;
+}
+
+.radioboxes{
+    background-color: rgba(0,0,0, 0.3);
+    border-radius: 10px;
+    padding: 5px;
 }
 /*ConfirmPage*/
 
@@ -808,6 +895,34 @@ section{
     background-color: white;
     color:rgb(0,103,103)
 }
+
+/*AllWounds*/
+.allwoundsNav-ct{
+    display:flex;
+    justify-content: space-between; /* Optional, you can use space-around or gap instead */
+     align-items: center;
+     padding: 1rem;
+     margin: 0 10%;
+}
+
+.allwoundsNav-ct > div {
+    width:30%; /* Each column gets equal width. Adjust if you want different sizing */
+  }
+
+.allwoundsHeader{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+
+}
+
+
+
+.bottombtns{
+    text-align:center
+}
+
 
 /*PatientPage*/
 
@@ -910,16 +1025,36 @@ section{
 
 .ptProfile-ct{
     display:flex;
-
+    border: 1px solid black;
+   background-color: rgba(0,0,0, 0.2);
+   padding:10px;
+   box-shadow: inset 0 0 10px rgba(0, 103, 103, 0.9);
+   /*flex-wrap:wrap;*/
 }
 
 .pt-profile{
     flex-direction: column;
+
 }
 
-.pt-profile >li{
-    list-style-type: none;
+.pt-profile.ptImg-ct {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 200px;
+    
+    
 }
+
+
+.imgEdit-ct{
+    
+    margin-top: 5px ;
+   
+}
+
+
+
 
 .ptImg-ct{
     border: 1px solid black;
@@ -929,8 +1064,30 @@ section{
 }
 
 .ptImg{
-    height:200px;
-    width:200px
+    width: 100%;
+    width: 200px;
+    align-self: center;
+    height: 200px;
+    flex-shrink: 0;
+    border: 2px solid #333;
+}
+
+.demographics{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap; /* wrap if screen gets smaller */
+   
+}
+
+.demlists{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
 }
 
 .woundList-ct{
@@ -967,6 +1124,7 @@ section{
 .woundupdate-ct{
     display:flex;
     flex-direction: column;
+    background-color: rgba(0,0,0, 0.3);
 }
 
 .updateInputBox{
@@ -974,6 +1132,8 @@ section{
     
     overflow: hidden;
     transition: max-height 0.4s ease;
+    box-shadow: 10px 7px black;
+
 }
 
 .updateInputBox.open {
@@ -1000,31 +1160,190 @@ section{
 }
 
 /*Physician P Pt*/
+.woundHeader{
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(0, 103, 103, 0.9);
+    border: 3px solid rgb(0, 103, 103);
+    border-radius: 10px;
+    color:white;
+    margin-top: 10px;
+    box-shadow: inset 0 0 10px rgba(238, 235, 235, 0.9);
+}
+
+.active-btn{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width:100%;
+    
+    
+}
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .toggle-track {
+    position: relative;
+    width: 120px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  
+  .toggle-track.active {
+    background-color: rgb(0, 103, 103);
+  }
+  
+  .toggle-track.inactive {
+    background-color: red;
+  }
+  
+  .toggle-label-left, .toggle-label-right {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Knob styling */
+  .toggle-knob {
+    position: absolute;
+    top: 3px;
+    width: 50px;
+    height: 20px;
+    background-color: white;
+    border-radius: 15px; /* fully rounded square */
+    transition: left 0.3s ease;
+    z-index: 2;
+  }
+  
+  /* Left and right positions */
+  .toggle-track.active .toggle-knob {
+    left: 5px;
+  }
+  
+  .toggle-track.inactive .toggle-knob {
+    left: 62px;
+  }
+  
+  
+
+
+
 .woundDocImg{
     width:100px;
     height:100px;
     border-radius: 10px;
+    cursor:pointer;
 }
+
+.originalDetail-ct{
+    border:1px solid white;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.3);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 7px 7px black;
+    color:black;
+}
+
+.originalDetail-ct > h3, p{
+    margin-left: 5px;
+}
+
+.originalDetailTop{
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap:50px
+}
+
 .woundDocs-scrollBox{
-    border: 1px solid black;
+    border: 2px solid rgb(0,103,103);
+    border-radius: 10px;
     height:300px;
     overflow: auto;
-    background-color: rgba(0,0,0, 0.6)
+    background-color: rgba(0,0,0, 0.6);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 7px 7px rgb(1, 49, 49),
+    8px 8px rgb(0,103,103);
+    
+
+}
+
+.woundDocs-scrollBox::-webkit-scrollbar{
+    border-radius: 10px;
+    width:5px;
+}
+
+.woundDocs-scrollBox::-webkit-scrollbar-track{
+    background-color: rgb(0,103,103);
+    border-radius: 10px;
+    width:50px
+}
+
+
+
+.woundDocs-scrollBox::-webkit-scrollbar-thumb{
+    background-color: black;
+    border-radius: 50px;
 }
 
 .woundDocsBox{
     border: 1px solid black;
 }
 
+.woundInputs{
+    margin-left: 10px;
+}
+
 .woundDoc-ct{
     background-color: rgba(255,255,255, 0.9);
     margin-left: 2%;
     border-radius: 10px;
+    margin-bottom: 30px;
 }
 
 .woundDoc-ct > li{
     list-style-type: none;
 }
+
+.woundDocTop{
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;    
+   /* justify-content: space-around;*/
+   gap:20px;
+}
+
+.woundDocImg{
+border: 1px solid black;
+}
+
+.woundDocMeasure >ul{
+    list-style-type: none;
+}
+
+.woundDocDescript{
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 .arrow-icon {
     transition: transform 0.3s ease;
@@ -1034,14 +1353,88 @@ section{
 .arrow-icon.rotate {
   transform: rotate(180deg); /* arrow points down */
 }
-  
+
+.divider{
+    height:30px;
+    border:2px solid white;
+    border-radius: 10px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgb(0,103,103),
+        rgb(0,103,103) 10px,
+        rgb(0,0,0) 10px,
+        rgb(0,0,0) 20px
+      );
+    background-color: black;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.dividerp {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.inactiveHeader{
+    width:100%;
+    height:50px;
+    background-color: rgba(0,0,0, 0.8);
+    color:white;
+    border:5px solid black;
+    border-radius: 10px;;
+    text-align: center;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:10px;
+}
+
+.woundNButton{
+    display:flex;
+    flex-direction: row;
+    background-color: rgba(0,0,0, 0.3);
+    border-radius: 10px;
+    border: 1px solid rgb(0, 103, 103);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.woundNButton:hover{
+    background-color: rgba(0,0,0, 0.2);
+}
+
+.inactive-btn{
+   /* display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    */
+    margin-top: 10px;
+}
+
+.showButton{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: rgb(0, 103, 103);
+    width:50px;
+    cursor:pointer;
+}
+
+.inactiveArrow {
+    display: inline-block;
+    
+  }
+
+.inactiveRotate {
+    transform: rotate(180deg);
+  }
 /*Pt Image Update*/
 .imgUpName{
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .imgUpdate-ct{
@@ -1084,6 +1477,44 @@ section{
     width:200px
 }
 
+/*Pt Profile Update*/
+
+.profileUpdateBox{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    border: 1px solid black;
+    background-color: rgba(0,0,0, 0.3);
+    height:500px;
+}
+
+.profileUpdate-ct{
+    border: 1px solid black;
+    border-radius: 10px;;
+    background-color: rgba(0,0,0, 0.6);
+    width:50%;
+    height: 499px ;
+    display:flex;
+    
+    justify-content: center;
+    color:white;
+}
+
+.formtop, .formbottom{
+    display:flex;
+    flex-direction: column;
+}
+
+.profileUpdateBtn{
+    background-color: black;
+    color:white;
+    padding: 5px;
+    border: 2px solid rgb(0,103,103);
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
 
 /*Media Q*/
 

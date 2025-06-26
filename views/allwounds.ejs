@@ -1,23 +1,38 @@
 <%- include('partials/header') -%>
-  <div class="newcontainer2">
+  <div class="newWoundcontainer">
     <div class="shadow2">
       
     
 
-      <section class="blacktop">
-          <div class="col-12 halfover">
-            <h2 class="white" id="top">All Wounds</h2>
+      <section class="blacktop row col-12">
+        <div class="allwoundsNav-ct"> <!--3 divs flexed into three columns-->
+          <div class="whitetext topdiv">
+            <p>User: <%=user.userName%></p>
           </div>
         
-          <div class="user-info woundpad halfover">
-            <label for=""></label>
-            <select name="" id="" onchange="javascript:location.href = this.value;">
-              <option selected value="/wound/allWounds"><a href="">Most Recent(Default)</a></option>
-              <option value="/wound/woundsZtoA">Oldest</option>
-              <option value="/wound/woundsPatient"><a href="">Patient(A-Z)</a></option>
-              <option value="/wound/woundsPatientZtoA"><a href="">Patient(Z-A)</a></option>
-            </select>
+          <div class="allwoundsHeader middiv"> <!--Two divs flexed into a column-->
+            <div class=" ">
+              <h2 class="white" id="top">All Wounds</h2>
+            </div>
+          
+            <div class=" woundpad ">
+              <label for=""></label>
+              <select name="" id="" onchange="javascript:location.href = this.value;">
+                <option selected value="/wound/allWounds"><a href="">Most Recent(Default)</a></option>
+                <option value="/wound/woundsZtoA">Oldest</option>
+                <option value="/wound/woundsPatient"><a href="">Patient(A-Z)</a></option>
+                <option value="/wound/woundsPatientZtoA"><a href="">Patient(Z-A)</a></option>
+              </select>
+            </div>
           </div>
+
+          <div class="endiv">
+            <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+            <a href="/woundsByUser" class="bluebutton btn whitetext">Wounds by User</a>
+          </div>
+
+      </div>
+         
       </section>
 
 
@@ -56,7 +71,7 @@
     </div>
   
 
-  <div class="row mb-5 col-12 justify-content-center">
+  <div class="row mb-5 col-12 justify-content-center bottombtns">
     <a href="#top" class="ms-2 mt-5 col-4 titles allw justify-content-center">Back to Top</a>
     <a href="/profile" class="ms-2 mt-5 col-4 titles allw">Profile</a>
   </div>

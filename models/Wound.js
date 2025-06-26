@@ -51,6 +51,11 @@ const WoundInfoSchema = new mongoose.Schema({
   patient: {
     type: String,
   },
+  active: {
+    type: Boolean,
+    default: true,
+    required:true,
+  },
 },{
   timestamps: true,
 });
