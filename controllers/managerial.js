@@ -14,7 +14,12 @@ const WoundImg = require("../models/WoundImg");
 
 exports.getroleEdit = async (req,res) => {
     try{
-      const users = await User.find()
+
+      const pageUser = await User.findById(req.user.id)
+      
+
+
+      const users = await User.find().sort({userName: "asc"})
       console.log(req.user.role)
       
    if(req.user.role === "manager"){
@@ -23,66 +28,38 @@ exports.getroleEdit = async (req,res) => {
     console.log("Welcome Admin")
    }else console.log("Welcome User")
   
-  res.render("roleEdit.ejs", {user: users})
+  res.render("roleEdit.ejs", {user: users, thisUser:pageUser})
 } catch (err) {
   console.log(err);
 }
 }
 
 exports.putroleEdit = async (req,res) => {
-    try{
-        
-        //console.log(req.body.newRole)
-        //console.log(req.params.id)
-        
-        await User.findOneAndUpdate(
-            {_id: req.params.id},
-            {$set: {role: req.body.newRole}}
+  try {
+    const { updates } = req.body;
 
-        )
+    for (let { userId, newRole } of updates) {
+      await User.findByIdAndUpdate(userId, { role: newRole });
 
-        // 1. Fetch the updated user
-        const updatedUser = await User.findById(req.params.id);
-
-        // 2. Create a new payload
-        const payload = {
-          user: {
-            id: updatedUser._id,
-            email: updatedUser.email,
-            role: updatedUser.role,
-          },
-        };
-
-        // 3. Sign new token
-        const newToken = jwt.sign(payload, process.env.JWT_SECRET, {
-          expiresIn: "1h",
-        });
-
-        // 4. Set the new token in the cookie
-        res.cookie("token", newToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          maxAge: 3600000,
-        });
-
-        // Optional: Redirect to refresh page or confirm update
-        console.log("Role updated")
-        //res.redirect("/editRoles"); // or res.json({ message: "Role updated" });
-
-
-
-        res.redirect("/editRoles")
-    }catch (err){
-        console.log(err)
+      // Optionally re-issue new JWTs if the current user is updated
+      // (Not done here unless needed for live re-auth)
     }
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Role update error:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 }
 
 exports.getEditUser = async (req,res) => {
     try{
-        
+        const pageUser = await User.findById(req.user.id)
+        console.log(pageUser)
+
         const users = await User.find()
 
-        res.render("deleteUsers.ejs", {user: users})
+        res.render("deleteUsers.ejs", {user: users, thisUser: pageUser})
     }catch(err){
         console.log(err)
     }
@@ -116,6 +93,9 @@ exports.deleteUser = async (req,res) => {
 
 exports.getPhysicianP = async(req,res) => {
     try{
+
+      const thisUser = await User.findById(req.user.id)
+
       /////////Getting List of patients with wounds 
 
         // 1. Get all wounds
@@ -139,7 +119,7 @@ exports.getPhysicianP = async(req,res) => {
         //Im going to create a snapshot with each edit. The info will be stored within the image document
 
 
-        res.render("physicianpage.ejs", {patients: sortedPatients})
+        res.render("physicianpage.ejs", {patients: sortedPatients, user: thisUser})
     }catch(err){
         console.log(err)
     }
@@ -147,6 +127,7 @@ exports.getPhysicianP = async(req,res) => {
 
 exports.getPhysicianPtPage = async(req,res) => {
     try{
+      const thisUser = await User.findById(req.user.id)
 
         /////////loading Pt Image
         const ptImage = await PatientImg.find({ Patient: req.params.id });
@@ -207,6 +188,7 @@ exports.getPhysicianPtPage = async(req,res) => {
         console.log(PtProfile)
 
         res.render("physicianpagePatientProfile.ejs", {
+            user: thisUser,
             patients: sortedPatients, 
             wounds:patientWounds, 
             inactive: inactiveWounds,
@@ -305,11 +287,14 @@ exports.updateWounds = async(req,res) => {
 exports.getUpdatePtProfileImg = async(req,res) => {
     try{
 
+        const thisUser = await User.findById(req.user.id)
+
         const currentPatient = await newPatient.findById(req.params.id)
 
         const ptImage = await PatientImg.find({ Patient: req.params.id });
 
         res.render("editPtProfileImg.ejs", {
+          user: thisUser,
           patient: currentPatient,
           ptImg: ptImage.length ? ptImage[0] : null
         });
@@ -325,13 +310,17 @@ exports.putUpdatePtProfileImg = async(req,res) => {
         //////Validation Error for image upload
         const validationErrors = [];
 
+        const allowedMimeTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+        
         if (!req.file) {
-            validationErrors.push({ param: "ptImg", msg: "Wound Image Requires File" });
+          validationErrors.push({ param: "ptImg", msg: "Wound Image Requires File" });
+        } else if (!allowedMimeTypes.includes(req.file.mimetype)) {
+          validationErrors.push({ param: "ptImg", msg: "Invalid file type. Only JPG, PNG, or WEBP allowed." });
         }
         
         if (validationErrors.length) {
-            req.flash("errors", validationErrors);
-            return res.redirect(`/physicianP/${req.params.id}/updatePtProfileImg`);
+          req.flash("errors", validationErrors);
+          return res.redirect(`/physicianP/${req.params.id}/updatePtProfileImg`);
         }
         
         // If no validation errors, continue with Cloudinary upload and DB logic
@@ -360,13 +349,19 @@ exports.putUpdatePtProfileImg = async(req,res) => {
 
 exports.getEditPtProfile = async(req,res) => {
   try{
-
+    const thisUser = await User.findById(req.user.id)
     const currentPatient = await newPatient.findById(req.params.id)
     const ptImage = await PatientImg.find({ Patient: req.params.id });
+    const ptInfo = await PatientProfile.find({patient: req.params.id})
+
 
     res.render("editPtProfile.ejs", {
       patient: currentPatient, 
-      ptImg: ptImage.length ? ptImage[0] : null})
+      ptImg: ptImage.length ? ptImage[0] : null,
+      profileInfo: ptInfo.length ? ptInfo[0] : null,
+      user: thisUser,
+    },
+    )
   }catch(err){
         console.log(err)
     }

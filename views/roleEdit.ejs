@@ -1,36 +1,63 @@
 <%- include('partials/header') -%>
-<main>
-    <div>
+<div class="newcontainer">
+  <div class="shadow2">
 
-       <div class="editHeader">
-            <h2>Edit Roles</h2>
-            <p>(One User at a time)</p>
-            <p><a href="/profile">Back to Profile</a></p>
+      <main>
+          <div>
+            <section class="blacktop row col-12">
+              <div class="allwoundsNav-ct"> <!--3 divs flexed into three columns-->
+              
+                <div class="whitetext topdiv">
+                  <p>User: <%=thisUser.userName%></p>
+                </div>
+              
+                <div class="allwoundsHeader middiv whitetext"> <!--Two divs flexed into a column-->
+
+                    <h2>Edit Roles</h2>
+
+
+                </div>
+              
+                <div class="endiv">
+                  <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+                  <a href="/editUsers" class="bluebutton btn whitetext">Delete Users</a>
+                </div>
+              
+              </div>
+
+            </section>
+          
+          <div class="">
+          
+
+              <div class="editRole-ct col-8">
+              <div class="editRoleScroll col-8">
+
+                <ul class="row list-unstyled">
+                  <% for (var i = 0; i < user.length; i++) { %>
+                    <li class="col-12 justify-content-between mt-2 blackborder role-row roleBoxes" data-user-id="<%= user[i]._id %>">
+                      <p>Username: <span class="teal"><%= user[i].userName %></span></p>
+                      <p>Email: <span class="teal"><%= user[i].email %></span></p>
+                      <p>Current Role: <span class="teal current-role"><%= user[i].role %></span></p>
+                
+                      <label for="role-select-<%= i %>">Change Role:</label>
+                      <select class="role-select" id="role-select-<%= i %>">
+                        <option value="user" <%= user[i].role === 'user' ? 'selected' : '' %>>user</option>
+                        <option value="manager" <%= user[i].role === 'manager' ? 'selected' : '' %>>manager</option>
+                        <option value="admin" <%= user[i].role === 'admin' ? 'selected' : '' %>>admin</option>
+                      </select>
+                    </li>
+                  <% } %>
+                </ul>
+                
+              </div>  
+
+              <button id="saveRolesBtn" class="btn bluebutton mt-4">Save Roles</button>
+              
+            </div>  
         </div>
-        
-        <ul>
-            <ul class="row list-unstyled">
-                <% for(var i=0; i < user.length; i++) {%>
-                  <li class="col-12 justify-content-between mt-2 blackborder">
-                    <p>Username: <span class="teal"><%=user[i].userName%></span></p>
-                    <p>Email: <span class="teal"><%=user[i].email%></span></p>
-                    <p>Current Role: <span class="teal"><%=user[i].role%></span></p>
-                    <form 
-                    action="/updateRoles/<%=user[i].id%>?_method=PUT"
-                    method="POST" >
-                        <p>Please select new role</p>
-                        <input type="radio" name="newRole" value="user">
-                        <label for="">user</label>
-                        <input type="radio" name="newRole" value="manager">
-                        <label for="">manager</label>
-                        <input type="radio" name="newRole" value="admin">
-                        <label for="">admin</label>
-                        <input type="submit">
-                    </form>
-                  </li>
-                <% } %>
-              </ul>
-        </ul>
-    </div>
-</main>
+        </div>
+      </main>
+</div>
+</div>
 <%- include('partials/footer') -%>

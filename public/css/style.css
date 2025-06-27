@@ -34,6 +34,11 @@ body{
     box-shadow: 0 0 50px 5px teal;
 }
 
+.whiteglow{
+    color:teal;
+    box-shadow: 0 0 50px 5px white;
+}
+
 .noborder{
     border: none;
 }
@@ -438,6 +443,42 @@ section{
 
 /*PROFILE*/
 
+.profileNav-ct{
+    display:flex;
+    justify-content: space-between; /* Optional, you can use space-around or gap instead */
+     align-items: center;
+     padding: 1rem 4rem 1rem 8rem;
+    
+     
+     height:100%;
+     gap:1;
+}
+
+.profileNav-ct > div {
+     /* Each column gets equal width. Adjust if you want different sizing */
+  }
+
+  .profileendiv{
+   display:flex;
+   flex-direction: column;
+   align-items: flex-end;
+  }
+
+  .adminBox {
+    display: flex;
+    flex-wrap: wrap; /* Wrap to new line if too many */
+    gap: 0.5rem; /* spacing between buttons */
+    justify-content: flex-end;
+  }
+  
+  .adminBox .btn {
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  
+
+
 .profileHeader{
     float:left;
     width:100%;
@@ -449,6 +490,11 @@ section{
 
 .profileHeader > h2{
     margin-top: 10px;
+}
+
+.profilemiddiv{
+    padding-left: 12rem;
+    padding-right: 0
 }
 
 .halfover2{
@@ -640,11 +686,7 @@ section{
     border-radius: 10px
 }
 
-.adminBox{
-    display:flex;
- 
-   
-}
+
 
 /*NewPatient*/
 
@@ -986,6 +1028,77 @@ section{
     color:rgb(0,103,103)
 }
 
+.editRole-ct{
+    
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 7px black;
+    margin: 200px auto 0 auto; /* top margin + center horizontally */
+    padding: 20px;
+    width: 80%; /* control container width */
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:650px;
+}
+
+.editRoleScroll{
+    border: 1px solid black;
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%; /* take full width of container */
+    padding: 10px;
+    /* makes scrollbox visible */
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow:  
+    inset -10px 0 8px rgba(0, 0, 0, 0.8),   /* Left side */
+    inset 0 -10px 8px rgba(0, 0, 0, 0.8); 
+}
+
+.editRoleScroll::-webkit-scrollbar{
+    width: 10px;
+}
+
+.editRoleScroll::-webkit-scrollbar-track{
+    /*background: repeating-linear-gradient(
+        45deg,
+        rgb(0,103,103),
+        rgb(0,103,103) 10px,
+        rgb(0,0,0) 10px,
+        rgb(0,0,0) 20px
+      );*/
+      background-color: #f0f0f0;
+}
+
+.editRoleScroll::-webkit-scrollbar-thumb{
+    background: rgba(0,103,103, 0.8);
+    border-radius: 50px;
+}
+
+.roleBoxes{
+    color:white;
+    height: 200px;
+    border: 1px solid teal;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: rgba(0,0,0, 0.8);
+    
+}
+
+.flex{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
 /*Physician P*/
 .physicianP-ct{
     display: flex;
@@ -1160,6 +1273,25 @@ section{
 }
 
 /*Physician P Pt*/
+
+.physicianPtNav-ct{
+    display:flex;
+    justify-content: space-between; /* Optional, you can use space-around or gap instead */
+    align-items: center;
+     padding: 1rem;
+     margin: 0 10%;
+}
+
+.physicianPtNav-ct > div {
+    width:30%; /* Each column gets equal width. Adjust if you want different sizing */
+  }
+
+.pptendiv{
+    display:flex;
+    flex-direction: row;
+    gap: 0.5rem
+  }
+
 .woundHeader{
     text-align: center;
     padding: 5px;
@@ -1429,6 +1561,18 @@ border: 1px solid black;
     transform: rotate(180deg);
   }
 /*Pt Image Update*/
+
+.newbox2{
+    display:flex;
+    flex-direction: column;
+    width:50%;
+    height:400px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+    box-shadow: 10px 7px black;
+    margin-left: 25%;;
+}
+
 .imgUpName{
     display: flex;
     align-items: center;
@@ -1438,12 +1582,8 @@ border: 1px solid black;
 }
 
 .imgUpdate-ct{
-    border: 1px solid black;
-    background-color: rgba(0,0,0, 0.3);
-    
-    height: 500px;
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     justify-items: center;
     align-items: center;
@@ -1452,9 +1592,26 @@ border: 1px solid black;
 
 }
 
-.upd-ct{
-   
+.updateForm-ct{
+    border: 1px solid black;
+    border-radius: 10px;;
+    background-color: rgba(0,0,0, 0.6);
+    /*width:400px;*/
+    height: 200px ;
+    display:flex;
+    
+    justify-content: center;
+    color:white;
 
+}
+
+.updatelist{
+    list-style-type: none;
+    margin: 10% auto;
+}
+
+.updatelist> li{
+    margin: 20px auto
 }
 
 .ptImg-ct2{
@@ -1479,13 +1636,36 @@ border: 1px solid black;
 
 /*Pt Profile Update*/
 
+.ptupdateNav-ct{
+    display:flex;
+    justify-content: space-between; /* Optional, you can use space-around or gap instead */
+     align-items: center;
+     padding: 1rem;
+     margin: 0 10%;
+}
+
+.ptupdateNav-ct > div {
+    width:40%; /* Each column gets equal width. Adjust if you want different sizing */
+  }
+
+.newbox{
+    display:flex;
+    flex-direction: column;
+    width:50%;
+    height:650px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+    box-shadow: 10px 7px black;
+    margin-left: 25%;;
+}
+
 .profileUpdateBox{
     display:flex;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    border: 1px solid black;
-    background-color: rgba(0,0,0, 0.3);
+    
+    
     height:500px;
 }
 
@@ -1493,7 +1673,7 @@ border: 1px solid black;
     border: 1px solid black;
     border-radius: 10px;;
     background-color: rgba(0,0,0, 0.6);
-    width:50%;
+    /*width:400px;*/
     height: 499px ;
     display:flex;
     
@@ -1514,6 +1694,19 @@ border: 1px solid black;
     border-radius: 5px;
     text-decoration: none;
     margin-top: 10px;
+}
+
+.demlistsEdit{
+    color:white;
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 
+    inset -10px 0 8px rgba(0, 0, 0, 0.8),   /* Left side */
+    inset 0 -10px 8px rgba(0, 0, 0, 0.8);
 }
 
 /*Media Q*/

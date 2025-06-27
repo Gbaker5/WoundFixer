@@ -3,8 +3,28 @@
     <div class="shadow2">
        
     <div>
-        <div class="row user-info blackback whitetext halfover">
-            <h2>Physician Page</h2>
+        <div class="row user-info blackback whitetext">
+            
+            <div class="physicianPtNav-ct"> <!--3 divs flexed into three columns-->
+
+              <div class="whitetext topdiv">
+                <p>User: <%=user.userName%></p>
+              </div>
+            
+              <div class="allwoundsHeader middiv"> <!--Two divs flexed into a column-->
+                <div class=" ">
+                  <h2 class="white" id="top">Physician Page</h2>
+                </div>
+              
+              </div>
+    
+              <div class="pptendiv">
+                <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+                
+                <a href="/wound/allWounds" class="bluebutton btn">All Wounds</a>
+              </div>
+    
+          </div>
         </div>
       
         <div class="physicianP-ct">
@@ -47,13 +67,21 @@
                     <div class="pt-profile ptImg-ct">
                         <img src="" alt="Patient Image" class="ptImg">
                     </div>
-                    <ul class="pt-profile">
-                        <li><h3>Patient Profile</h3></li>
-                        <li><p>Name:</p></li>
-                        <li><p>Age:</p></li>
-                        <li><p>Gender:</p></li>
-                        <li><p>Race:</p></li>
-                        <!--<li><p>Need to either create another model or update an existing one to add this info.Last thing then css!</p></li>-->
+                    <ul class="pt-profile demographics">
+                      <div class="demlists">
+                        <h3><strong>Patient Profile</strong></h3>
+                        <p><strong>Name:</strong> </p>
+                        <p><strong>Age:</strong>  </p>
+                        <p><strong>Gender:</strong> </p>
+                        <p><strong>Race:</strong> </p>
+                    </div>
+                    <div class="demlists">
+                        <p><strong>Height:</strong></p>
+                        <p><strong>Weight: </strong></p>
+                        <p><strong>Allergies: </strong></p>
+                        <p><strong>Mobility Status: </strong></p>
+                        <p><strong>Smoker: </strong></p>
+                    </div>
                     </ul>
                 
                 </div>

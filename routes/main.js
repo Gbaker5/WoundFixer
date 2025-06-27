@@ -21,7 +21,7 @@ router.post("/signup", authController.postSignup);
 
 //Manager routes
 router.get("/editRoles", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getroleEdit)
-router.put("/updateRoles/:id", ensureAuth, authorizeRoles("admin", "manager"), managerialController.putroleEdit )
+router.put("/updateRoles", ensureAuth, authorizeRoles("admin", "manager"), managerialController.putroleEdit )
 router.get("/editUsers", ensureAuth, authorizeRoles("admin"), managerialController.getEditUser )
 router.get("/confirmDeleteUser/:id", ensureAuth, authorizeRoles("admin"),managerialController.getConfirmDeleteUser)
 router.delete("/deleteUser/:id", ensureAuth, authorizeRoles("admin", "manager"), managerialController.deleteUser )

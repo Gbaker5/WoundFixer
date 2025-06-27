@@ -11,7 +11,7 @@ const Mailjet = require('node-mailjet');
 module.exports = {
   getProfile: async (req, res) => {
     try {
-
+      
       //how to sort uniquePatArr by lastName property from each object in array
       const patients = await newPatient.find().sort({lastName: "asc"});
       //console.log(patients)

@@ -3,15 +3,31 @@
     <div class="shadow2">
        
     <div>
-        <div class="row user-info blackback whitetext halfover">
-            <h2>Physician Page</h2>
-            <nav>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Create Wound</a></li>
-                    <li><a href="">All wounds</a></li>
-                </ul>
-            </nav>
+        <div class=" user-info blackback whitetext ">
+            <div class="physicianPtNav-ct"> <!--3 divs flexed into three columns-->
+
+                <div class="whitetext topdiv">
+                  <p>User: <%=user.userName%></p>
+                </div>
+              
+                <div class="allwoundsHeader middiv"> <!--Two divs flexed into a column-->
+                  <div class=" ">
+                    <h2 class="white" id="top">Physician Pt Page</h2>
+                  </div>
+                
+                </div>
+      
+                <div class="pptendiv">
+                  <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+                  <a href="/wound/newWoundForm/<%=patient._id%>" class="bluebutton btn">Create Wound</a>
+                  <a href="/wound/allWounds" class="bluebutton btn">All Wounds</a>
+                </div>
+      
+            </div>
+
+
+
+            
         </div>
       
         <div class="physicianP-ct">

@@ -1,28 +1,4 @@
-//const deleteButton = document.querySelectorAll('.tester')
-//
-//
-//    Array.from(deleteButton).forEach((element)=>{
-//      element.addEventListener('click', deleteItem) //adds an event listener to each delete button 
-//  });
-//
-//  async function deleteItem(){
-//    const itemText = this.parentNode.childNodes[1].innerText //declares a variable that holds the location where info/data will be placed client-side
-//    try{
-//        const response = await fetch('deleteItem', { //sends a fetch request to delete item
-//            method: 'delete', //delete method comes from 
-//            headers: {'Content-Type': 'application/json'}, //formats data to allow us to use json 
-//            body: JSON.stringify({ //turns json response into string 
-//              'itemFromJS': itemText // (itemjs will now equal itemtext) grabbing the text and sending to backend to delete 
-//            })
-//          })
-//        const data = await response.json() //declares a variable to hold the response that is received from the server after the fetch request
-//        console.log(data) //console logs the json response
-//        location.reload() //refreshes page
-//        console.log("deleted")
-//    }catch(err){
-//        console.log(err) //catch error
-//    }
-//}
+console.log("alt.js loaded")
    
 
 /////////////Toggle for each Hidden class to handle error on physician Pt page
@@ -67,16 +43,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById('fullscreenModal');
   const modalImg = document.getElementById('modalImage');
 
+  if(images){
   images.forEach(img => {
     img.addEventListener('click', () => {
       modal.style.display = "block";
       modalImg.src = img.src;
     });
   });
+  }
 
-  modal.addEventListener('click', () => {
-    modal.style.display = "none";
-  });
+  if(modal){
+    modal.addEventListener('click', () => {
+      modal.style.display = "none";
+    });
+  }
+
+ 
 });
 
 
@@ -106,11 +88,63 @@ const button = document.querySelector('.showButton');
 const targetDiv = document.querySelector('.inactiveWounds-ct');
 const arrow = document.querySelector('.inactiveArrow')
 
-button.addEventListener('click', () => {
-   // Rotate arrow
-   arrow.classList.toggle('inactiveRotate');
-  targetDiv.classList.toggle('hidden');
-  button.textContent = targetDiv.classList.contains('hidden') ? 'Show' : 'Hide';
-});
+if(button){
+  button.addEventListener('click', () => {
+    // Rotate arrow
+    arrow.classList.toggle('inactiveRotate');
+   targetDiv.classList.toggle('hidden');
+   button.textContent = targetDiv.classList.contains('hidden') ? 'Show' : 'Hide';
+ });
+}
+
 
 ////////////Update roles
+document.addEventListener("DOMContentLoaded", () => {
+  const saveBtn = document.getElementById("saveRolesBtn");
+
+  if (!saveBtn) {
+    console.error("Save button not found!");
+    return;
+  }
+
+  
+  saveBtn.addEventListener("click", async () => {
+    const rows = document.querySelectorAll(".role-row");
+    const updates = [];
+  
+
+    rows.forEach(row => {
+      const userId = row.dataset.userId;
+      const newRole = row.querySelector(".role-select").value;
+      updates.push({ userId, newRole });
+    });
+  
+    try {
+      const res = await fetch("/updateRoles", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin", // includes JWT cookie
+        body: JSON.stringify({ updates })
+      });
+
+      const result = await res.json();
+      if (result.success) {
+        alert("Roles updated successfully");
+
+        // Optionally update the UI in-place
+        rows.forEach(row => {
+          const newRole = row.querySelector(".role-select").value;
+          row.querySelector(".current-role").innerText = newRole;
+        });
+
+      } else {
+        alert("Error updating roles: " + result.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error while updating roles.");
+    }
+  });
+});

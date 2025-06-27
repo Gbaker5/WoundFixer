@@ -3,44 +3,85 @@
     <div class="shadow2">
 
         <div>
-
-            <div class="row user-info blackback whitetext halfover">
-                <h2>Update Patient Image</h2>
-            </div>
-            <div class="imgUpName">
-                <h3><%=patient.lastName%>, <%=patient.firstName%></h3>
-            </div>
-            <div class="imgUpdate-ct col-12 mt-5">
-                <!--If current image exists then display-->
-                <% if (ptImg) { %>
-                    <div class="ptImg-ct2 upd-ct">
-                      <img src="<%= ptImg.Image %>" alt="Pt Img" class="ptImg2">
-                      <p>Current Image</p>
+            <section class="blacktop row col-12">
+                <div class="ptupdateNav-ct"> <!--3 divs flexed into three columns-->
+                  <div class="whitetext topdiv">
+                    <p>User: <%=user.userName%></p>
+                  </div>
+                
+                  <div class="allwoundsHeader middiv"> <!--Two divs flexed into a column-->
+                    <div class=" ">
+                      <h2 class="white" id="top">Update Patient Image</h2>
                     </div>
-                  <% } else { %>
-                    <p>No image uploaded yet.</p>
-                  <% } %>
-                <!--Else display "no current image"-->
-                
-                <!--Field Error logic-->
-                <div class="upd-ct">
-                    <form class="" action="/physicianP/<%=patient._id%>/updatePtProfileImg?_method=PUT" method="POST" enctype="multipart/form-data">
-                        <ul>
-                            <li><span>Upload Wound Image</span></li>
-                            <li><input type="file" name="ptImg"></li>
-                            <li><input type="submit"></li>
-                        </ul>
-                        
-                        
-                        
-                    </form>
-                    <!--Field Error -->
+                  </div>
+        
+                  <div class="endiv">
+                    <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+                    <a href="/physicianP/<%=patient._id%>" class="bluebutton btn whitetext">Physician Pt Page</a>
+                    <a href="/physicianP/<%=patient._id%>/updatePtProfile" class="bluebutton btn whitetext">Edit Pt Info</a>
+                  </div>
+        
+              </div>
+                 
+            </section>
+            <div class="newbox2">
+                <div class="imgUpName woundHeader">
+                    <h3><%=patient.lastName%>, <%=patient.firstName%></h3>
                 </div>
-                
+                <div class="imgUpdate-ct col-12 mt-5">
+                    <!--If current image exists then display-->
+                    <% if (ptImg) { %>
+                        <div class="ptImg-ct2 upd-ct">
+                          <img src="<%= ptImg.Image %>" alt="Pt Img" class="ptImg2 enlargeable">
+                          <p>Current Image</p>
+                        </div>
+                      <% } else { %>
+                        <div class="ptImg-ct">
+                            <img src="" alt="No image uploaded yet." class="ptImg">
+                            <p></p>
+                        </div>
+                        
+                      <% } %>
+                    <!--Else display "no current image"-->
+                    
+                    <!--Field Error logic-->
+                    <div class="updateForm-ct">
+                        <form class="" action="/physicianP/<%=patient._id%>/updatePtProfileImg?_method=PUT" method="POST" enctype="multipart/form-data">
+                            <ul class="updatelist">
+                                <li><span class="tealglow">Upload Wound Image</span></li>
+                                <li><input type="file" name="ptImg" accept="image/png, image/jpeg, image/jpg"></li>
+                                <li><input type="submit" class="titles confbtn"></li>
+                            </ul>
 
+                            <%
+                              const fieldErrors = {};
+                              if (locals.messages && messages.errors) {
+                                messages.errors.forEach(err => {
+                                  fieldErrors[err.param] = err.msg;
+                                });
+                              }
+                            %>
+
+                            
+                            <% if (fieldErrors.ptImg) { %>
+                                <div class="text-danger"><%= fieldErrors.ptImg %></div>
+                              <% } %>
+                              
+                            
+                        </form>
+                        <!--Field Error -->
+                    </div>
+                    
+    
+                </div>
             </div>
+            
 
         </div>
     </div> <!--shadow2-->
 </div> <!--newcontainer-->
 <%- include('partials/footer') -%>
+
+<div id="fullscreenModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999;">
+    <img id="modalImage" src="" style="margin:auto; display:block; max-width:90%; max-height:90%; position:absolute; top:0; bottom:0; left:0; right:0;">
+    </div>

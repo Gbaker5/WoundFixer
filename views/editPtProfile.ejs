@@ -3,93 +3,142 @@
     <div class="shadow2">
 
         <div>
-
-            <div class="row user-info blackback whitetext halfover">
-                <h2>Update Patient Profile</h2>
-            </div>
-            <div class="imgUpName">
-                <h3><%=patient.lastName%>, <%=patient.firstName%></h3>
-            </div>
-            <div class="profileUpdateBox col-12 mt-5">
-                <div>
-
+            <!--Update Nav-->
+            <section class="blacktop row col-12">
+                <div class="ptupdateNav-ct"> <!--3 divs flexed into three columns-->
+                  <div class="whitetext topdiv">
+                    <p>User: <%=user.userName%></p>
+                  </div>
                 
-                <!--If current image exists then display-->
-                <% if (ptImg) { %>
-                    <div class="ptImg-ct2 upd-ct">
-                      <img src="<%= ptImg.Image %>" alt="Pt Img" class="ptImg2">
-                      <p>Current Image</p>
+                  <div class="allwoundsHeader middiv"> <!--Two divs flexed into a column-->
+                    <div class=" ">
+                      <h2 class="white" id="top">Update Patient Profile</h2>
                     </div>
-                  <% } else { %>
-                    <p>No image uploaded yet.</p>
-                  <% } %>
-                <!--Else display "no current image"-->
+                  </div>
+        
+                  <div class="endiv">
+                    <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+                    <a href="/physicianP/<%=patient._id%>" class="bluebutton btn whitetext">Physician Pt Page</a>
+                    <a href="/physicianP/<%=patient._id%>/updatePtProfileImg" class="bluebutton btn whitetext">Edit Pt Image</a>
+                  </div>
+        
+              </div>
+                 
+              </section>
+
+            <div class="newbox">
+                <div class="imgUpName">
+                    <h3 class="whitetext woundHeader col-10"><%=patient.lastName%>, <%=patient.firstName%></h3>
                 </div>
+                <div class="profileUpdateBox col-12 mt-5">
+                    <div class="col-6">
+                        <% if(profileInfo){%>
 
-                <!--Field Error logic-->
-                <div class="profileUpdate-ct ">
-                    <form class="" action="/physicianP/<%=patient._id%>/updatePtProfile?_method=PUT" method="POST">
-                        <div class="formtop">
-                            <label for="age">Age</label>
-                            <input type="text" name="age">
-
-                            <label for="Height">Height</label>
-                            <input type="text" name="height">
-
-                            <label for="Weight">Weight</label>
-                            <input type="text" name="weight">
-
-                            <label for="Allergies">Allergies</label>
-                            <input type="text" name="allergies">
-     
+                                    
+                            <div class="demlistsEdit">
+                                <h3><strong>Patient Profile</strong></h3>
+                                <p><strong>Name:</strong> <%=patient.lastName%>, <%=patient.firstName%></p>
+                                <p><strong>Age:</strong> <%=profileInfo.age%> </p>
+                                <p><strong>Gender:</strong> <%=profileInfo.gender%></p>
+                                <p><strong>Race:</strong> <%=profileInfo.race%></p>
+                            
+                            
+                                <p><strong>Height:</strong> <%=profileInfo.height%></p>
+                                <p><strong>Weight: </strong><%=profileInfo.weight%></p>
+                                <p><strong>Allergies: </strong><%=profileInfo.allergies%></p>
+                                <p><strong>Mobility Status: </strong><%=profileInfo.mobility%></p>
+                                <p><strong>Smoker: </strong><%=profileInfo.smoker%></p>
+                            </div>
+                        <%} else {%>
+                            <div class="demlistsEdit">
+                                <h3><strong>Patient Profile</strong></h3>
+                                <p><strong>Name:</strong> <%=patient.lastName%>, <%=patient.firstName%></p>
+                                <p><strong>Age:</strong>  </p>
+                                <p><strong>Gender:</strong> </p>
+                                <p><strong>Race:</strong> </p>
+                            
+                         
+                                <p><strong>Height:</strong></p>
+                                <p><strong>Weight: </strong></p>
+                                <p><strong>Allergies: </strong></p>
+                                <p><strong>Mobility Status: </strong></p>
+                                <p><strong>Smoker: </strong></p>
+                            </div>
+                       <% }%>
+                    
+                    <!--If current image exists then display-->
+                  
+                    <!--Else display "no current image"-->
+                 
+                    </div>
+    
+                    <!--Field Error logic-->
+                    <div class="profileUpdate-ct col-4">
+                        <form class="" action="/physicianP/<%=patient._id%>/updatePtProfile?_method=PUT" method="POST">
+                            <div class="formtop">
+                                <label for="age">Age</label>
+                                <input type="text" name="age">
+    
+                                <label for="Height">Height</label>
+                                <input type="text" name="height">
+    
+                                <label for="Weight">Weight</label>
+                                <input type="text" name="weight">
+    
+                                <label for="Allergies">Allergies</label>
+                                <input type="text" name="allergies">
+         
+                              
+         
+                                
+                            </div>
+                            <div class="formbottom">
+                               
+                                <label for="Gender">Gender</label>
+                                <select name="gender" id="">
+                                    <option value="female">female</option>
+                                    <option value="male">male</option>
+                                </select>
+                                
+         
+                                <label for="Race">Race</label>
+                                <select name="race" id="">
+                                    <option value="African-American">African-American</option>
+                                    <option value="Native-American">Native-American</option>
+                                    <option value="Asian">Asian</option>
+                                    <option value="Caucasian">Caucasian</option>
+                                </select>
+                               
+    
+                                <label for="Mobility">Mobility</label>
+                                <select name="mobility" id="">
+                                 <option value="Ambulatory">Ambulatory</option>
+                                 <option value="Wheelchair">Wheelchair</option>
+                                 <option value="Bed Bound">Bed Bound</option>
+                                </select>
+    
+    
+                                <label for="Smoker">Smoker</label>
+                                <select name="smoker" id="">
+                                 <option value="no">no</option>
+                                 <option value="yes">yes</option>
+                                </select>
+                            </div>
                           
-     
-                            
-                        </div>
-                        <div class="formbottom">
+    
                            
-                            <label for="Gender">Gender</label>
-                            <select name="gender" id="">
-                                <option value="female">female</option>
-                                <option value="male">male</option>
-                            </select>
-                            
-     
-                            <label for="Race">Race</label>
-                            <select name="race" id="">
-                                <option value="African-American">African-American</option>
-                                <option value="Native-American">Native-American</option>
-                                <option value="Asian">Asian</option>
-                                <option value="Caucasian">Caucasian</option>
-                            </select>
                            
-
-                            <label for="Mobility">Mobility</label>
-                            <select name="mobility" id="">
-                             <option value="Ambulatory">Ambulatory</option>
-                             <option value="Wheelchair">Wheelchair</option>
-                             <option value="Bed Bound">Bed Bound</option>
-                            </select>
-
-
-                            <label for="Smoker">Smoker</label>
-                            <select name="smoker" id="">
-                             <option value="no">no</option>
-                             <option value="yes">yes</option>
-                            </select>
-                        </div>
-                      
-
-                       
-                       
-                       <button type="submit" class="profileUpdateBtn">Submit</button>
-                        
-                    </form>
-                    <!--Field Error -->
+                           <button type="submit" class="profileUpdateBtn">Submit</button>
+                            
+                        </form>
+                        <!--Field Error -->
+                    </div>
+                    
+    
                 </div>
-                
-
             </div>
+           
+            
 
         </div>
     </div> <!--shadow2-->

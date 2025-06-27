@@ -3,32 +3,44 @@
 <div class="shadow2">
   
   <div class="row ">
-    <div class="profileHeader blackback whitetext">
-      <h2>Home</h2>
-    </div>
-    <div class="blackback  user-info userinfosection whitetext">
+    <section class="blacktop navbar row col-12">
+      <div class="profileNav-ct"> <!--3 divs flexed into three columns-->
       
-      <section class="topsecs col-5">
-        <p class="ms-3 "><strong>Welcome</strong>: <%= user.userName %></p>
-        
-        <a href="/logout" class="ms-3 col-3 btn mb-2 bluebutton">Logout</a>
-      </section>
-      <section class="topsecs topsec2 roleSec whitetext col-5">
-          <p>Access Level: <%= user.role %></p>
+        <div class="whitetext topdiv">
+          <p><strong>Welcome:</strong> <%=user.userName%></p>
+          <p><strong>Access Level:</strong> <%= user.role[0].toUpperCase()%><%=user.role.substring(1)%></p>
 
-        <% if (user.role== "manager" || user.role == "admin") { %>
-          <p><a class="bluebutton btn" href="/physicianP">Physician Page</a></p>
-          <p class="underline"><strong>Admin and Manager Access:</strong></p> 
-          
-          <div class="adminBox">
-            
-             <p><a class="bluebutton btn" href="/editRoles">Role Edit</a></p>
-             <p><a class="bluebutton btn" href="/editUsers">Delete Users</a></p>
-             
+         
+        </div>
+      
+        <div class="allwoundsHeader profilemiddiv whitetext"> <!--Two divs flexed into a column-->
+            <h2>Profile</h2>
+        </div>
+
+
+        <% if (user.role === "manager" || user.role === "admin") { %>
+          <div class="profileendiv">
+            <p class="underline whitetext"><strong>Admin and Manager Access:</strong></p>
+            <div class="adminBox">
+              <a href="/logout" class="btn bluebutton">Logout</a>
+              <a href="/physicianP" class="btn bluebutton">Physician Page</a>
+              <a href="/editRoles" class="btn bluebutton">Role Edit</a>
+              <a href="/editUsers" class="btn bluebutton">Delete Users</a>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="profileendiv">
+            <a href="/logout" class="btn bluebutton">Logout</a>
           </div>
         <% } %>
-      </section>
-    </div>
+        
+      </div>
+
+    </section>
+
+
+    
+    
   
     
     <!--first column-->
