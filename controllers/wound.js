@@ -77,8 +77,8 @@ module.exports = {
       //console.log(sortedUniquePatArr[k])
     }
 
-    console.log(req.user)
-    console.log(req.body)
+    //console.log(req.user)
+    //console.log(req.body)
     
 
        
@@ -108,7 +108,7 @@ module.exports = {
       if(validator.isEmpty(req.body.firstName))validationErrors.push({ msg: "First Name Requires Input"});
       if(validator.isEmpty(req.body.lastName))validationErrors.push({ msg: "Last Name Requires Input"});
       if (validationErrors.length) {
-        console.log(validationErrors)
+        //console.log(validationErrors)
         req.flash("errors", validationErrors);
         return res.redirect("/newPatient");
       }
@@ -127,7 +127,7 @@ module.exports = {
     });
 
     
-    console.log()
+    //console.log()
     console.log(`Patient: ${firstCap} ${lastCap} Created!!!!`)
       res.redirect("/newPatient")
     }catch (err) {
@@ -137,7 +137,7 @@ module.exports = {
   getConfirmDeletePatient: async (req,res) => {
     try{
       const patient = await newPatient.findById(req.params.id)
-      console.log(patient)
+      //console.log(patient)
 
 
       res.render("confirmation.ejs",{patient:patient})
@@ -153,10 +153,10 @@ module.exports = {
     
     /////
     const thispatient = await newPatient.findOne({_id:req.params.id})
-    console.log(thispatient)
+    //console.log(thispatient)
 
     const thisPatientWoundsArr = await WoundInfo.find({patient: req.params.id})
-    console.log(thisPatientWoundsArr)
+    //console.log(thisPatientWoundsArr)
 
     await WoundInfo.deleteMany({patient: req.params.id})
     await newPatient.deleteOne({_id: req.params.id})
@@ -178,7 +178,7 @@ module.exports = {
       console.log(req.params)
       //console.log(req.user)
       const patient = await newPatient.findOne({ _id: req.params.id })
-      console.log(patient)
+      //console.log(patient)
       //const patientUrl = await newPatient.findById(req.params.id)
       //console.log(patientUrl)
       const wound = await WoundInfo.find();
@@ -565,7 +565,7 @@ module.exports = {
       const allWoundDocs = await WoundDoc.find({ Patient: req.params.id })
       .populate('user') // assuming each doc has a user who updated it
       .sort({ createdAt: -1 }); // newest first
-      console.log(allWoundDocs)
+      //console.log(allWoundDocs)
     
     // Group only the first (most recent) doc per wound
     const woundDocsByWound = {};

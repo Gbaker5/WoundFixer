@@ -249,9 +249,9 @@ exports.updateWounds = async(req,res) => {
 
 
 
-        console.log("Cloudinary loaded:", cloudinary.config);
-        console.log("req.file:", req.file);
-        console.log("req.body:", req.body);
+        //console.log("Cloudinary loaded:", cloudinary.config);
+        //console.log("req.file:", req.file);
+        //console.log("req.body:", req.body);
         
        
         const result = await cloudinary.uploader.upload(req.file.path);

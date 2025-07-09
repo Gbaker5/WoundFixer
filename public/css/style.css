@@ -2116,6 +2116,8 @@ border: 1px solid black;
     
 }
 
+
+
 @media all and (max-width: 767px) {
     /*New Wound Page*/
     .formBoxes{
@@ -2152,6 +2154,10 @@ border: 1px solid black;
         width:50%;
         padding-right: 10%;
         padding-left: 5%;
+    }
+
+    .woundbox{
+        width:100%;
     }
 
     /*Physician P*/
