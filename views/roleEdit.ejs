@@ -5,7 +5,7 @@
       <main>
           <div>
             <section class="blacktop row col-12">
-              <div class="allwoundsNav-ct"> <!--3 divs flexed into three columns-->
+              <div class="editRolesNav-ct"> <!--3 divs flexed into three columns-->
               
                 <div class="whitetext topdiv">
                   <p>User: <%=thisUser.userName%></p>
@@ -24,7 +24,18 @@
                 </div>
               
               </div>
+              
+              <!--Mobile Nav-->
+              <div class="editRoles-mobile-nav">
+                <p class="mobile-title">Edit Roles</p>
+                <div class="mobile-menu-icon" onclick="toggleMobileMenuRole()">☰</div>
+              </div>
 
+              <!--Dropdown-->
+              <div id="editRoles-mobile-dropdown">
+                <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+                <a href="/editUsers" class="bluebutton btn whitetext">Delete Users</a>
+              </div>
             </section>
           
           <div class="">

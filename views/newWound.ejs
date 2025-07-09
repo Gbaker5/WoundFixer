@@ -136,9 +136,9 @@
             </select>
         </div>
 
-        <div>
+        <div >
             <h2>Description of Wound</h2>
-            <textarea name="description" id="description" cols="30" rows="10" Placeholder="Color, Shape, etc"></textarea>
+            <textarea class="description-box" name="description" id="description" cols="30" rows="10" Placeholder="Color, Shape, etc"></textarea>
             <% if (fieldErrors.description) { %>
                 <div class="text-danger"><%= fieldErrors.description %></div>
               <% } %>
@@ -158,8 +158,8 @@
             <h2>Intervention</h2>
             <h3>Initial Intervention</h3>
         
-            <div>
-                <textarea name="intervention" id="intervention" cols="30" rows="10" placeholder="Clean with NS, Pat Dry, Apply Dry Dressing"></textarea>
+            <div >
+                <textarea class="intervention-box" name="intervention" id="intervention" cols="30" rows="10" placeholder="Clean with NS, Pat Dry, Apply Dry Dressing"></textarea>
             </div>
             <% if (fieldErrors.intervention) { %>
                 <div class="text-danger"><%= fieldErrors.intervention %></div>

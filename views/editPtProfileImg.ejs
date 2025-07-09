@@ -22,8 +22,23 @@
                   </div>
         
               </div>
+
+     <!-- MOBILE NAV (HIDDEN ON DESKTOP) -->
+<div class="editProfileImg-mobile-nav">
+  <div class="mobile-title">Update Patient Image</div>
+  <div class="update-mobile-menu-icon" onclick="toggleMobileMenuImgUpdate()">☰</div>
+</div>
+
+<!-- DROPDOWN MENU FOR MOBILE -->
+<div id="editProfileImg-mobile-dropdown">
+  <a href="/logout" class="btn bluebutton">Logout</a>
+  <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+  <a href="/physicianP/<%=patient._id%>" class="bluebutton btn whitetext">Physician Pt Page</a>
+  <a href="/physicianP/<%=patient._id%>/updatePtProfile" class="bluebutton btn whitetext">Edit Pt Info</a>
+</div>
                  
             </section>
+            
             <div class="newbox2">
                 <div class="imgUpName woundHeader">
                     <h3><%=patient.lastName%>, <%=patient.firstName%></h3>
@@ -33,12 +48,12 @@
                     <% if (ptImg) { %>
                         <div class="ptImg-ct2 upd-ct">
                           <img src="<%= ptImg.Image %>" alt="Pt Img" class="ptImg2 enlargeable">
-                          <p>Current Image</p>
+                         
                         </div>
                       <% } else { %>
-                        <div class="ptImg-ct">
+                        <div class="ptImg-ct2">
                             <img src="" alt="No image uploaded yet." class="ptImg">
-                            <p></p>
+                            
                         </div>
                         
                       <% } %>
@@ -48,7 +63,7 @@
                     <div class="updateForm-ct">
                         <form class="" action="/physicianP/<%=patient._id%>/updatePtProfileImg?_method=PUT" method="POST" enctype="multipart/form-data">
                             <ul class="updatelist">
-                                <li><span class="tealglow">Upload Wound Image</span></li>
+                                <li><span class="tealglow">Upload Profile Image</span></li>
                                 <li><input type="file" name="ptImg" accept="image/png, image/jpeg, image/jpg"></li>
                                 <li><input type="submit" class="titles confbtn"></li>
                             </ul>
@@ -84,4 +99,4 @@
 
 <div id="fullscreenModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999;">
     <img id="modalImage" src="" style="margin:auto; display:block; max-width:90%; max-height:90%; position:absolute; top:0; bottom:0; left:0; right:0;">
-    </div>
+    </div>    

@@ -1,5 +1,81 @@
-console.log("alt.js loaded")
+//console.log("alt.js loaded")
    
+////////////////////clock
+
+function liveCLock(){
+  const now = new Date();
+
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = minutes.toString().padStart(2, '0');
+  const formattedSeconds = seconds.toString().padStart(2, '0');
+
+  const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+  //console.log(timeString)
+  document.getElementById('clocktext').textContent = timeString
+}
+liveCLock()
+setInterval(liveCLock, 1000)
+
+/////////////////Toggle Nav Header- Profile
+function toggleMobileMenuProfile() {
+  const dropdown = document.getElementById('profile-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+
+
+/////////////////Toggle Nav Header- allwounds
+function toggleMobileMenu() {
+  const dropdown = document.querySelector('.allwounds-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+
+/////////////////Toggle Nav Header- edit Roles
+function toggleMobileMenuRole() {
+  const dropdown = document.getElementById('editRoles-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+
+/////////////////Toggle Nav Header- delete Users
+function toggleMobileMenuDeleteUser() {
+  const dropdown = document.getElementById('deleteUsers-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+////////////////Toggle Nav Header- physician P
+function toggleMobileMenuPP() {
+  const dropdown = document.getElementById('physicianP-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+////////////////Toggle Nav Header- physician P Pt
+function toggleMobileMenuPPpt() {
+  const dropdown = document.getElementById('physicianPPt-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+////////////////Toggle Nav Header- physician P Pt
+function toggleMobileMenuImgUpdate() {
+  const dropdown = document.getElementById('editProfileImg-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+////////////////Toggle Nav Header- physician P Pt
+function toggleMobileMenuProfileUpdate() {
+  const dropdown = document.getElementById('editPtProfile-mobile-dropdown');
+  dropdown.classList.toggle('show');
+}
+
+
+
+
 
 /////////////Toggle for each Hidden class to handle error on physician Pt page
 document.addEventListener("DOMContentLoaded", () => {
@@ -103,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveBtn = document.getElementById("saveRolesBtn");
 
   if (!saveBtn) {
-    console.error("Save button not found!");
+    //console.error("Save button not found!");
     return;
   }
 

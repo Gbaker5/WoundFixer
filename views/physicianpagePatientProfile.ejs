@@ -26,6 +26,20 @@
             </div>
 
 
+     <!-- MOBILE NAV (HIDDEN ON DESKTOP) -->
+<div class="physicianPPt-mobile-nav">
+    <div class="mobile-title">Physician Pt Page</div>
+    <div class="mobile-menu-icon" onclick="toggleMobileMenuPPpt()">☰</div>
+  </div>
+  
+  <!-- DROPDOWN MENU FOR MOBILE -->
+  <div id="physicianPPt-mobile-dropdown">
+    <a href="/logout" class="btn bluebutton">Logout</a>
+    <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+    <a href="/wound/newWoundForm/<%=patient._id%>" class="bluebutton btn">Create Wound</a>
+    <a href="/wound/allWounds" class="bluebutton btn">All Wounds</a>
+  </div>
+
 
             
         </div>
@@ -296,9 +310,9 @@
                                                 </div>
                                                    
                                                 <div class="woundDocDescript">
-                                                    <p><strong>Description:</strong> <%= relatedDocs[j].Description %></p>
-                                                    <p><strong>Intervention:</strong> <%= relatedDocs[j].Intervention%></p>
-                                                    <p><strong>Updated By:</strong> <%= relatedDocs[j].user.userName%></p>
+                                                    <p><span class="wDSpan"><strong>Description:</strong></span> <%= relatedDocs[j].Description %></p>
+                                                    <p><span class="wDSpan"><strong>Intervention:</strong></span> <%= relatedDocs[j].Intervention%></p>
+                                                    <p><span class="wDSpan"><strong>Updated By:</strong></span> <%= relatedDocs[j].user.userName%></p>
                                                 </div>
                                               
                                               

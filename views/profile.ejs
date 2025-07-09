@@ -3,6 +3,13 @@
 <div class="shadow2">
   
   <div class="row ">
+<!--scrolling text-->
+    <div class="marquee-container">
+      <div class="marquee-content">
+        Update Version-1.27 upcoming. System will shut down and restart @0300(CST) on 12/25/25. Please prepare acordingly. 
+      </div>
+    </div>
+
     <section class="blacktop navbar row col-12">
       <div class="profileNav-ct"> <!--3 divs flexed into three columns-->
       
@@ -12,14 +19,21 @@
 
          
         </div>
-      
-        <div class="allwoundsHeader profilemiddiv whitetext"> <!--Two divs flexed into a column-->
-            <h2>Profile</h2>
+
+       <% if (user.role === "manager" || user.role === "admin") { %>
+        <div class="allwoundsHeader profilemiddiv-Admin whitetext"> <!--Two divs flexed into a column-->
+          <h2>Profile</h2>
         </div>
+       <%} else {%>
+        <div class="allwoundsHeader profilemiddiv whitetext"> <!--Two divs flexed into a column-->
+          <h2>Profile</h2>
+        </div>
+       <%}%>
+       
 
 
         <% if (user.role === "manager" || user.role === "admin") { %>
-          <div class="profileendiv">
+          <div class="profileendiv-Admin">
             <p class="underline whitetext"><strong>Admin and Manager Access:</strong></p>
             <div class="adminBox">
               <a href="/logout" class="btn bluebutton">Logout</a>
@@ -36,13 +50,31 @@
         
       </div>
 
+     <!-- MOBILE NAV (HIDDEN ON DESKTOP) -->
+<div class="profile-mobile-nav">
+  <div class="mobile-title">Profile</div>
+  <div class="mobile-menu-icon" onclick="toggleMobileMenuProfile()">☰</div>
+</div>
+
+<!-- DROPDOWN MENU FOR MOBILE -->
+<div id="profile-mobile-dropdown">
+  <a href="/logout" class="btn bluebutton">Logout</a>
+  <% if (user.role === "manager" || user.role === "admin") { %>
+    <a href="/physicianP" class="btn bluebutton">Physician Page</a>
+    <a href="/editRoles" class="btn bluebutton">Role Edit</a>
+    <a href="/editUsers" class="btn bluebutton">Delete Users</a>
+  <% } %>
+</div>
+
+      
+
     </section>
 
 
     
     
   
-    
+    <div class="profilecolumns">
     <!--first column-->
       <div class="  col-6 all-pt-ct">
           
@@ -101,7 +133,7 @@
           </div>
         </div>  
       </div>  
-
+    </div> <!--Around 2 wound columns-->
 
     </div>
   </div>

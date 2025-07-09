@@ -31,6 +31,35 @@
         </div>
 
     </div>
+
+    <!--Mobile Nav-->
+      
+    <div class="allwounds-mobile-nav">
+      <div class="allwounds-title-ct">
+        <h2 class="white" id="top">All Wounds</h2>
+        <div class=" woundpad ">
+          <label for=""></label>
+          <select name="" id="" onchange="javascript:location.href = this.value;">
+            <option value="/wound/allWounds"><a href="">Most Recent(Default)</a></option>
+            <option value="/wound/woundsZtoA">Oldest</option>
+            <option value="/wound/woundsPatient"><a href="">Patient(A-Z)</a></option>
+            <option selected value="/wound/woundsPatientZtoA"><a href="">Patient(Z-A)</a></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="allw-mobile-menu-icon" onclick="toggleMobileMenu()">☰</div>
+    </div>
+
+    
+  
+
+    <div class="allwounds-mobile-dropdown">
+      <a href="/profile" class="bluebutton btn whitetext">Profile</a>
+      <a href="/woundsByUser" class="bluebutton btn whitetext">Wounds by User</a>
+
+    </div>
+
        
     </section>
 
@@ -38,7 +67,7 @@
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
         <% for(var i=0; i<wounds.length; i++) {%>
-          <li class="col-4 justify-content-between mt-5">
+          <li class="col-4 justify-content-between mt-5 allwLi">
             <div class="woundbox">
               <div class="boxcolor">
                 <div class="boxshadow">
@@ -61,9 +90,7 @@
               </div>
               </div>
             </div>
-            <!--<a href="/post/<%= wounds[i]._id%>">
-              <img class="img-fluid" src="<%= wounds[i].image%>">
-            </a>-->
+            
           </li>
         <% } %>
         </ul>

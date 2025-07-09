@@ -11,7 +11,15 @@ html, body{
     height:100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    width:100%;
+    box-sizing: border-box;
 }
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
 
 body{
     overflow-x: hidden;
@@ -42,7 +50,28 @@ body{
 .noborder{
     border: none;
 }
+
+.hm{
+    width:auto;
+    height:auto;
+}
 /*HEADER*/
+
+#clock{
+    height:100px;
+    width:100px;
+    border-radius: 150px;
+    
+    position:absolute;
+    left:100px;
+    top:10px;
+    box-shadow: 12px 10px 12px -4px;
+}
+
+#clock>p{
+    margin-top: 40%;
+    color:white;
+}
 
 header{
     height:200px;
@@ -51,7 +80,7 @@ header{
     background-size: 100vw, 300px;
     background-repeat:no-repeat;
     width:100vw;
-    
+   
 
 }
 
@@ -60,10 +89,18 @@ header{
     text-decoration: none;
     height: 50%;
     width:50%;
+    font-size: 4rem;
+   
 }
 
 .headerh1:hover{
     color:black;
+}
+
+.headerp{
+    color: white;
+    box-shadow: -1px 10px 7px -4px rgb(0,0,0);
+    width:100%;
 }
 
 .headshadow{
@@ -89,29 +126,59 @@ header{
     background: linear-gradient(to right, rgba(0,103,103,0.9),rgba(0,103,103,0.1));
     height:200px;
     width:100vw;
+    position:relative;
+
 }
 
 /*Index Page*/
 
-.backgroundimg{
+.backgroundimg {
     background-image: url(/imgs/medicalhand.jpg);
     background-position: center;
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    
+    min-height: 100vh;
     width: 100vw;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+ 
+
+
+  .frontpage{
+    float:none;
+    height:100%;
+    width:40%;
+    margin-left: 5%;
+    margin-top: 10%;
+    margin-bottom: 10px;
+   
 }
+  
 
 .colorshade{
     width:60vw;
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(to right, rgba(0,103,103,0.9),rgba(0,103,103,0))
 }
 
 .shadow{
     width:100vw;
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(to left, rgba(0,0,0,0.7),rgba(0,0,0,0)) 
+}
+
+.shadow,
+.colorshade {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h1{
@@ -135,31 +202,35 @@ h1{
     color:white;
 }
 
-.buttons li{
-    width:250px;
-    height:70px;
-    background-color: white;
-    border-radius: 5px;
-    color:rgba(0,103,103,0.8);
-    font-size: 50px;
+.indexbuttons {
+    width:100%;
+    height:400px;
+   
+    display:flex;
+    flex-direction: column;
+    
+    gap:1rem;
     text-align: center;
     
 }
 
-.buttons li:hover{
-    background-color: rgb(0,103,103);
+.indexButton{
+    height: 50px;
+    
+    background-color: rgb(0, 103, 103);
+    border: 5px solid white;
+    border-radius: 10px;
+    font-size: 2rem;
+    text-align: center;
     color: white;
-}
-
-.button{
-    text-decoration: none;
-    margin-bottom: 0px;
-    color: rgba(0,103,103,0.8);
     width: 100%;
+    text-decoration: none;
 }
 
-.button:hover{
-    color:white;
+.indexButton:hover{
+    background-color: rgba(165,104,42,0.9);
+    border: 2px solid black;
+    color: black;
 }
 
 /*.button{
@@ -182,9 +253,7 @@ section{
     
 }
 
-.frontpage{
-    position:relative;
-}
+
 
 .icons{
     margin-bottom: 10%;
@@ -226,6 +295,36 @@ section{
 
 
 /*LOGIN*/
+
+/*scrolling marquee*/
+.marquee-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: rgba(0,103,103, 0.5); /* Optional background color */
+    
+  }
+  
+  .marquee-content {
+    display: inline-block;
+    padding: 10px; /* Optional padding */
+    animation: scroll-animation 15s linear infinite;
+    width:100%;
+    color:white;
+  }
+  
+  .marquee-content:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes scroll-animation {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 
 .leftcolorpillar{
     float:left;
@@ -320,8 +419,8 @@ section{
 .newcontainer2{
     background-image: url(../imgs/steth.jpg);
     background-repeat: repeat-y;
-    background-position: center center;
-    background-size:contain;
+    background-position: center top;
+    background-size:100vw 100vh;
     min-height:100vh;
     width: 100%;
     display: flex;
@@ -332,9 +431,10 @@ section{
 .blacktop{
     margin:0;
     padding: 0;
-    height:100px;
+    min-height:100px;
     width:100%;
     background-color: black;
+
 }
 
 .woundpad{
@@ -342,13 +442,34 @@ section{
 }
 
 .halfover{
-    padding-left: 45%;
+    display: flex;
+   
+    text-align: center;
+}
+
+.woundbox-ct{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.woundboxlist{
+    
+    width:50%;
+
 }
 
 .woundbox{
+    box-sizing: border-box;
     border: 5px solid black;
     border-radius: 5px;
-    
+    width:80%;
+    max-width: 100%;
+    margin-left: 10%;
+    margin-top: 10%;
     background-color: rgb(0,103,103);
     background-image: url(../imgs/bandage.jpg) ;
     background-position: center;
@@ -356,6 +477,17 @@ section{
     
     height:400px;
 }
+
+
+/** {
+    outline: 2px solid rgba(255, 0, 0, 0.2);
+}*/
+  
+
+.invisibleborder{
+    border: 1px solid rgba(0, 0, 0, 0.0);
+}
+
 
 .boxcolor{
     background-color: rgba(0,103,103, 0.9);
@@ -441,7 +573,7 @@ section{
 }
 
 
-/*PROFILE*/
+/* ///////PROFILE*/
 
 .profileNav-ct{
     display:flex;
@@ -462,6 +594,7 @@ section{
    display:flex;
    flex-direction: column;
    align-items: flex-end;
+
   }
 
   .adminBox {
@@ -492,10 +625,43 @@ section{
     margin-top: 10px;
 }
 
+
+
 .profilemiddiv{
-    padding-left: 12rem;
-    padding-right: 0
+    padding-left: 0rem;
+    margin-right: 10rem;
+  
 }
+
+
+.profilemiddiv >h2{
+    font-size: 50px;
+}
+
+
+
+.profilemiddiv-Admin{
+    padding-left: 12rem;
+    padding-right: 0;
+   
+}
+
+.profileendiv-Admin{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.profile-mobile-nav,
+#profile-mobile-dropdown {
+  display: none;
+}
+
+.profilecolumns{
+    display:flex;
+    flex-direction: row;;
+}
+
 
 .halfover2{
     margin-left:35%;
@@ -885,6 +1051,14 @@ section{
     border-radius: 10px;
     padding: 5px;
 }
+
+.description-box{
+    width:100%;
+}
+
+.intervention-box{
+    width:100%;
+}
 /*ConfirmPage*/
 
 .confirmcont{
@@ -951,6 +1125,8 @@ section{
     width:30%; /* Each column gets equal width. Adjust if you want different sizing */
   }
 
+
+
 .allwoundsHeader{
     display:flex;
     flex-direction: column;
@@ -959,7 +1135,13 @@ section{
 
 }
 
+.allwounds-mobile-nav{
+    display:none;
+}
 
+.allwounds-mobile-dropdown {
+    display:none;   
+}
 
 .bottombtns{
     text-align:center
@@ -968,8 +1150,40 @@ section{
 
 /*PatientPage*/
 
-.patientheader{
+.patientHeader-ct{
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+   
+    height:auto;
+    margin-top: 20px;
+}
+
+.patientHeader{
+    display:flex;
+    justify-content: center;
+    width:80%;
+}
+
+.ptPageNav2-ct{
+    display:flex;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    border: none;
     
+}
+
+.ptPageNav2{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.ptPageNav2 > a{
+    margin-top: 20px;
 }
 
 .patientcolor{
@@ -1019,6 +1233,27 @@ section{
 }
 
 /*Edit Roles*/
+
+.editRolesNav-ct{
+    display:flex;
+    justify-content: space-between; /* Optional, you can use space-around or gap instead */
+     align-items: center;
+     padding: 1rem;
+     margin: 0 10%;
+}
+
+.editRolesNav-ct > div {
+    width:30%; /* Each column gets equal width. Adjust if you want different sizing */
+  }
+
+  .editRoles-mobile-nav{
+    display:none;
+  } 
+
+  #editRoles-mobile-dropdown{
+    display:none;
+  }
+
 .editHeader{
     text-align: center;
     border: 1px solid black;
@@ -1099,7 +1334,38 @@ section{
     align-content: center;
 }
 
+/*Delete users*/
+
+.deleteUsersNav-ct{
+    display:flex;
+    justify-content: space-between; /* Optional, you can use space-around or gap instead */
+     align-items: center;
+     padding: 1rem;
+     margin: 0 10%;
+}
+
+.deleteUsersNav-ct > div {
+    width:30%; /* Each column gets equal width. Adjust if you want different sizing */
+  }
+
+  .deleteUsers-mobile-nav{
+    display:none;
+  } 
+
+  #deleteUsers-mobile-dropdown{
+    display:none;
+  }
+
 /*Physician P*/
+
+.physicianP-mobile-nav{
+    display:none;
+}
+
+#physicianP-mobile-dropdown{
+    display:none;   
+}
+
 .physicianP-ct{
     display: flex;
     margin-top: 10px;
@@ -1189,7 +1455,7 @@ section{
     display: flex;
     flex-direction: row;
     gap: 10px;
-    flex-wrap: wrap; /* wrap if screen gets smaller */
+    flex-wrap: nowrap; /* wrap if screen gets smaller */
    
 }
 
@@ -1274,6 +1540,14 @@ section{
 
 /*Physician P Pt*/
 
+.physicianPPt-mobile-nav{
+    display:none;
+}
+
+#physicianPPt-mobile-dropdown{
+    display:none;   
+}
+
 .physicianPtNav-ct{
     display:flex;
     justify-content: space-between; /* Optional, you can use space-around or gap instead */
@@ -1332,6 +1606,9 @@ section{
     align-items: center;
     padding: 0 10px;
     box-sizing: border-box;
+    transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
   }
   
   .toggle-track.active {
@@ -1562,6 +1839,14 @@ border: 1px solid black;
   }
 /*Pt Image Update*/
 
+.editProfileImg-mobile-nav{
+    display:none;
+}
+
+#editProfileImg-mobile-dropdown{
+    display:none;
+}
+
 .newbox2{
     display:flex;
     flex-direction: column;
@@ -1615,23 +1900,30 @@ border: 1px solid black;
 }
 
 .ptImg-ct2{
-    border: 1px solid black;
+    border: 1px solid white;
+    border-radius: 10px ;
     width:200px;
     height:200px;
     background-color: black;
     position:relative;
-    margin-right: 50px;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .ptImg-ct2>p{
     position:absolute;
     bottom:-50px;
-    left:50px
+    left:50px;
 }
 
 .ptImg2{
     height:200px;
-    width:200px
+    width:200px;
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 /*Pt Profile Update*/
@@ -1648,6 +1940,14 @@ border: 1px solid black;
     width:40%; /* Each column gets equal width. Adjust if you want different sizing */
   }
 
+  .editPtProfile-mobile-nav{
+    display:none
+  }
+
+  #editPtProfile-mobile-dropdown{
+    display:none;
+  }
+
 .newbox{
     display:flex;
     flex-direction: column;
@@ -1657,6 +1957,7 @@ border: 1px solid black;
     border: 1px solid black;
     box-shadow: 10px 7px black;
     margin-left: 25%;;
+    margin-top: 100px;
 }
 
 .profileUpdateBox{
@@ -1696,6 +1997,12 @@ border: 1px solid black;
     margin-top: 10px;
 }
 
+.profileUpdateBtn:hover{
+    background-color: white;
+    color:rgb(0,103,103);
+    border: 2px solid rgb(0,103,103);
+  }
+
 .demlistsEdit{
     color:white;
     display:flex;
@@ -1709,8 +2016,25 @@ border: 1px solid black;
     inset 0 -10px 8px rgba(0, 0, 0, 0.8);
 }
 
-/*Media Q*/
+/*//////////////////////////////////*/
+/*Media Queries*/
 
+@media all and (max-width: 375px){
+    .headerh1{
+        width: 45%;
+        font-size: 3rem;
+    }
+}
+
+@media all and (max-width: 405px){
+    .woundDocTop{
+        flex-direction: column;
+    }
+
+    .wDSpan{
+        box-shadow: -2px 4px 2px -2px gray;;
+    }
+}
 
 @media all and (max-width: 425px) {
     .h1list p{
@@ -1745,5 +2069,505 @@ border: 1px solid black;
         margin-left: 30%;
         margin-top: 5%;
     }
+
+    
+    /* Pt image update*/
+   
+
+    .ptImg2 {
+        width:auto;
+        margin: 0 auto;
+    }
 }
 
+@media all and (max-width: 475px){
+    .originalDetailTop{
+        display:flex;
+        flex-direction: column;
+        gap:0px;
+    }
+}
+
+
+@media all and (max-width: 575px){
+    .woundbox{
+        width:90%;
+    }
+}
+
+@media all and (max-width: 700px){
+    /*All wounds Pages*/
+    .allwLi{
+        width:90% !important;
+        margin-right: 5% !important;
+    }
+
+    .newbox2{
+        width:80%;
+        margin-left:10%;
+    }
+
+    /*PatientWOounds*/
+    .woundboxlist{
+        
+        width:100%;
+    
+    }
+    
+}
+
+@media all and (max-width: 767px) {
+    /*New Wound Page*/
+    .formBoxes{
+        width:80%;
+        margin-right: 20%;
+        margin-bottom: 50px;
+    }
+}
+
+@media all and (max-width: 850px) {
+    /*Profile Page*/
+    .profilecolumns{
+        display:flex;
+        flex-direction: column;
+    }
+
+    .profilecolumns >div {
+        width: 100%;
+    }
+
+    /*New Patient Page*/
+    .editP-ct{
+        width:80%;
+        margin-right:20%;
+
+    }
+
+    .topflink{
+        width:100%;
+    }
+
+    /*All Wounds Pages*/
+    .allwLi{
+        width:50%;
+        padding-right: 10%;
+        padding-left: 5%;
+    }
+
+    /*Physician P*/
+
+    /*Physician PATIENT Page*/
+
+}
+
+
+@media all and (max-width: 900px){
+    /*Edit Roles Page*/
+.editRolesNav-ct{
+    display:none;
+}
+
+.editRoles-mobile-nav{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+#editRoles-mobile-dropdown {
+    display: none; /* stays hidden until toggled with JS */
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #editRoles-mobile-dropdown.show {
+    display: flex;
+    z-index:1;
+  }
+
+
+
+/*Delete Users Page*/
+.deleteUsersNav-ct{
+    display:none;
+}
+
+.deleteUsers-mobile-nav{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+#deleteUsers-mobile-dropdown {
+    display: none; /* stays hidden until toggled with JS */
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #deleteUsers-mobile-dropdown.show {
+    display: flex;
+    z-index:1;
+  }
+
+
+/*Physician P*/
+.physicianPtNav-ct{
+    display:none;
+}
+
+.physicianP-mobile-nav{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+#physicianP-mobile-dropdown {
+    display: none; /* stays hidden until toggled with JS */
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #physicianP-mobile-dropdown.show {
+    display: flex;
+    z-index:1;
+  }
+
+/*Physician Patient Page*/
+ 
+
+.physicianPPt-mobile-nav{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+#physicianPPt-mobile-dropdown {
+    display: none; /* stays hidden until toggled with JS */
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #physicianPPt-mobile-dropdown.show {
+    display: flex;
+    z-index:1;
+  }
+
+  .physicianP-ct{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .columns{
+    width:80%;
+    margin-right: 15%;;
+  }
+
+  .column-left{
+    
+  }
+
+  .column-right{
+    margin-left: 10%;
+  }
+}
+
+@media all and (max-width: 1030px) {
+
+/*Profile Pages*/
+.profileNav-ct {
+    display: none;
+  }
+
+  .profile-mobile-nav {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+
+  .mobile-title{
+    font-size: 40px;
+  }
+
+  #profile-mobile-dropdown {
+    display: none; /* stays hidden until toggled with JS */
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #profile-mobile-dropdown.show {
+    display: flex;
+  }
+
+  .mobile-menu-icon{
+    font-size: 30px;
+    padding: 0px 10px 10px 10px;
+    border: 1px solid teal;
+    border-radius: 10px;
+    background-color: rgba(255,255,255, 0.1);
+  }
+
+  .mobile-menu-icon:hover{
+    background-color: rgba(255,255,255, 0.5);
+    cursor: pointer;
+  }
+
+  /*All wounds Pages*/
+  .allwoundsNav-ct{
+    display:none;
+  }
+
+  .allwounds-mobile-nav{
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    gap: 50px
+  }
+
+  .allwounds-title-ct{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+  }
+
+  .allw-mobile-menu-icon{
+    cursor:pointer;
+    color:white;
+    font-size: 40px;
+    height:60px;
+    padding: 0px 10px 0px 10px;
+    margin-top: 20px;
+    border: 1px solid teal;
+    border-radius: 10px;
+    background-color: rgba(255,255,255, 0.1);
+  }
+
+  .allw-mobile-menu-icon:hover{
+    background-color: rgba(255,255,255, 0.4);
+    color:teal;
+  }
+
+  .allwounds-mobile-dropdown {
+    display: none; /* stays hidden until toggled with JS */
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .allwounds-mobile-dropdown.show {
+    display: flex;
+    z-index:1;
+  }
+
+
+
+}
+
+@media all and (max-width: 1260px){
+    .newbox2{
+        height:auto;
+        
+    }
+
+    .imgUpdate-ct{
+        flex-direction:column;
+        gap:2rem;
+    }
+
+    .updateForm-ct, .updateForm-ct> form {
+        width: 100%; 
+        border:1px solid white;
+    }
+
+    .updatForm-ct> form{
+        justify-content: center;
+    }
+}   
+
+@media all and (max-width: 1315px){
+    /*P profile* and Pt profile pages*/
+    .ptImg-ct{
+        display:flex;
+        height:100%;
+        border-radius: 10px;
+        justify-content: center;
+    }
+
+    .ptImg{
+        border-radius: 10px;
+    }
+
+    .ptProfile-ct{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .demographics{
+        width:100%;
+    }
+
+    .demlists{
+        width:50%;
+    }
+
+    .mobile-title{
+        font-size: 40px;
+    }
+
+    .update-mobile-menu-icon{
+        cursor:pointer;
+        color:white;
+        font-size: 40px;
+        height:60px;
+        padding: 0px 10px 0px 10px;
+        margin-top: 20px;
+        border: 1px solid teal;
+        border-radius: 10px;
+        background-color: rgba(255,255,255, 0.1);
+      }
+    
+      .update-mobile-menu-icon:hover{
+        background-color: rgba(255,255,255, 0.4);
+        color:teal;
+      }
+
+    /*Update Patient Profile*/
+    .ptupdateNav-ct{
+        display:none;
+    }
+
+    
+    
+    .editPtProfile-mobile-nav{
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        align-items: center;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+    }
+    
+    #editPtProfile-mobile-dropdown {
+        display: none; /* stays hidden until toggled with JS */
+        flex-direction: column;
+        gap: 10px;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+    
+      #editPtProfile-mobile-dropdown.show {
+        display: flex;
+        z-index:1;
+      }
+
+      .newbox{
+        height:auto;
+        margin-top: 100px;
+       
+      }
+
+      .profileUpdateBox{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width:100%;
+        height: auto ;
+        padding-bottom: 2rem;
+        
+      }
+
+      .pfUpdateLeft {
+        width: 99%;
+        height:auto;
+        margin-bottom: 1rem;
+      }
+
+      .pfUpdateRight{
+        width:99%;
+        height:auto;
+        margin-bottom: 1rem;
+      }
+
+      .formtop,.formbottom{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap:1;
+        justify-content: space-between;
+      }
+
+      .formtop input,
+    .formbottom select {
+        width: 100%;
+        flex: 1 1 100%;
+        min-width: 0; /* prevents overflowing long content */
+     }
+
+  label {
+    width: 100%;
+    font-weight: bold;
+  }
+
+  .profileUpdateBtn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  
+
+      /*Update Profile Img update*/
+      .editProfileImg-mobile-nav{
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        align-items: center;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+    }
+    
+    #editProfileImg-mobile-dropdown {
+        display: none; /* stays hidden until toggled with JS */
+        flex-direction: column;
+        gap: 10px;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+    
+      #editProfileImg-mobile-dropdown.show {
+        display: flex;
+        z-index:1;
+      }
+
+}
