@@ -108,7 +108,7 @@ module.exports = {
       if(validator.isEmpty(req.body.firstName))validationErrors.push({ msg: "First Name Requires Input"});
       if(validator.isEmpty(req.body.lastName))validationErrors.push({ msg: "Last Name Requires Input"});
       if (validationErrors.length) {
-        //console.log(validationErrors)
+        console.log(validationErrors)
         req.flash("errors", validationErrors);
         return res.redirect("/newPatient");
       }
@@ -128,7 +128,7 @@ module.exports = {
 
     
     //console.log()
-    console.log(`Patient: ${firstCap} ${lastCap} Created!!!!`)
+    console.log(`Patient: ${firstNameCap} ${lastNameCap} Created!!!!`)
       res.redirect("/newPatient")
     }catch (err) {
       console.log(err);
