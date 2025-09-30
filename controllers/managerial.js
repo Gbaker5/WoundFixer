@@ -494,7 +494,49 @@ exports.getLineGraph = async(req,res) => {
 exports.getAreaGraph = async (req,res) => {
   try{
 
-    const lineChartData = {
+     const originalWound = await WoundInfo.find({_id: req.params.wound})
+    const orgLength = originalWound[0].Length //y-axis
+    const orgWidth = originalWound[0].Width //y-axis
+    const orgDepth = originalWound[0].Depth //y-axis
+    const orgTime = formatDate(originalWound[0].createdAt) //x -axis
+    
+
+    function formatDate(time){
+      const date = new Date(time);
+      const formatted = date.toDateString();
+
+      return formatted
+    }
+    //console.log(formatDate(orgTime))
+
+    const woundUpdates = await WoundImg.find({originalWoundId: req.params.wound}).sort({createdAt: 1})
+    console.log(woundUpdates)
+
+    //X-AXIS
+    let xAxis = [orgTime]
+
+    for(let i=0;i<woundUpdates.length;i++){
+      xAxis.push(formatDate(woundUpdates[i].createdAt))
+      
+    }
+    console.log(xAxis)
+
+    //Y-AXIS
+    let lengths = [orgLength];
+    let widths = [orgWidth];
+    let depths = [orgDepth];
+
+    for(let i=0;i<woundUpdates.length;i++){
+      lengths.push(woundUpdates[i].Length)
+      widths.push(woundUpdates[i].Width)
+      depths.push(woundUpdates[i].Depth)
+    }
+    console.log(lengths)
+    console.log(widths)
+    console.log(depths)
+  
+
+    const areaChartData = {
   labels: xAxis,
   datasets: [
     {
@@ -522,7 +564,7 @@ exports.getAreaGraph = async (req,res) => {
 }
 
 
-    res.render("areaGraphPage.ejs")
+    res.render("areaGraphPage.ejs", {chartData: JSON.stringify(areaChartData)})
   }catch(err){
     console.log(err)
   }
