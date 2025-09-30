@@ -318,12 +318,18 @@
                                               
                                             
                                             </div>
+
+                                         
                                             <% } %> <!--This closes the relatedDocs[j] loop-->
                                             
                                                 <% if (relatedDocs.length === 0) { %>
                                                 <p>No wound documentation for this wound yet.</p>
                                                 <% } %>
                                         </div>
+
+                                            <a  class="titles allw" href="/physicianP/woundgraph/line/<%=wounds[i]._id%>">Wound Line Graph</a>
+                                            <a  class="titles allw" href="/physicianP/woundgraph/area/<%=wounds[i]._id%>">Wound Area Graph</a>
+
                                         <div class="divider col-12">
                                             <p class="dividerp"><strong>End of Wound <%=[i + 1]%></strong></p>
                                         </div>                          

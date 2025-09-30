@@ -414,3 +414,116 @@ exports.toggleActive = async(req,res) => {
     res.status(500).json({ message: "Server error." });
   }
 }
+
+exports.getLineGraph = async(req,res) => {
+  try{
+
+    const originalWound = await WoundInfo.find({_id: req.params.wound})
+    const orgLength = originalWound[0].Length //y-axis
+    const orgWidth = originalWound[0].Width //y-axis
+    const orgDepth = originalWound[0].Depth //y-axis
+    const orgTime = formatDate(originalWound[0].createdAt) //x -axis
+    
+
+    function formatDate(time){
+      const date = new Date(time);
+      const formatted = date.toDateString();
+
+      return formatted
+    }
+    //console.log(formatDate(orgTime))
+
+    const woundUpdates = await WoundImg.find({originalWoundId: req.params.wound}).sort({createdAt: 1})
+    console.log(woundUpdates)
+
+    //X-AXIS
+    let xAxis = [orgTime]
+
+    for(let i=0;i<woundUpdates.length;i++){
+      xAxis.push(formatDate(woundUpdates[i].createdAt))
+      
+    }
+    console.log(xAxis)
+
+    //Y-AXIS
+    let lengths = [orgLength];
+    let widths = [orgWidth];
+    let depths = [orgDepth];
+
+    for(let i=0;i<woundUpdates.length;i++){
+      lengths.push(woundUpdates[i].Length)
+      widths.push(woundUpdates[i].Width)
+      depths.push(woundUpdates[i].Depth)
+    }
+    console.log(lengths)
+    console.log(widths)
+    console.log(depths)
+  
+
+    const lineChartData = {
+      labels: xAxis,
+      datasets: [
+        {
+          label:"Length",
+          data: lengths ,
+          borderColor:"red",
+
+        },
+        {
+          label:"Width",
+          data: widths ,
+          borderColor:"blue",
+
+        },
+        {
+          label:"Depth",
+          data: depths ,
+          borderColor:"green",
+
+        },
+      ]
+    }
+   
+
+    res.render("lineGraphPage.ejs", {chartData: JSON.stringify(lineChartData)})
+  } catch(err){
+    console.log(err)
+  }
+}
+
+exports.getAreaGraph = async (req,res) => {
+  try{
+
+    const lineChartData = {
+  labels: xAxis,
+  datasets: [
+    {
+      label:"Length",
+      data: lengths,
+      borderColor:"red",
+      backgroundColor: "rgba(255,0,0,0.2)", // semi-transparent fill
+      fill: true
+    },
+    {
+      label:"Width",
+      data: widths,
+      borderColor:"blue",
+      backgroundColor: "rgba(0,0,255,0.2)",
+      fill: true
+    },
+    {
+      label:"Depth",
+      data: depths,
+      borderColor:"green",
+      backgroundColor: "rgba(0,255,0,0.2)",
+      fill: true
+    },
+  ]
+}
+
+
+    res.render("areaGraphPage.ejs")
+  }catch(err){
+    console.log(err)
+  }
+}

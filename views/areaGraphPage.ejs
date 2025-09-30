@@ -1,0 +1,14 @@
+<%- include('partials/header') -%>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h1>Wound Measurements Over Time</h1>
+  <canvas id="woundChart" width="400" height="200"></canvas>
+
+  <!-- Inject chartData from backend -->
+  <script>
+    window.chartData = JSON.parse('<%- chartData%>')
+  </script>
+
+  <!-- Load your external JS -->
+  <script src="/js/areaGraph.js"></script>
+<%- include('partials/footer') -%>
