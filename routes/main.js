@@ -35,6 +35,13 @@ router.get("/physicianP/:id/updatePtProfile", ensureAuth, authorizeRoles("admin"
 router.put("/physicianP/:id/updatePtProfile", ensureAuth, authorizeRoles("admin", "manager"), managerialController.putEditPtProfile)
 router.get("/physicianP/woundgraph/line/:wound", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getLineGraph)
 router.get("/physicianP/woundgraph/area/:wound", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getAreaGraph)
+router.get("/facilityCreation", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getFacilityCreate)
+router.post("/facilityCreation", ensureAuth, authorizeRoles("admin", "manager"), managerialController.postFacilityCreate)
+router.get("/allFacilities", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getAllFacilities)
+router.get("/myFacilities", ensureAuth, authorizeRoles("admin", "manager"), managerialController.getMyFacilities)
+router.post("/checkFacilityCode", ensureAuth, authorizeRoles("admin", "manager"), managerialController.postCodeSearch)
+
+
 
 //patient
 router.get("/newPatient", ensureAuth, woundController.getAddPatient)

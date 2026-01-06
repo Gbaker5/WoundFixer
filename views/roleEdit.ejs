@@ -56,6 +56,9 @@
                         <option value="user" <%= user[i].role === 'user' ? 'selected' : '' %>>user</option>
                         <option value="manager" <%= user[i].role === 'manager' ? 'selected' : '' %>>manager</option>
                         <option value="admin" <%= user[i].role === 'admin' ? 'selected' : '' %>>admin</option>
+                        <option value="physician" <%= user[i].role === 'physician' ? 'selected' : '' %>>physician</option>
+                        <option value="physicians Assistant" <%= user[i].role === 'physicians Assistant' ? 'selected' : '' %>>physicians Assistant</option>
+                        <option value="nurse" <%= user[i].role === 'nurse' ? 'selected' : '' %>>LPN/RN</option>
                       </select>
                     </li>
                   <% } %>

@@ -10,6 +10,7 @@ const passport = require("passport");
 const axios = require("axios")
 const jwt = require("jsonwebtoken");
 const WoundImg = require("../models/WoundImg");
+const Facility = require("../models/Facility");
 
 
 exports.getroleEdit = async (req,res) => {
@@ -569,3 +570,95 @@ exports.getAreaGraph = async (req,res) => {
     console.log(err)
   }
 }
+//////FACILITY CREATION
+exports.getFacilityCreate = async (req,res) => {
+  try{
+
+   const thisUser = await User.findById(req.user.id)
+
+
+
+
+
+
+     res.render("facilityCreation.ejs", {user:thisUser})
+  }catch(err){
+    console.log(err)
+  }
+}
+
+exports.postCodeSearch = async (req,res) => {
+  try{
+    ////This fetch/ajax code is in alt.js
+
+   const thisUser = await User.findById(req.user.id)
+
+    const { facilityIdCode } = req.body;
+
+    if (!facilityIdCode) {
+      return res.status(400).json({ available: false });
+    }
+
+    const exists = await Facility.exists({ facilityIdCode });
+
+    // exists === null => available
+    res.json({
+      available: !exists
+    });
+  }catch(err){
+    console.log(err)
+  }
+}
+
+exports.postFacilityCreate = async (req,res) => {
+  try{
+
+   const thisUser = await User.findById(req.user.id)
+
+   await Facility.create({
+      facilityName: req.body.facilityName,
+      facilityAddress: req.body.facilityAddress ,
+      facilityPhone: req.body.facilityPhone ,
+      facilityState: req.body.facilityState ,
+      facilityCity: req.body.facilityCity ,
+      facilityZipcode: req.body.facilityZipcode,
+      createdBy: thisUser ,
+      facilityIdCode: req.body.facilityIdCode ,
+   })
+
+     console.log("Facility Created Successfully")
+     res.redirect("/facilityCreation", {user:thisUser})
+  }catch(err){
+    console.log(err)
+  }
+
+  
+}
+
+exports.getAllFacilities = async (req,res) => {
+  try{
+
+    const thisUser = await User.findById(req.user.id)
+    const allFacilities = await Facility.find()
+    console.log(allFacilities)
+
+
+
+
+      res.render("viewAllFacilities.ejs", {
+        user:thisUser,
+        facilities: allFacilities,
+      })
+  }catch(err){
+    console.log(err)
+  }
+  }
+
+exports.getMyFacilities = async (req,res) => {
+  try{
+
+      res.render("viewAllFacilites.ejs", {user:thisUser})
+  }catch(err){
+    console.log(err)
+  }
+  }

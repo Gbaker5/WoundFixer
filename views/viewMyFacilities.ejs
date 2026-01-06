@@ -1,0 +1,76 @@
+<%- include('partials/header') -%>
+  <div class="newWoundcontainer">
+    <div class="shadow2">
+      <div class="row">
+
+          <section class="blacktop navbar row col-12">
+      <div class="profileNav-ct"> <!--3 divs flexed into three columns-->
+      
+        <div class="whitetext topdiv">
+          <p><strong>Welcome:</strong> <%=user.userName%></p>
+          <p><strong>Access Level:</strong> <%= user.role[0].toUpperCase()%><%=user.role.substring(1)%></p>
+
+         
+        </div>
+
+       <% if (user.role === "manager" || user.role === "admin") { %>
+        <div class="allwoundsHeader profilemiddiv-Admin whitetext"> <!--Two divs flexed into a column-->
+          <h2>Profile</h2>
+        </div>
+       <%} else {%>
+        <div class="allwoundsHeader profilemiddiv whitetext"> <!--Two divs flexed into a column-->
+          <h2>Profile</h2>
+        </div>
+       <%}%>
+       
+
+
+        <% if (user.role === "manager" || user.role === "admin") { %>
+          <div class="profileendiv-Admin">
+            <p class="underline whitetext"><strong>Admin and Manager Access:</strong></p>
+            <div class="adminBox">
+              <a href="/facilityCreation" class="btn bluebutton">Facility Creation</a>
+              <a href="/logout" class="btn bluebutton">Logout</a>
+              <a href="/physicianP" class="btn bluebutton">Physician Page</a>
+              <a href="/editRoles" class="btn bluebutton">Role Edit</a>
+              <a href="/editUsers" class="btn bluebutton">Delete Users</a>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="profileendiv">
+            <a href="/logout" class="btn bluebutton">Logout</a>
+          </div>
+        <% } %>
+        
+      </div>
+
+     <!-- MOBILE NAV (HIDDEN ON DESKTOP) -->
+<div class="profile-mobile-nav">
+  <div class="mobile-title">Profile</div>
+  <div class="mobile-menu-icon" onclick="toggleMobileMenuProfile()">☰</div>
+</div>
+
+<!-- DROPDOWN MENU FOR MOBILE -->
+<div id="profile-mobile-dropdown">
+  <a href="/logout" class="btn bluebutton">Logout</a>
+  <% if (user.role === "manager" || user.role === "admin") { %>
+    <a href="/physicianP" class="btn bluebutton">Physician Page</a>
+    <a href="/editRoles" class="btn bluebutton">Role Edit</a>
+    <a href="/editUsers" class="btn bluebutton">Delete Users</a>
+  <% } %>
+</div>
+    </section>
+
+
+
+
+
+
+
+
+
+         </div>
+      </div>  
+</div>
+
+<%- include('partials/footer') -%>

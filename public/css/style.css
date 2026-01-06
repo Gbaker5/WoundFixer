@@ -2025,6 +2025,56 @@ border: 1px solid black;
     inset 0 -10px 8px rgba(0, 0, 0, 0.8);
 }
 
+/*Facility creation*/
+#facilityInputs{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    height:100vh;
+    border: none;
+    color:white;
+}
+
+
+
+.avail-ct{
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.4);
+    box-shadow: 10px 7px black;
+   
+    margin-top:50px;
+    margin-left: 50px;
+    height:200px;
+
+}
+
+.facilitycreate-ct{
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.4);
+    box-shadow: 10px 7px black;
+   
+    margin-top:50px;
+    margin-left: 50px;
+    height:600px;
+}
+
+/*All Facility*/
+
+.facility-ct{
+    border: 1px solid black;
+    background-color: rgba(0,0,0,0.3);
+}
+
+/*Graphs*/
+.areaGraphct{
+    background-color: black;
+}
+
+
+
+
 /*//////////////////////////////////*/
 /*Media Queries*/
 

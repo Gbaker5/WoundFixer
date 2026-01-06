@@ -224,3 +224,69 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+//// Facility Code Availability Check (Live, No Page Reload)
+
+// Grab the text input where the user types the facility code
+const input = document.getElementById("facilityCode");
+
+// Grab the <p> element where we will display the result (Available / Not Available)
+const result = document.getElementById("availability");
+
+// This will hold our debounce timer so we can cancel previous requests
+let timeout;
+
+// Listen for every change the user makes in the input field
+input.addEventListener("input", () => {
+
+  // Cancel the previous timeout so we don't fire a request on every keystroke
+  // (this prevents excessive API calls while the user is typing)
+  clearTimeout(timeout);
+
+  // Get the current input value and remove extra spaces
+  const value = input.value.trim();
+
+  // If the input is too short, don't query the database yet
+  // This avoids unnecessary backend calls and keeps UX clean
+  if (value.length < 3) {
+    result.textContent = "";
+    result.style.color = "black";
+    return;
+  }
+
+  // Wait 300ms after the user stops typing before making the request
+  timeout = setTimeout(async () => {
+    try {
+      // Send an AJAX request to the server to check if the code exists
+      const res = await fetch("/checkFacilityCode", {
+        method: "POST",
+        headers: {
+          // Tell the server we're sending JSON
+          "Content-Type": "application/json"
+        },
+        // Send the facilityIdCode to the backend
+        body: JSON.stringify({ facilityIdCode: value })
+      });
+
+      // Parse the JSON response from the server
+      const data = await res.json();
+
+      // Update the page based on availability
+      if (data.available) {
+        // Code does NOT exist in DB
+        result.textContent = "✅ Available";
+        result.style.color = "green";
+      } else {
+        // Code already exists in DB
+        result.textContent = "❌ Not Available";
+        result.style.color = "red";
+      }
+    } catch (err) {
+      // Handle network or server errors gracefully
+      console.error(err);
+      result.textContent = "⚠️ Error checking availability";
+      result.style.color = "orange";
+    }
+  }, 300); // Debounce delay for smoother UX
+});
